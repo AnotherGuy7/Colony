@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Globals/PackedScenes.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleHouse1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Maps/Woodville/Woodville.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleHouse2.tscn" type="PackedScene" id=4]
+
+[node name="PackedScenes" type="Node2D"]
+script = ExtResource( 1 )
+Woodville = ExtResource( 3 )
+WoodvilleHouse1 = ExtResource( 2 )
+WoodvilleHouse2 = ExtResource( 4 )

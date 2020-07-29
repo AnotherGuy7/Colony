@@ -1,0 +1,97 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_09.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_13.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_12.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_14.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_07.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_15.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_10.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_11.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_08.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_05.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_06.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_03.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_00.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_01.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/NPCs/NPC_01/npc_04.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/NPCs/TownNPC01.cs" type="Script" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 1 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Walking_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Walking_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Idle_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Walking_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "Idle_Right",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.01254
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 24.0
+
+[node name="TownNPC01" type="RigidBody2D"]
+mode = 3
+mass = 0.00102041
+script = ExtResource( 16 )
+
+[node name="NPCAnim" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle_Front"
+
+[node name="NPCShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="TalkArea" type="Area2D" parent="."]
+
+[node name="TalkAreaShape" type="CollisionShape2D" parent="TalkArea"]
+shape = SubResource( 3 )
+
+[node name="MoveDurationTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MoveRestTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_entered" from="TalkArea" to="." method="OnTalkAreaEntered"]
+[connection signal="body_exited" from="TalkArea" to="." method="OnTalkAreaExited"]
+[connection signal="timeout" from="MoveDurationTimer" to="." method="OnMoveDurationTimerOut"]
+[connection signal="timeout" from="MoveRestTimer" to="." method="OnMoveRestTimerOut"]

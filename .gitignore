@@ -1,0 +1,7 @@
+
+*.sln
+.vs
+Properties
+.mono
+*.old
+*.user

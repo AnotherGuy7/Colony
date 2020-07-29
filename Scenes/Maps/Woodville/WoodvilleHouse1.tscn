@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scenes/NPCs/TownNPC01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Maps/WoodvilleHouses.cs" type="Script" id=3]
+[ext_resource path="res://Tilesets/IndoorsTileset.tres" type="TileSet" id=4]
+[ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Environment/Indoors/Counter.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Environment/Indoors/Chair.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Environment/Indoors/Table.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Environment/Indoors/CounterEdge.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.08568, 2.01627 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9.60051, 2.77313 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 3.14557 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 8 )
+
+[node name="WoodvilleHouse1Map" type="Node2D"]
+position = Vector2( 136, 168 )
+script = ExtResource( 3 )
+positionToSpawnAt = 1
+
+[node name="EmptyVoid" type="Sprite" parent="."]
+position = Vector2( 132, 128 )
+scale = Vector2( 36.5, 24 )
+texture = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 524292, 3, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 4, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 6, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 6, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 6, 0, 786436, 2, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 6, 0, 851978, 1, 0, 851979, 0, 0, 851980, 6, 0, 917514, 2, 0, 917515, 0, 0, 917516, 5, 0 )
+
+[node name="SpawnPos1" type="Position2D" parent="."]
+position = Vector2( 184, 208 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Chair" type="Sprite" parent="YSort"]
+position = Vector2( 104, 192 )
+texture = ExtResource( 7 )
+
+[node name="ChairBody" type="StaticBody2D" parent="YSort/Chair"]
+position = Vector2( 0, 2.3 )
+
+[node name="ChairShape" type="CollisionShape2D" parent="YSort/Chair/ChairBody"]
+position = Vector2( 0, 2.086 )
+shape = SubResource( 1 )
+
+[node name="Table" type="Sprite" parent="YSort"]
+position = Vector2( 88, 192 )
+texture = ExtResource( 8 )
+
+[node name="TableBody" type="StaticBody2D" parent="YSort/Table"]
+
+[node name="TableShape" type="CollisionShape2D" parent="YSort/Table/TableBody"]
+position = Vector2( 0, 2.76599 )
+shape = SubResource( 2 )
+
+[node name="Counter" type="Sprite" parent="YSort"]
+position = Vector2( 73.5, 160 )
+texture = ExtResource( 6 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 3 )
+
+[node name="Counter2" type="Sprite" parent="YSort"]
+position = Vector2( 89.5, 160 )
+texture = ExtResource( 6 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter2"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter2/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 3 )
+
+[node name="Counter3" type="Sprite" parent="YSort"]
+position = Vector2( 105.5, 160 )
+texture = ExtResource( 6 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter3"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter3/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 3 )
+
+[node name="CounterEdge" type="Sprite" parent="YSort"]
+position = Vector2( 121.5, 160 )
+texture = ExtResource( 9 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/CounterEdge"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/CounterEdge/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 3 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 10 )]
+position = Vector2( 184, 208 )
+
+[node name="TownNPC01" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 97.5, 144 )
+dialogue = PoolStringArray( "Hey AG, how\'s your day been!" )
+speakerNames = PoolStringArray( "Squilliam" )
+anchored = true
+
+[node name="LeaveArea" type="Area2D" parent="."]
+position = Vector2( 184, 232 )
+
+[node name="LeaveShape" type="CollisionShape2D" parent="LeaveArea"]
+shape = SubResource( 4 )
+
+[node name="HouseBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseBody"]
+polygon = PoolVector2Array( 48, 128, 48, 112, 224, 112, 224, 256, 144, 256, 144, 224, 48, 224, 48, 128, 64, 128, 64, 208, 160, 208, 160, 240, 208, 240, 208, 128 )
+[connection signal="body_entered" from="LeaveArea" to="." method="OnLeaveAreaEntered"]

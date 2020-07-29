@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/UI/DialogueManager.cs" type="Script" id=1]
+[ext_resource path="res://Sprites/UI/DialogueBox.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sounds/SoundEffects/NPCTalkBlip.wav" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[node name="DialogueManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="DialogPanel" type="Panel" parent="Layer2"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 256.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueBox" type="TextureRect" parent="Layer2/DialogPanel"]
+margin_left = 8.0
+margin_top = 96.0
+margin_right = 158.0
+margin_bottom = 126.0
+rect_scale = Vector2( 1.6, 1.6 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueText" type="Label" parent="Layer2/DialogPanel"]
+margin_left = 10.0
+margin_top = 112.0
+margin_right = 957.0
+margin_bottom = 235.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 1 )
+text = "[Text here]"
+autowrap = true
+max_lines_visible = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="Layer2/DialogPanel"]
+margin_left = 18.0
+margin_top = 102.0
+margin_right = 104.0
+margin_bottom = 138.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_fonts/font = SubResource( 2 )
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TalkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

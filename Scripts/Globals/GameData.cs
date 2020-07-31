@@ -10,6 +10,7 @@ public class GameData : Node2D
 	public delegate void FinishedSpawning(bool entering);       //this is sent after the player has finished loading into a map and is already in the proper position and direction
 
 	public static GameData gameData;
+	public static YSort mapYSort;
 
 	public static int playerHealth = 4;
 	public static int playerDamage = 1;

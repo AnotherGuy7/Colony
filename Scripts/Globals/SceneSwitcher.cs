@@ -51,6 +51,15 @@ public class SceneSwitcher : Node
 		// Optionally, to make it compatible with the SceneTree.change_scene() API.
 		GetTree().CurrentScene = CurrentScene;
 
+		foreach (object allChildren in GetTree().CurrentScene.GetChildren())
+		{
+			if (allChildren.GetType().ToString() == "Godot.YSort")
+			{
+				YSort ySort = allChildren as YSort;
+				GameData.mapYSort = ySort;
+			}
+		}
+
 		GameData.gameData.EmitSignal(nameof(GameData.SwitchedMaps), spawnPointNumber, spawnDirection);
 
 		transitionPlayer.Play("InTransition");

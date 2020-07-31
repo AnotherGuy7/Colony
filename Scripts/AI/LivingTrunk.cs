@@ -72,6 +72,7 @@ public class LivingTrunk : RigidBody2D
 						break;
 				}
 				moveDurationTimer.Start(rand.Next(1, 3));
+				moveRestTimer.Stop();
 			}
 			//Moving depending on direction
 			if (moving)
@@ -161,6 +162,7 @@ public class LivingTrunk : RigidBody2D
 	{
 		moving = false;
 		moveRestTimer.Start(rand.Next(2, 3));
+		moveDurationTimer.Stop();
 	}
 
 	//Attacked and stun stuff
@@ -172,6 +174,7 @@ public class LivingTrunk : RigidBody2D
 		}
 		moving = false;
 		moveRestTimer.Start(rand.Next(1, 2));
+		moveDurationTimer.Stop();
 	}
 
 	private void OnHitboxAreaEntered(object area)

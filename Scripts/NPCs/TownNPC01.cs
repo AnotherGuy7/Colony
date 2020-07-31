@@ -89,6 +89,7 @@ public class TownNPC01 : RigidBody2D
 			{
 				moving = false;
 				moveRestTimer.Start(rand.Next(2, 3));
+				moveDurationTimer.Stop();
 			}
 		}
 		if (!isBeingTalkedTo)
@@ -131,6 +132,7 @@ public class TownNPC01 : RigidBody2D
 	{
 		moving = false;
 		moveRestTimer.Start(rand.Next(2, 3));
+		moveDurationTimer.Stop();
 	}
 
 	private void OnBodyEntered(object body)
@@ -139,6 +141,7 @@ public class TownNPC01 : RigidBody2D
 		{
 			moving = false;
 			moveRestTimer.Start(rand.Next(2, 3));
+			moveDurationTimer.Stop();
 		}
 	}
 

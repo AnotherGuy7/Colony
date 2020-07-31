@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_0.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_6.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_5.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_7.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/AI/Rocklin.cs" type="Script" id=5]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_4.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Enemies/Rocklin/Rocklin_3.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Environment/Projectiles/PerfectlyCircularRock.tscn" type="PackedScene" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Searching",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Alerted",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 14.7068, 9.39499 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 17.5839, 11.9745 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 80.0
+
+[node name="Rocklin" type="RigidBody2D"]
+mode = 1
+mass = 0.01
+script = ExtResource( 5 )
+perfectlyCircularRock = ExtResource( 10 )
+
+[node name="RocklinAnim" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle"
+playing = true
+
+[node name="RocklinShape" type="CollisionShape2D" parent="."]
+position = Vector2( -0.595276, 2.77795 )
+shape = SubResource( 2 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.595276, 2.77795 )
+shape = SubResource( 3 )
+
+[node name="DetectionRange" type="Area2D" parent="."]
+
+[node name="DetectionRangeShape" type="CollisionShape2D" parent="DetectionRange"]
+shape = SubResource( 4 )
+
+[node name="SearchTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="SearchRestTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="MeleeAttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StunDurationTimer" type="Timer" parent="."]
+wait_time = 2.0
+[connection signal="area_entered" from="Hitbox" to="." method="OnHitboxAreaEntered"]
+[connection signal="body_entered" from="Hitbox" to="." method="OnHitboxBodyEntered"]
+[connection signal="body_entered" from="DetectionRange" to="." method="OnDetectionRangeBodyEntered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="OnDetectionRangeBodyExited"]
+[connection signal="timeout" from="SearchTimer" to="." method="OnSearchTimerOut"]
+[connection signal="timeout" from="SearchRestTimer" to="." method="OnSearchRestTimerOut"]
+[connection signal="timeout" from="AttackTimer" to="." method="OnAttackTimerOut"]
+[connection signal="timeout" from="StunDurationTimer" to="." method="OnStunDurationTimerOut"]

@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\AI\LivingTrunk.cs" />
+    <Compile Include="Scripts\AI\Rocklin.cs" />
     <Compile Include="Scripts\Globals\GameData.cs" />
     <Compile Include="Scripts\Globals\GlobalParticleEmitter.cs" />
     <Compile Include="Scripts\Globals\PackedScenes.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Scripts\Objects\Door.cs" />
     <Compile Include="Scripts\Objects\House1.cs" />
     <Compile Include="Scripts\Player\Player.cs" />
+    <Compile Include="Scripts\Projectiles\PerfectlyCircularRock.cs" />
     <Compile Include="Scripts\UI\DialogueManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

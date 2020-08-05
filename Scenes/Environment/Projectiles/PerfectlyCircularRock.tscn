@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Projectiles/PerfectlyCircularRock.cs" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.58278
+radius = 3.24472
 
 [node name="PerfectlyCircularRock" type="Area2D"]
 script = ExtResource( 2 )

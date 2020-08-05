@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=22 format=2]
+[gd_resource type="TileSet" load_steps=31 format=2]
 
 [ext_resource path="res://Sprites/Tiles/GrassCorner.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tiles/GrassBorder.png" type="Texture" id=2]
@@ -15,6 +15,12 @@
 [ext_resource path="res://Sprites/Environment/Outdoors/RedFlowers.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Tiles/HillGrassCorner2.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/Environment/Outdoors/YellowFlowers.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Environment/Outdoors/Fence.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Tiles/GrassCorner2.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Environment/Outdoors/Fence2.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd2.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd3.png" type="Texture" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.17654, 2.01912 )
@@ -29,9 +35,18 @@ extents = Vector2( 3.88933, 0.988876 )
 extents = Vector2( 2.51869, 2.58837 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.0799, 2.6174 )
+extents = Vector2( 8.02084, 2.04432 )
 
 [sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 5.5, 2.044 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 5.45192, 2.97469 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8.0799, 2.6174 )
+
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8.13023, 0.977726 )
 
 [resource]
@@ -129,14 +144,14 @@ extents = Vector2( 8.13023, 0.977726 )
 6/navigation_offset = Vector2( 8, 8 )
 6/shape_offset = Vector2( 8.04157, 5.48404 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 8.04157, 5.48404 )
-6/shape = SubResource( 5 )
+6/shape = SubResource( 8 )
 6/shape_one_way = false
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.04157, 5.48404 )
 } ]
 6/z_index = 0
@@ -150,14 +165,14 @@ extents = Vector2( 8.13023, 0.977726 )
 7/navigation_offset = Vector2( 8, 8 )
 7/shape_offset = Vector2( 8.03544, 11.9458 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 8.03544, 11.9458 )
-7/shape = SubResource( 6 )
+7/shape = SubResource( 9 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.03544, 11.9458 )
 } ]
 7/z_index = 0
@@ -169,17 +184,17 @@ extents = Vector2( 8.13023, 0.977726 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 8, 8 )
 8/navigation_offset = Vector2( 8, 8 )
-8/shape_offset = Vector2( 10.5978, 8.12259 )
-8/shape_transform = Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 10.5978, 8.12259 )
-8/shape = SubResource( 5 )
+8/shape_offset = Vector2( 10.5978, 8.1226 )
+8/shape_transform = Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 10.5978, 8.1226 )
+8/shape = SubResource( 8 )
 8/shape_one_way = false
 8/shape_one_way_margin = 1.0
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 10.5978, 8.12259 )
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 10.5978, 8.1226 )
 } ]
 8/z_index = 0
 9/name = "HillGrassRight"
@@ -190,17 +205,17 @@ extents = Vector2( 8.13023, 0.977726 )
 9/tile_mode = 0
 9/occluder_offset = Vector2( 8, 8 )
 9/navigation_offset = Vector2( 8, 8 )
-9/shape_offset = Vector2( 5.5035, 8.044 )
-9/shape_transform = Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 5.5035, 8.044 )
-9/shape = SubResource( 5 )
+9/shape_offset = Vector2( 5.50351, 8.04401 )
+9/shape_transform = Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.50351, 8.04401 )
+9/shape = SubResource( 8 )
 9/shape_one_way = false
 9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
-"shape_transform": Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 5.5035, 8.044 )
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.50351, 8.04401 )
 } ]
 9/z_index = 0
 10/name = "HillGrassCorner"
@@ -211,8 +226,8 @@ extents = Vector2( 8.13023, 0.977726 )
 10/tile_mode = 0
 10/occluder_offset = Vector2( 8, 8 )
 10/navigation_offset = Vector2( 8, 8 )
-10/shape_offset = Vector2( 5.98448, 4.10629 )
-10/shape_transform = Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 5.98448, 4.10629 )
+10/shape_offset = Vector2( 5.98448, 4.1063 )
+10/shape_transform = Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.98448, 4.1063 )
 10/shape = SubResource( 1 )
 10/shape_one_way = false
 10/shape_one_way_margin = 1.0
@@ -221,7 +236,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 1 ),
-"shape_transform": Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 5.98448, 4.10629 )
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.98448, 4.1063 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -282,7 +297,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 4 ),
-"shape_transform": Transform2D( -4.37114e-08, 1, -1, -4.37114e-08, 10.517, 13.4671 )
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 10.517, 13.4671 )
 } ]
 13/z_index = 0
 14/name = "RedFlowers"
@@ -313,3 +328,128 @@ extents = Vector2( 8.13023, 0.977726 )
 15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
+16/name = "Fence"
+16/texture = ExtResource( 16 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 16, 16 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 8, 8 )
+16/navigation_offset = Vector2( 8, 8 )
+16/shape_offset = Vector2( 8, 13.994 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 8, 13.994 )
+16/shape = SubResource( 5 )
+16/shape_one_way = false
+16/shape_one_way_margin = 1.0
+16/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 8, 13.994 )
+} ]
+16/z_index = 0
+17/name = "FenceEnd"
+17/texture = ExtResource( 17 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 0, 0, 16, 16 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 8, 8 )
+17/navigation_offset = Vector2( 8, 8 )
+17/shape_offset = Vector2( 5.50327, 14.0443 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
+17/shape = SubResource( 6 )
+17/shape_one_way = false
+17/shape_one_way_margin = 1.0
+17/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
+} ]
+17/z_index = 0
+18/name = "GrassCorner2"
+18/texture = ExtResource( 18 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 0, 0, 16, 16 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 8, 8 )
+18/navigation_offset = Vector2( 8, 8 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 0
+19/name = "Fence2"
+19/texture = ExtResource( 19 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 0, 0, 16, 16 )
+19/tile_mode = 0
+19/occluder_offset = Vector2( 8, 8 )
+19/navigation_offset = Vector2( 8, 8 )
+19/shape_offset = Vector2( 8, 8 )
+19/shape_transform = Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 8, 8 )
+19/shape = SubResource( 5 )
+19/shape_one_way = false
+19/shape_one_way_margin = 1.0
+19/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 8, 8 )
+} ]
+19/z_index = 0
+20/name = "FenceEnd2"
+20/texture = ExtResource( 20 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 0, 0, 16, 16 )
+20/tile_mode = 0
+20/occluder_offset = Vector2( 8, 8 )
+20/navigation_offset = Vector2( 8, 8 )
+20/shape_offset = Vector2( 5.50327, 14.0443 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
+20/shape = SubResource( 6 )
+20/shape_one_way = false
+20/shape_one_way_margin = 1.0
+20/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
+}, {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+20/z_index = 0
+21/name = "FenceEnd3"
+21/texture = ExtResource( 21 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 0, 0, 16, 16 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 8, 8 )
+21/navigation_offset = Vector2( 8, 8 )
+21/shape_offset = Vector2( 7.99999, 10.5986 )
+21/shape_transform = Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+21/shape = SubResource( 7 )
+21/shape_one_way = false
+21/shape_one_way_margin = 1.0
+21/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+21/z_index = 0

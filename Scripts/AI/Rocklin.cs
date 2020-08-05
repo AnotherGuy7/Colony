@@ -14,6 +14,8 @@ public class Rocklin : RigidBody2D
 	private Timer meleeAttackTimer;
 	private Area2D detectionArea;
 
+	private const float shootSpeed = 1.5f;
+
 	private int health = 6;
 	private int flashTimer = 0;
 	private int playerDetectionTimer = 0;
@@ -33,6 +35,7 @@ public class Rocklin : RigidBody2D
 		attackTimer = GetNode<Timer>("AttackTimer");
 		stunDurationTimer = GetNode<Timer>("StunDurationTimer");
 		meleeAttackTimer = GetNode<Timer>("MeleeAttackTimer");
+		detectionArea = GetNode<Area2D>("DetectionRange");
 	}
 
 	public override void _Process(float delta)
@@ -43,18 +46,6 @@ public class Rocklin : RigidBody2D
 		}
 
 		if (searching)
-		{
-			rocklinAnim.Play("Searching");
-		}
-		else
-		{
-			if (!alerted)
-				rocklinAnim.Play("Idle");
-			else
-				rocklinAnim.Play("Alerted");
-		}
-
-		if (alerted)
 		{
 			if (playerDetectionTimer <= 0)
 			{
@@ -67,6 +58,37 @@ public class Rocklin : RigidBody2D
 				}
 				playerDetectionTimer += 60;
 			}
+			rocklinAnim.Play("Searching");
+		}
+		else
+		{
+			if (!alerted)
+			{
+				rocklinAnim.Play("Idle");
+				if (searchRestTimer.IsStopped())
+				{
+					searchRestTimer.Start();
+				}
+				if (!attackTimer.IsStopped())
+				{
+					attackTimer.Stop();
+				}
+			}
+			else
+			{
+				rocklinAnim.Play("Alerted");
+			}
+		}
+
+		if (alerted)
+		{
+			searchTimer.Stop();
+			searchRestTimer.Stop();
+			searching = false;
+			if (attackTimer.IsStopped())
+			{
+				attackTimer.Start();
+			}	
 		}
 
 		if (stunned)
@@ -82,7 +104,6 @@ public class Rocklin : RigidBody2D
 		{
 			QueueFree();
 		}
-		GD.Print(searchTimer.TimeLeft);
 	}
 
 	private void OnAttackTimerOut()
@@ -90,7 +111,8 @@ public class Rocklin : RigidBody2D
 		Area2D rockProjectile = (Area2D)perfectlyCircularRock.Instance();
 		GameData.mapYSort.AddChild(rockProjectile);
 		rockProjectile.GlobalPosition = GlobalPosition;
-		attackTimer.Start();
+		Vector2 directionToPlayer = Player.player.GlobalPosition - GlobalPosition;
+		rockProjectile.Set("velocity", directionToPlayer.Normalized() * shootSpeed);
 	}
 
 	//Detection stuff
@@ -118,7 +140,7 @@ public class Rocklin : RigidBody2D
 
 	private void OnDetectionRangeBodyExited(object body)
 	{
-		if (body == Player.player && searching)
+		if (body == Player.player)
 		{
 			alerted = false;
 		}
@@ -130,6 +152,8 @@ public class Rocklin : RigidBody2D
 		if (area == Player.playerSword)
 		{
 			health -= GameData.playerDamage;
+			stunned = true;
+			stunDurationTimer.Start();
 		}
 	}
 
@@ -139,8 +163,6 @@ public class Rocklin : RigidBody2D
 		if (body == Player.player && meleeAttackTimer.TimeLeft == 0 && alerted)
 		{
 			GameData.HurtPlayer(1);
-			stunned = true;
-			stunDurationTimer.Start();
 			meleeAttackTimer.Start();
 		}
 	}

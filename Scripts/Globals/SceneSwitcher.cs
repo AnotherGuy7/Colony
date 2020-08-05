@@ -8,6 +8,8 @@ public class SceneSwitcher : Node
 
 	private AnimationPlayer transitionPlayer;
 
+	private TileMap f;
+
 	private PackedScene whatToLoad;
 	private int spawnPointNumber;
 	private string spawnDirection;
@@ -57,6 +59,29 @@ public class SceneSwitcher : Node
 			{
 				YSort ySort = allChildren as YSort;
 				GameData.mapYSort = ySort;
+			}
+			if (allChildren.GetType().ToString() == "Godot.Position2D")		//setting camrea limits upon entering scene
+			{
+				Position2D positions = allChildren as Position2D;
+				if (positions.Name.Contains("CameraLimit"))		//only for maps that need it, if 
+				{
+					Position2D cameraLimits = positions;
+					switch (cameraLimits.Name)
+					{
+						case "CameraLimitTop":
+							Player.playerCam.LimitTop = (int)cameraLimits.GlobalPosition.y;
+							break;
+						case "CameraLimitLeft":
+							Player.playerCam.LimitLeft = (int)cameraLimits.GlobalPosition.x;
+							break;
+						case "CameraLimitBottom":
+							Player.playerCam.LimitBottom = (int)cameraLimits.GlobalPosition.y;
+							break;
+						case "CameraLimitRight":
+							Player.playerCam.LimitRight = (int)cameraLimits.GlobalPosition.x;
+							break;
+					}
+				}
 			}
 		}
 

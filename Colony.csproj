@@ -58,12 +58,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\UI\TitleScreen.cs" />
+    <Compile Include="Scripts\UI\UI.cs" />
     <Compile Include="Scripts\AI\LivingTrunk.cs" />
     <Compile Include="Scripts\AI\Rocklin.cs" />
     <Compile Include="Scripts\Globals\GameData.cs" />
     <Compile Include="Scripts\Globals\GlobalParticleEmitter.cs" />
     <Compile Include="Scripts\Globals\PackedScenes.cs" />
     <Compile Include="Scripts\Globals\SceneSwitcher.cs" />
+    <Compile Include="Scripts\Maps\Quarry.cs" />
+    <Compile Include="Scripts\Maps\Woodville.cs" />
     <Compile Include="Scripts\Maps\WoodvilleHouses.cs" />
     <Compile Include="Scripts\NPCs\TownNPC01.cs" />
     <Compile Include="Scripts\Objects\Bush.cs" />

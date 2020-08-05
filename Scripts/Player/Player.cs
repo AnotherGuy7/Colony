@@ -12,7 +12,8 @@ public class Player : KinematicBody2D
 	private bool swinging = false;
 
 	public static Player player;
-	public static Area2D playerSword;		//for easier player sword referencing
+	public static Area2D playerSword;       //for easier player sword referencing
+	public static Camera2D playerCam;
 
 	public override void _Ready()
 	{
@@ -20,6 +21,7 @@ public class Player : KinematicBody2D
 		playerSword = GetNode<Area2D>("SwordHitbox");
 		playerAnim = GetNode<AnimatedSprite>("PlayerAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
+		playerCam = GetNode<Camera2D>("PlayerCam");
 		//Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
 		GameData.gameData.Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
 	}

@@ -5,6 +5,7 @@ using System.Collections;
 public class PerfectlyCircularRock : Area2D
 {
 	private Sprite rockSprite;
+	public Vector2 velocity;
 
 	public override void _Ready()
 	{
@@ -13,7 +14,13 @@ public class PerfectlyCircularRock : Area2D
 
 	public override void _Process(float delta)
 	{
-		rockSprite.RotationDegrees += 1f;
+		rockSprite.RotationDegrees += 5f;
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
+		MoveLocalX(velocity.x);
+		MoveLocalY(velocity.y);
 	}
 
 	private void OnBodyEntered(object body)
@@ -22,6 +29,7 @@ public class PerfectlyCircularRock : Area2D
 		{
 			GameData.HurtPlayer(2);
 		}
-		QueueFree();
+		if (body.GetType().ToString() != "Rocklin")
+			QueueFree();
 	}
 }

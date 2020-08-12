@@ -10,10 +10,15 @@ public class Player : KinematicBody2D
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
 	private bool swinging = false;
+	private int flashTimer = 0;
+	private int hurtTimer = 0;
 
 	public static Player player;
 	public static Area2D playerSword;       //for easier player sword referencing
 	public static Camera2D playerCam;
+
+	private readonly Color reddened = new Color(1f, 0.28f, 0.28f, 1f);
+	private readonly Color normal = new Color(1f, 1f, 1f, 1f);
 
 	public override void _Ready()
 	{
@@ -26,30 +31,34 @@ public class Player : KinematicBody2D
 		GameData.gameData.Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressed("attack"))
+		{
+			swinging = true;
+		}
+	}
+
 	public override void _Process(float delta)
 	{
 		swordShape.Disabled = !swinging;
-		
-		//Sword hitbox rotation
-		if (direction == "Front")
+
+		HandleHitboxRotationAndSize();
+
+		//Post-Stun stuff
+		if (!GameData.playerHurt && Modulate == reddened)
 		{
-			playerSword.RotationDegrees = 0f;
-		}
-		if (direction == "Back")
-		{
-			playerSword.RotationDegrees = 180f;
-		}
-		if (direction == "Left")
-		{
-			playerSword.RotationDegrees = 90f;
-		}
-		if (direction == "Right")
-		{
-			playerSword.RotationDegrees = 270f;
+			Modulate = normal;
 		}
 
-		//Hurt stun
-
+		if (Input.IsKeyPressed((int)KeyList.V))
+		{
+			for (int i = 0; i < GameData.playerInventory.Length; i++)
+			{
+				Item item = GameData.playerInventory[i];
+				GD.Print(item.name);
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -76,11 +85,6 @@ public class Player : KinematicBody2D
 			direction = "Right";
 			velocity.x += moveSpeed;
 		}
-		if (Input.IsActionJustPressed("attack"))
-		{
-			swinging = true;
-			velocity = Vector2.Zero;
-		}
 
 		if (!swinging)
 		{
@@ -102,8 +106,14 @@ public class Player : KinematicBody2D
 		//Hurt movement
 		if (GameData.playerHurt)
 		{
-			velocity *= -2f;
-			GameData.playerHurt = false;
+			hurtTimer++;
+			velocity *= -GameData.inflictedKnockback * 7f;
+			Flash(6);
+			if (hurtTimer >= 30)
+			{
+				GameData.playerHurt = false;
+				hurtTimer = 0;
+			}
 		}
 		if (GameData.isPlayerTalking)
 		{
@@ -113,11 +123,7 @@ public class Player : KinematicBody2D
 		MoveAndSlide(velocity);
 	}
 
-	private void OnPlayerAnimAnimationDone()
-	{
-		swinging = false;
-	}
-
+	//Signal stuff
 	private void SpawnedInMap(int positionToSpawnAt, string passedDirection)
 	{
 		foreach (object allChildren in GetTree().CurrentScene.GetChildren())
@@ -132,5 +138,63 @@ public class Player : KinematicBody2D
 			}
 		}
 		direction = passedDirection;
+	}
+
+	private void OnPlayerAnimAnimationDone()
+	{
+		swinging = false;
+	}
+
+	//Methods
+	private void Flash(int eachFlashDuration)
+	{
+		flashTimer++;
+		if (flashTimer >= eachFlashDuration)
+		{
+			if (Modulate == normal)
+			{
+				Modulate = reddened;
+			}
+			else
+			{
+				Modulate = normal;
+			}
+			flashTimer = 0;
+		}
+	}
+
+	private void HandleHitboxRotationAndSize()
+	{
+		if (direction == "Front")
+		{
+			playerSword.RotationDegrees = 0f;
+		}
+		if (direction == "Back")
+		{
+			playerSword.RotationDegrees = 180f;
+		}
+		if (direction == "Left")
+		{
+			playerSword.RotationDegrees = 90f;
+		}
+		if (direction == "Right")
+		{
+			playerSword.RotationDegrees = 270f;
+		}
+	}
+
+	private void HandleItemUsages(Item item, int consumeAmount = 0)
+	{
+		switch (item.useType)
+		{
+			case Item.Weapon:
+				break;
+			case Item.Healing:
+				GameData.playerHealth += item.healAmount;
+				item.stack -= consumeAmount;
+				break;
+			case Item.Equip:
+				break;
+		}
 	}
 }

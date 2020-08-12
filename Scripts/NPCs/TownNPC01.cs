@@ -144,6 +144,13 @@ public class TownNPC01 : RigidBody2D
 			moveDurationTimer.Stop();
 		}
 	}
+	
+	private void OnStaticBodyEntered(int body_id, object body, int body_shape, int local_shape)
+	{
+	   	moving = false;
+		moveRestTimer.Start(rand.Next(2, 3));
+		moveDurationTimer.Stop();
+	}
 
 	//Talk stuff
 	private void OnTalkAreaEntered(object body)

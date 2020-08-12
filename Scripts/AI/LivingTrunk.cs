@@ -19,6 +19,7 @@ public class LivingTrunk : RigidBody2D
 	private bool moving = false;
 	private bool stunned = false;
 	private bool alerted = false;
+	private Vector2 knockbackVector;
 
 	private Random rand = new Random();
 
@@ -45,6 +46,7 @@ public class LivingTrunk : RigidBody2D
 		else
 		{
 			Modulate = normal;
+			knockbackVector = Vector2.Zero;
 		}
 	}
 
@@ -119,6 +121,13 @@ public class LivingTrunk : RigidBody2D
 				Vector2 newVelocity = playerPos - GlobalPosition;
 				velocity = newVelocity.Normalized() * moveSpeed;
 			}
+			else
+			{
+				if (knockbackVector == Vector2.Zero)
+					knockbackVector = playerPos - GlobalPosition;
+				knockbackVector *= 0.4f;
+				velocity = -knockbackVector;
+			}
 		}
 
 		if (velocity == Vector2.Zero)
@@ -164,9 +173,27 @@ public class LivingTrunk : RigidBody2D
 		moveRestTimer.Start(rand.Next(2, 3));
 		moveDurationTimer.Stop();
 	}
+	
+	private void OnLivingTrunkStaticBodyEntered(int body_id, object body, int body_shape, int local_shape)
+	{
+		moving = false;
+		moveRestTimer.Start(rand.Next(2, 3));
+		moveDurationTimer.Stop();
+	}
 
 	//Attacked and stun stuff
 	private void OnLivingTrunkBodyCollided(object body)
+	{
+		if (body == Player.player)
+		{
+			GameData.HurtPlayer(1);
+		}
+		moving = false;
+		moveRestTimer.Start(rand.Next(1, 2));
+		moveDurationTimer.Stop();
+	}
+
+	private void OnHitboxBodyEntered(object body)
 	{
 		if (body == Player.player)
 		{

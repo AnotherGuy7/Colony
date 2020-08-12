@@ -27,7 +27,7 @@ public class PerfectlyCircularRock : Area2D
 	{
 		if (body == Player.player)
 		{
-			GameData.HurtPlayer(2);
+			GameData.HurtPlayer(2, 0f);
 		}
 		if (body.GetType().ToString() != "Rocklin")
 			QueueFree();

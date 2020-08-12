@@ -39,14 +39,14 @@ animations = [ {
 "name": "Walking_Left",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "Idle_Right",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "Idle_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "Walking_Front",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 5 ) ],
@@ -54,9 +54,9 @@ animations = [ {
 "name": "Walking_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 12 ) ],
 "loop": true,
-"name": "Idle_Right",
+"name": "Walking_Front",
 "speed": 5.0
 } ]
 
@@ -91,6 +91,7 @@ wait_time = 2.0
 wait_time = 3.0
 autostart = true
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_shape_entered" from="." to="." method="OnStaticBodyEntered"]
 [connection signal="body_entered" from="TalkArea" to="." method="OnTalkAreaEntered"]
 [connection signal="body_exited" from="TalkArea" to="." method="OnTalkAreaExited"]
 [connection signal="timeout" from="MoveDurationTimer" to="." method="OnMoveDurationTimerOut"]

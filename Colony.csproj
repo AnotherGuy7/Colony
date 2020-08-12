@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Items\Apple.cs" />
+    <Compile Include="Scripts\UI\Item.cs" />
     <Compile Include="Scripts\UI\TitleScreen.cs" />
     <Compile Include="Scripts\UI\UI.cs" />
     <Compile Include="Scripts\AI\LivingTrunk.cs" />

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Enemies/LivingTrunk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/NPCs/TownNPC01.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Scenes/Enemies/Rocklin.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scripts/Maps/Woodville.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/NPCs/TownNPC02.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Environment/Items/Apple.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9757, 12.5707 )
@@ -167,6 +168,21 @@ position = Vector2( -140.981, -144.437 )
 position = Vector2( -292.981, -120.437 )
 dialogue = PoolStringArray( "Hello there, nice of you to stop by our house!", "Your next line is... Yes I Am Hail 2 U kool", "Ah nevermind, you don\'t speak." )
 speakerNames = PoolStringArray( "Terrance", "Terrance", "Terrance" )
+
+[node name="Apple" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 227.019, -160.437 )
+
+[node name="Apple2" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 259.019, -168.437 )
+
+[node name="Apple3" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 291.019, -152.437 )
+
+[node name="Apple4" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 307.019, -144.437 )
+
+[node name="Apple5" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 355.019, -168.437 )
 
 [node name="AreaToQuarry" type="Area2D" parent="."]
 position = Vector2( -31.785, -331.866 )

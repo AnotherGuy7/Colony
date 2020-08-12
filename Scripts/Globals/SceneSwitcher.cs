@@ -8,8 +8,6 @@ public class SceneSwitcher : Node
 
 	private AnimationPlayer transitionPlayer;
 
-	private TileMap f;
-
 	private PackedScene whatToLoad;
 	private int spawnPointNumber;
 	private string spawnDirection;

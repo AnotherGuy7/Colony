@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+ItemClass="*res://Scenes/Environment/Items/ItemClass.tscn"
 GameData="*res://Scripts/Globals/GameData.cs"
 GlobalParticleEmitter="*res://Scenes/Globals/GlobalParticleEmitter.tscn"
 PackedScenes="*res://Scenes/Globals/PackedScenes.tscn"

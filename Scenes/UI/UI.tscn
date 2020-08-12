@@ -1,12 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Sprites/UI/PlayerHealth_Bar.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/UI/PlayerHealthBarOutline.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/PlayerHeart_Empty.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/UI/HalfHeart.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/UI/PlayerHeart.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/UI/UI.cs" type="Script" id=5]
 [ext_resource path="res://Sprites/Minimaps/WoodvilleMap.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/UI/PlayerMarker.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/UI/InventorySlot.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/UI/InventorySlot_Active.png" type="Texture" id=9]
+[ext_resource path="res://Fonts/MajorlRetroRegular-aqom.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 10 )
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -15,31 +21,13 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+halfHeart = ExtResource( 2 )
+emptyHeart = ExtResource( 1 )
+fullHeart = ExtResource( 3 )
+inactiveSlot = ExtResource( 8 )
+activeSlot = ExtResource( 9 )
 
 [node name="Layer1" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" type="TextureProgress" parent="Layer1"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-step = 0.0
-value = 100.0
-texture_over = ExtResource( 2 )
-texture_progress = ExtResource( 1 )
-stretch_margin_right = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Layer1"]
-visible = false
-margin_left = -8.0
-margin_right = 32.0
-margin_bottom = 40.0
-texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MapPanel" type="Panel" parent="Layer1"]
 visible = false
@@ -80,6 +68,280 @@ margin_bottom = -1.90735e-06
 rect_pivot_offset = Vector2( 2.5, 13 )
 texture = ExtResource( 7 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="Panel" parent="Layer1"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart1" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 15.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart2" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 18.0
+margin_top = 3.0
+margin_right = 29.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart3" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 32.0
+margin_top = 3.0
+margin_right = 43.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart4" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 46.0
+margin_top = 3.0
+margin_right = 57.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart5" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 60.0
+margin_top = 3.0
+margin_right = 71.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart6" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 74.0
+margin_top = 3.0
+margin_right = 85.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart7" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 88.0
+margin_top = 3.0
+margin_right = 99.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart8" type="TextureRect" parent="Layer1/HealthBar"]
+margin_left = 102.0
+margin_top = 3.0
+margin_right = 113.0
+margin_bottom = 13.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryPanel" type="Panel" parent="Layer1"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot1" type="TextureRect" parent="Layer1/InventoryPanel"]
+margin_left = 8.0
+margin_top = 128.0
+margin_right = 24.0
+margin_bottom = 144.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="Layer1/InventoryPanel/InventorySlot1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+size_flags_stretch_ratio = 0.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ItemStack" type="Label" parent="Layer1/InventoryPanel/InventorySlot1"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 1 )
+align = 2
+
+[node name="InventorySlot2" type="TextureRect" parent="Layer1/InventoryPanel"]
+margin_left = 26.0
+margin_top = 128.0
+margin_right = 42.0
+margin_bottom = 144.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="Layer1/InventoryPanel/InventorySlot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemStack" type="Label" parent="Layer1/InventoryPanel/InventorySlot2"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 1 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot3" type="TextureRect" parent="Layer1/InventoryPanel"]
+margin_left = 44.0
+margin_top = 128.0
+margin_right = 60.0
+margin_bottom = 144.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="Layer1/InventoryPanel/InventorySlot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemStack" type="Label" parent="Layer1/InventoryPanel/InventorySlot3"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 1 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot4" type="TextureRect" parent="Layer1/InventoryPanel"]
+margin_left = 62.0
+margin_top = 128.0
+margin_right = 78.0
+margin_bottom = 144.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="Layer1/InventoryPanel/InventorySlot4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemStack" type="Label" parent="Layer1/InventoryPanel/InventorySlot4"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 1 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot5" type="TextureRect" parent="Layer1/InventoryPanel"]
+margin_left = 80.0
+margin_top = 128.0
+margin_right = 96.0
+margin_bottom = 144.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="Layer1/InventoryPanel/InventorySlot5"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -6.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemStack" type="Label" parent="Layer1/InventoryPanel/InventorySlot5"]
+margin_left = 2.0
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 26.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 1 )
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

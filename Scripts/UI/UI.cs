@@ -1,58 +1,109 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
 public class UI : Control
 {
-	public static TextureRect miniMapRect;
+	[Export]
+	public Texture halfHeart;
+
+	[Export]
+	public Texture emptyHeart;
+
+	[Export]
+	public Texture fullHeart;
+
+	[Export]
+	public Texture inactiveSlot;
+
+	[Export]
+	public Texture activeSlot;
 
 	private Panel mapPanel;
-	private TextureRect map;
 	private TextureRect playerMarker;
-	private Position2D playerMarkerCenter;
-	private Position2D cameraLimitLeft;
-	private Position2D cameraLimitTop;
-	private Position2D cameraLimitBottom;
-	private Position2D cameraLimitRight;
+	private Panel heartsPanel;
+	private Panel inventoryPanel;
+
+	private int currentHeart = 0;
+
+	private List<TextureRect> inventorySlots = new List<TextureRect>();
+	private List<TextureRect> hearts = new List<TextureRect>();
 
 	public override void _Ready()
 	{
-		miniMapRect = GetNode<TextureRect>("Layer1/MapPanel/Map");
 		mapPanel = GetNode<Panel>("Layer1/MapPanel");
-		map = GetNode<TextureRect>("Layer1/MapPanel/Map");
 		playerMarker = GetNode<TextureRect>("Layer1/MapPanel/PlayerMarkerCenter/PlayerMarker");
+		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
+		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
+		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
+
+		foreach (TextureRect heart in heartsPanel.GetChildren())
+		{
+			hearts.Add(heart);
+		}
+		foreach (TextureRect slot in inventoryPanel.GetChildren())
+		{
+			inventorySlots.Add(slot);
+		}
+	}
+
+	private void UpdateInventoryDrawings()
+	{
+		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		{
+			Item item = GameData.playerInventory[i];
+			TextureRect currentSlot = inventorySlots[i];
+			TextureRect currentSlotItemRect = (TextureRect)inventorySlots[i].GetNode(inventorySlots[i].GetPath() + "/ItemTexture");
+			Label currentSlotStack = (Label)inventorySlots[i].GetNode(inventorySlots[i].GetPath() + "/ItemStack");
+			currentSlotItemRect.Texture = item.sprite;
+
+			if (item.stack > 1)
+				currentSlotStack.Text = item.stack.ToString();
+			else
+				currentSlotStack.Text = "";
+
+			if (i == GameData.selectedInventorySlot)
+				currentSlot.Texture = activeSlot;
+			else
+				currentSlot.Texture = inactiveSlot;
+		}
 	}
 
 	public override void _Process(float delta)
 	{
 		if (Input.IsActionJustPressed("map"))
 		{
-			foreach (object allChildren in GetTree().CurrentScene.GetChildren())
+			mapPanel.Visible = !mapPanel.Visible;
+			Notification(NotificationDraw);
+		}
+		currentHeart = GameData.playerHealth / 2;
+		for (int i = 0; i < hearts.Count; i++)		//change this so that it changes upon a signal
+		{
+			if (i < GameData.playerMaxHealth)
 			{
-				if (allChildren.GetType().ToString() == "Godot.Position2D")
+				hearts[i].Visible = true;
+			}
+			else
+			{
+				hearts[i].Visible = false;
+			}
+			if (i > currentHeart)
+				hearts[i].Texture = emptyHeart;
+			if (i < currentHeart)
+				hearts[i].Texture = fullHeart;
+			if (i == currentHeart)
+			{
+				if (GameData.playerHealth % 2f == 1)
 				{
-					Position2D positions = allChildren as Position2D;
-					if (positions.Name.Contains("CameraLimit"))
-					{
-						Position2D cameraLimits = positions;
-						if (cameraLimits.Name == "CamreaLimitLeft")
-						{
-							cameraLimitLeft = cameraLimits;
-						}
-						if (cameraLimits.Name == "CamreaLimitTop")
-						{
-							cameraLimitTop = cameraLimits;
-						}
-					}
+					hearts[i].Texture = fullHeart;
+				}
+				else
+				{
+					hearts[i].Texture = halfHeart;
 				}
 			}
-			Vector2 totalArea = new Vector2(cameraLimitRight.GlobalPosition.x - cameraLimitLeft.GlobalPosition.x, cameraLimitTop.GlobalPosition.y - cameraLimitBottom.GlobalPosition.y);
-			float differenceX = map.RectSize.x / totalArea.x;
-			float differenceY = map.RectSize.y / totalArea.y;
-			Vector2 markerAddition = Vector2.Zero;
-			markerAddition.x = (cameraLimitLeft.GlobalPosition.x + Player.player.GlobalPosition.x) * differenceX;
-			markerAddition.y = (cameraLimitTop.GlobalPosition.y - Player.player.GlobalPosition.y) * differenceY;
-			playerMarker.RectGlobalPosition = playerMarkerCenter.GlobalPosition + markerAddition;
-			mapPanel.Visible = !mapPanel.Visible;
 		}
 	}
 }

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/UI/PickUpBox.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/Items/Apple.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Items/Apple.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/Items/BaseItem.cs" type="Script" id=3]
 [ext_resource path="res://Fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -13,6 +13,8 @@ font_data = ExtResource( 4 )
 
 [node name="Apple" type="Area2D"]
 script = ExtResource( 3 )
+itemType = 1
+amount = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 8 )

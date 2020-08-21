@@ -12,6 +12,7 @@ public class DialogueManager : Control
 
 	public static List<string> speakerNames = new List<string>();
 	public static List<string> activeDialog = new List<string>();
+	public static List<int> shopArray = new List<int>();
 	
 	private string currentText = "";
 	private string currentName = "";
@@ -34,7 +35,7 @@ public class DialogueManager : Control
 			if (textPercentage < 1f)
 			{
 				textPercentage += 0.005f;
-				talkSound.Play();
+				//talkSound.Play();
 			}
 			if (Input.IsActionJustPressed("Continue"))
 			{
@@ -51,6 +52,7 @@ public class DialogueManager : Control
 						{
 							dialogIndex = -1;
 							activeDialog.Clear();
+							dialogPanel.Visible = false;
 							GameData.isPlayerTalking = false;
 							return;
 						}
@@ -64,7 +66,6 @@ public class DialogueManager : Control
 			}
 			dialogueText.PercentVisible = textPercentage;
 		}
-		dialogPanel.Visible = GameData.isPlayerTalking;
 	}
 
 	public static void StartDialog(string[] dialogArray, string[] nameArray)
@@ -77,5 +78,6 @@ public class DialogueManager : Control
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
+		dialogManager.dialogPanel.Visible = true;
 	}
 }

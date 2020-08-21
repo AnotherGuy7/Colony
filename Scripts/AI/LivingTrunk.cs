@@ -213,7 +213,6 @@ public class LivingTrunk : RigidBody2D
 			stunDurationTimer.Start();
 			if (health <= 0)
 			{
-				GlobalParticleEmitter.EmitDeathClouds(GlobalPosition, rand.Next(3, 6));
 				QueueFree();
 			}
 		}

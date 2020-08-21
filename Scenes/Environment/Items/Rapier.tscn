@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/UI/PickUpBox.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/Items/BaseItem.cs" type="Script" id=3]
+[ext_resource path="res://Sprites/UI/Items/Rapier.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 24.0
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="Rapier" type="Area2D"]
+script = ExtResource( 3 )
+itemType = 4
+amount = 1
+
+[node name="RapierSprite" type="Sprite" parent="."]
+position = Vector2( 0, 8 )
+texture = ExtResource( 4 )
+
+[node name="PickUpArea" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="PickUpBox" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -8 )
+texture = ExtResource( 1 )
+
+[node name="Pick Up" type="Label" parent="PickUpBox"]
+margin_left = -7.47027
+margin_top = -3.80811
+margin_right = 92.5297
+margin_bottom = 32.1919
+rect_scale = Vector2( 0.15, 0.15 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Pick up"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

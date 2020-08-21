@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://Sprites/Player/player_01.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Player/player_00.png" type="Texture" id=2]
@@ -43,6 +43,54 @@
 [ext_resource path="res://Scripts/Player/Player.cs" type="Script" id=41]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Scenes/UI/DialogueManager.tscn" type="PackedScene" id=43]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_02.png" type="Texture" id=44]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_01.png" type="Texture" id=45]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_00.png" type="Texture" id=46]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_04.png" type="Texture" id=47]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_03.png" type="Texture" id=48]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_05.png" type="Texture" id=49]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_12.png" type="Texture" id=50]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_15.png" type="Texture" id=51]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_19.png" type="Texture" id=52]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_10.png" type="Texture" id=53]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_13.png" type="Texture" id=54]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_17.png" type="Texture" id=55]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_20.png" type="Texture" id=56]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_21.png" type="Texture" id=57]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_22.png" type="Texture" id=58]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_16.png" type="Texture" id=59]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_06.png" type="Texture" id=60]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_14.png" type="Texture" id=61]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_11.png" type="Texture" id=62]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_09.png" type="Texture" id=63]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_07.png" type="Texture" id=64]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_08.png" type="Texture" id=65]
+[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_23.png" type="Texture" id=66]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_02.png" type="Texture" id=67]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_00.png" type="Texture" id=68]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_01.png" type="Texture" id=69]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_06.png" type="Texture" id=70]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_07.png" type="Texture" id=71]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_08.png" type="Texture" id=72]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_05.png" type="Texture" id=73]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_03.png" type="Texture" id=74]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_09.png" type="Texture" id=75]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_11.png" type="Texture" id=76]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_04.png" type="Texture" id=77]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_10.png" type="Texture" id=78]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_17.png" type="Texture" id=79]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_12.png" type="Texture" id=80]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_13.png" type="Texture" id=81]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_15.png" type="Texture" id=82]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_21.png" type="Texture" id=83]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_14.png" type="Texture" id=84]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_22.png" type="Texture" id=85]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_19.png" type="Texture" id=86]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_16.png" type="Texture" id=87]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_23.png" type="Texture" id=88]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_20.png" type="Texture" id=89]
+[ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_18.png" type="Texture" id=90]
+[ext_resource path="res://Scenes/UI/ShopMenu.tscn" type="PackedScene" id=91]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -61,6 +109,11 @@ animations = [ {
 "name": "Idle_Left",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Walking_Right",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Walking_Left",
@@ -71,29 +124,24 @@ animations = [ {
 "name": "Walking_Front",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Idle_Right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "Idle_Back",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "Walking_Right",
+"name": "Idle_Right",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "Swinging_Back",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 39 ) ],
 "loop": false,
 "name": "Swinging_Front",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 32 ) ],
-"loop": false,
-"name": "Swinging_Right",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 40 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 26 ) ],
@@ -101,16 +149,59 @@ animations = [ {
 "name": "Swinging_Left",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 32 ) ],
 "loop": false,
-"name": "Swinging_Back",
+"name": "Swinging_Right",
 "speed": 12.0
 } ]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 46 ), ExtResource( 45 ), ExtResource( 44 ), ExtResource( 48 ), ExtResource( 47 ), ExtResource( 49 ) ],
+"loop": true,
+"name": "Sword_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 50 ), ExtResource( 54 ), ExtResource( 61 ), ExtResource( 51 ), ExtResource( 59 ), ExtResource( 55 ) ],
+"loop": true,
+"name": "Sword_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 73 ) ],
+"loop": true,
+"name": "Rapier_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 78 ), ExtResource( 76 ) ],
+"loop": true,
+"name": "Rapier_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 60 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 63 ), ExtResource( 53 ), ExtResource( 62 ) ],
+"loop": true,
+"name": "Sword_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
+"loop": true,
+"name": "Rapier_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
+"loop": true,
+"name": "Rapier_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 52 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 66 ) ],
+"loop": true,
+"name": "Sword_Left",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=3]
 radius = 4.83595
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 13.3832, 5.73529 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -121,9 +212,14 @@ frames = SubResource( 1 )
 animation = "Idle_Front"
 playing = true
 
+[node name="WeaponAnim" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
+animation = "Rapier_Right"
+
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.14865, 8.54743 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="PlayerCam" type="Camera2D" parent="."]
 current = true
@@ -132,7 +228,7 @@ current = true
 
 [node name="SwordShape" type="CollisionShape2D" parent="SwordHitbox"]
 position = Vector2( 0, 12 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="UI" parent="." instance=ExtResource( 42 )]
 
@@ -141,4 +237,6 @@ margin_left = -127.245
 margin_top = -74.3256
 margin_right = -127.245
 margin_bottom = -74.3256
+
+[node name="ShopMenu" parent="." instance=ExtResource( 91 )]
 [connection signal="animation_finished" from="PlayerAnim" to="." method="OnPlayerAnimAnimationDone"]

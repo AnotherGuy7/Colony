@@ -106,6 +106,29 @@ public class TownNPC01 : RigidBody2D
 			MoveLocalX(velocity.x);
 			MoveLocalY(velocity.y);
 		}
+		else
+		{
+			float angle = Mathf.Rad2Deg((GlobalPosition - Player.player.GlobalPosition).Angle()) + 180f;
+			if (angle >= 135f && angle <= 225f)        //Left
+			{
+				direction = "Left";
+			}
+			if (angle >= 225f && angle <= 315f)        //Back
+			{
+				direction = "Back";
+			}
+			if (angle <= 45f || angle >= 315f)        //Right
+			{
+				direction = "Right";
+			}
+			if (angle >= 45f && angle <= 135f)        //Front
+			{
+				direction = "Front";
+			}
+			moveRestTimer.Stop();
+			npcAnim.Play("Idle_" + direction);
+			isBeingTalkedTo = GameData.isPlayerTalking;
+		}
 	}
 
 	public override void _Process(float delta)
@@ -115,10 +138,6 @@ public class TownNPC01 : RigidBody2D
 			DialogueManager.StartDialog(dialogue, speakerNames);
 			isBeingTalkedTo = true;
 			GameData.isPlayerTalking = true;
-		}
-		if (isBeingTalkedTo)
-		{
-			isBeingTalkedTo = GameData.isPlayerTalking;
 		}
 	}
 

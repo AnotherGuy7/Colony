@@ -1,19 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/UI/TitleScreen.cs" type="Script" id=1]
-[ext_resource path="res://Fonts/PixelFJVerdana12pt.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Sprites/UI/Arrow.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UI/ColonyTitle.png" type="Texture" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
-
-[node name="TitleScreen" type="Node2D"]
+[node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 128, 72 )
+scale = Vector2( 0.32, 0.264 )
+texture = ExtResource( 4 )
 
 [node name="PlayButton" type="Button" parent="."]
 margin_left = 104.0
 margin_top = 64.0
 margin_right = 142.0
 margin_bottom = 84.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 2 )
 text = "Play"
 flat = true
 __meta__ = {
@@ -23,8 +32,10 @@ __meta__ = {
 [node name="SettingsButton" type="Button" parent="."]
 margin_left = 88.0
 margin_top = 88.0
-margin_right = 151.0
-margin_bottom = 108.0
+margin_right = 216.0
+margin_bottom = 130.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 2 )
 text = "Settings"
 flat = true
 __meta__ = {
@@ -47,7 +58,7 @@ margin_top = 16.0
 margin_right = 48.0
 margin_bottom = 40.0
 rect_scale = Vector2( 0.66, 0.66 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Save 1:"
 align = 1
 valign = 1
@@ -61,7 +72,7 @@ margin_top = 56.0
 margin_right = 102.0
 margin_bottom = 92.0
 rect_scale = Vector2( 0.66, 0.66 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Save 2:"
 align = 1
 valign = 1
@@ -75,7 +86,7 @@ margin_top = 96.0
 margin_right = 102.0
 margin_bottom = 132.0
 rect_scale = Vector2( 0.66, 0.66 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Save 3:"
 align = 1
 valign = 1
@@ -90,5 +101,76 @@ margin_bottom = 40.0
 [node name="Player" type="TextureRect" parent="SavesPanel/Save1Button"]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="SettingsPanel" type="Panel" parent="."]
+visible = false
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 248.0
+margin_bottom = 144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResolutionLabel" type="Label" parent="SettingsPanel"]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 102.0
+margin_bottom = 52.0
+rect_scale = Vector2( 0.66, 0.66 )
+custom_fonts/font = ExtResource( 2 )
+text = "Resolution:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResolutionNumberLabel" type="Label" parent="SettingsPanel"]
+margin_left = 144.0
+margin_top = 16.0
+margin_right = 278.0
+margin_bottom = 52.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "256 x 150"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenButton" type="Button" parent="SettingsPanel"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 86.0
+margin_bottom = 68.0
+rect_scale = Vector2( 0.66, 0.66 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 0.996078, 1, 0.294118, 1 )
+text = "Fullscreen"
+flat = true
+
+[node name="LowerResolutionButton" type="Button" parent="SettingsPanel"]
+margin_left = 112.0
+margin_top = 16.0
+margin_right = 136.0
+margin_bottom = 36.0
+rect_pivot_offset = Vector2( 11, 9.5 )
+icon = ExtResource( 3 )
+flat = true
+
+[node name="HigherResolutionButton" type="Button" parent="SettingsPanel"]
+margin_left = 216.0
+margin_top = 16.0
+margin_right = 240.0
+margin_bottom = 36.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 11, 9.5 )
+icon = ExtResource( 3 )
+flat = true
 [connection signal="pressed" from="PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="SettingsPanel/FullscreenButton" to="." method="OnFullscreenPressed"]
+[connection signal="pressed" from="SettingsPanel/LowerResolutionButton" to="." method="OnLowerResPresse"]
+[connection signal="pressed" from="SettingsPanel/HigherResolutionButton" to="." method="OnHigherResPressed"]

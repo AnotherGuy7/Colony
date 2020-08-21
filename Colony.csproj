@@ -58,14 +58,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\Items\Apple.cs" />
+    <Compile Include="Scripts\UI\ShopMenu.cs" />
+    <Compile Include="Scripts\Items\BaseItem.cs" />
+    <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />
+    <Compile Include="Scripts\Projectiles\Arrow.cs" />
     <Compile Include="Scripts\UI\Item.cs" />
     <Compile Include="Scripts\UI\TitleScreen.cs" />
     <Compile Include="Scripts\UI\UI.cs" />
     <Compile Include="Scripts\AI\LivingTrunk.cs" />
     <Compile Include="Scripts\AI\Rocklin.cs" />
     <Compile Include="Scripts\Globals\GameData.cs" />
-    <Compile Include="Scripts\Globals\GlobalParticleEmitter.cs" />
     <Compile Include="Scripts\Globals\PackedScenes.cs" />
     <Compile Include="Scripts\Globals\SceneSwitcher.cs" />
     <Compile Include="Scripts\Maps\Quarry.cs" />

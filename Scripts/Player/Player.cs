@@ -6,10 +6,14 @@ public class Player : KinematicBody2D
 	private const float moveSpeed = 45f;
 
 	private AnimatedSprite playerAnim;
+	private AnimatedSprite weaponAnim;
 	private CollisionShape2D swordShape;
+	private PackedScene arrow;
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
 	private bool swinging = false;
+	private bool shooting = false;
+	private bool running = false;
 	private int flashTimer = 0;
 	private int hurtTimer = 0;
 
@@ -25,17 +29,25 @@ public class Player : KinematicBody2D
 		player = this;
 		playerSword = GetNode<Area2D>("SwordHitbox");
 		playerAnim = GetNode<AnimatedSprite>("PlayerAnim");
+		weaponAnim = GetNode<AnimatedSprite>("WeaponAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
 		playerCam = GetNode<Camera2D>("PlayerCam");
-		//Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
+
+		arrow = GD.Load<PackedScene>("res://Scenes/Environment/Projectiles/Arrow.tscn");
+
 		GameData.gameData.Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
+		GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
 	}
 
 	public override void _Input(InputEvent @event)
 	{
 		if (Input.IsActionJustPressed("attack"))
 		{
-			swinging = true;
+			HandleItemUsages(GameData.playerInventory[GameData.selectedInventorySlot]);
+		}
+		if (Input.IsKeyPressed((int)KeyList.Shift))
+		{
+			running = true;
 		}
 	}
 
@@ -45,20 +57,32 @@ public class Player : KinematicBody2D
 
 		HandleHitboxRotationAndSize();
 
+		weaponAnim.Frame = playerAnim.Frame;
+
 		//Post-Stun stuff
 		if (!GameData.playerHurt && Modulate == reddened)
 		{
 			Modulate = normal;
 		}
 
-		if (Input.IsKeyPressed((int)KeyList.V))
+		if (!Input.IsActionPressed("attack") && shooting)
 		{
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				Item item = GameData.playerInventory[i];
-				GD.Print(item.name);
-			}
+			Area2D arrowInstance = arrow.Instance() as Area2D;
+			Vector2 direction = GetGlobalMousePosition() - GlobalPosition;
+			arrowInstance.Set("velocity", direction.Normalized() * 2f);
+			arrowInstance.Set("rotation", Mathf.Rad2Deg(direction.Angle()) + 90f);
+			GameData.mapYSort.AddChild(arrowInstance);
+			arrowInstance.GlobalPosition = GlobalPosition;
+			shooting = false;
 		}
+
+		if (Input.IsKeyPressed((int)KeyList.Equal))
+			if (playerCam.Zoom.x > 0.5f)
+				playerCam.Zoom -= new Vector2(0.05f, 0.05f);
+
+		if (Input.IsKeyPressed((int)KeyList.Minus))
+			if (playerCam.Zoom.x < 1.5f)
+				playerCam.Zoom += new Vector2(0.05f, 0.05f);
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -119,6 +143,18 @@ public class Player : KinematicBody2D
 		{
 			velocity = Vector2.Zero;
 		}
+		if (running)
+		{
+			velocity *= 2f;
+		}
+		if (shooting)
+		{
+			velocity /= 2f;
+		}
+		if (velocity == Vector2.Zero)
+		{
+			running = false;
+		}
 
 		MoveAndSlide(velocity);
 	}
@@ -143,6 +179,8 @@ public class Player : KinematicBody2D
 	private void OnPlayerAnimAnimationDone()
 	{
 		swinging = false;
+		weaponAnim.Visible = false;
+		weaponAnim.Stop();
 	}
 
 	//Methods
@@ -188,12 +226,35 @@ public class Player : KinematicBody2D
 		switch (item.useType)
 		{
 			case Item.Weapon:
+				Attack(item.type);
 				break;
 			case Item.Healing:
 				GameData.playerHealth += item.healAmount;
-				item.stack -= consumeAmount;
+				GameData.ConsumeItem(item);
 				break;
 			case Item.Equip:
+				break;
+		}
+	}
+
+	private void Attack(int itemType)
+	{
+		switch (itemType)
+		{
+			case (int)Item.ItemTypes.Sword:
+				swinging = true;
+				weaponAnim.Visible = true;
+				weaponAnim.Play("Sword_" + direction);
+				weaponAnim.Stop();
+				break;
+			case (int)Item.ItemTypes.Rapier:
+				swinging = true;
+				weaponAnim.Visible = true;
+				weaponAnim.Play("Rapier_" + direction);
+				weaponAnim.Stop();
+				break;
+			case (int)Item.ItemTypes.Bow:
+				shooting = true;
 				break;
 		}
 	}

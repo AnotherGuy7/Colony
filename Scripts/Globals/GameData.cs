@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 using System.Linq;
 
 public class GameData : Node2D
@@ -17,10 +18,9 @@ public class GameData : Node2D
 	public static int playerMaxHealth = 4;
 	public static int playerHealth = 8;
 	public static int playerDamage = 1;
+	public static int playerCurrency = 100;
 	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air]};
 	public static Item[] playerInventory = new Item[5];
-	public static int selectedInventorySlot = 0;
-	public static int latestOpenSlot = 1;
 
 	//Player action bools
 	public static bool playerHurt = false;      //I could also emit a signal... but this is easier and a signal would require me to check anyway
@@ -28,6 +28,9 @@ public class GameData : Node2D
 
 	//Misc stuff
 	public static float inflictedKnockback = 1f;
+	public static bool inventoryFull = false;
+	public static int selectedInventorySlot = 0;
+	public static int latestOpenSlot = 1;
 
 	public override void _Ready()
 	{
@@ -43,9 +46,8 @@ public class GameData : Node2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventMouseButton)
+		if (@event is InputEventMouseButton scroll)
 		{
-			InputEventMouseButton scroll = (InputEventMouseButton)@event;
 			if (scroll.IsPressed())
 			{
 				if (scroll.ButtonIndex == (int)ButtonList.WheelUp)
@@ -73,13 +75,57 @@ public class GameData : Node2D
 
 	public static void AddItemToInventory(Item itemToGive, int stack)
 	{
-		if (playerInventory[selectedInventorySlot].type == itemToGive.type)
+		Item selectedItem = playerInventory[selectedInventorySlot];
+		bool itemPlaced = false;
+
+		for (int i = 0; i < 5; i++)
 		{
-			playerInventory[selectedInventorySlot].stack += stack;
+			if (!itemPlaced)
+			{
+				if (playerInventory[i].type == (int)Item.ItemTypes.Air)
+				{
+					playerInventory[i] = itemToGive;
+					itemPlaced = true;
+				}
+			}
 		}
-		else
+		if (!itemPlaced)
 		{
-			playerInventory[selectedInventorySlot] = itemToGive;
+			if (selectedItem.type == itemToGive.type)
+			{
+				playerInventory[selectedInventorySlot].stack += stack;
+			}
+			else
+			{
+				if (selectedItem.type != (int)Item.ItemTypes.Air)
+				{
+					PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
+					Node2D droppedItem = itemScene.Instance() as Node2D;
+					droppedItem.Set("initializeTimer", 30);
+					droppedItem.Set("itemType", selectedItem.type);
+					droppedItem.Set("amount", selectedItem.stack);
+					mapYSort.AddChild(droppedItem);
+					droppedItem.GlobalPosition = Player.player.GlobalPosition;
+				}
+				playerInventory[selectedInventorySlot] = itemToGive;
+			}
+		}
+
+		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
+	}
+
+	public static void ConsumeItem(Item item, int amount = 1)
+	{
+		for (int i = 0; i < playerInventory.Length; i++)
+		{
+			if (playerInventory[i].type == item.type)
+			{
+				playerInventory[i].stack -= amount;
+				if (playerInventory[i].stack <= 0)
+				{
+					playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
+				}
+			}
 		}
 
 		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));

@@ -1,10 +1,17 @@
 using Godot;
 using System;
 
-public class Apple : Area2D
+public class BaseItem : Area2D
 {
+	[Export]
+	public int itemType;
+
+	[Export]
+	public int amount;
+
 	private Sprite pickUpBox;
 	private bool canBePickedUp = false;
+	private int initializeTimer = 0;
 
 	public override void _Ready()
 	{
@@ -13,9 +20,12 @@ public class Apple : Area2D
 
 	public override void _Process(float delta)
 	{
-		if (canBePickedUp && Input.IsKeyPressed((int)KeyList.G))
+		if (initializeTimer > 0)
+			initializeTimer--;
+
+		if (canBePickedUp && Input.IsKeyPressed((int)KeyList.G) && initializeTimer <= 0)
 		{
-			GameData.AddItemToInventory(Item.itemList[(int)Item.ItemTypes.Apple], 1);
+			GameData.AddItemToInventory(Item.itemList[itemType], amount);
 			QueueFree();
 		}
 	}

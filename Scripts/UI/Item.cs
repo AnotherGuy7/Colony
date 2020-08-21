@@ -11,10 +11,12 @@ public class Item : Node2D
     public Vector2 offsetInInventory = Vector2.Zero;
     public int stack = 1;
     public int consumeAmount = 0;       //for things that need consuming
+    public int buyPrice = 10;
     public int useType = 1;
     public Texture sprite;
 
     //Things for weapons
+    public int weaponDamage;
 
     //Things for healing items
     public int healAmount = 0;
@@ -36,7 +38,8 @@ public class Item : Node2D
         Air,
         Apple,
         Sword,
-        Bow
+        Bow,
+        Rapier
     }
 
     public override void _Ready()
@@ -55,6 +58,7 @@ public class Item : Node2D
         apple.sprite = GetTexture(apple.name);
         apple.consumeAmount = 1;
         apple.healAmount = 1;
+        apple.buyPrice = 5;
         itemList.Add(apple);
 
         Item sword = new Item();
@@ -62,6 +66,7 @@ public class Item : Node2D
         sword.type = (int)ItemTypes.Sword;
         sword.useType = Weapon;
         sword.sprite = GetTexture("Sword1");
+        sword.buyPrice = 20;
         itemList.Add(sword);
 
         Item bow = new Item();
@@ -69,12 +74,25 @@ public class Item : Node2D
         bow.type = (int)ItemTypes.Bow;
         bow.useType = Weapon;
         bow.sprite = GetTexture(bow.name);
+        bow.buyPrice = 15;
         itemList.Add(bow);
+
+        Item rapier = new Item();
+        rapier.name = "Rapier";
+        rapier.type = (int)ItemTypes.Rapier;
+        rapier.useType = Weapon;
+        rapier.sprite = GetTexture("Rapier");
+        rapier.buyPrice = 35;
+        itemList.Add(rapier);
     }
 
     private Texture GetTexture(string textureName)
     {
         Texture texture = (Texture)GD.Load("res://Sprites/UI/Items/" + textureName + ".png");
+        if (texture == null)
+        {
+            texture = (Texture)GD.Load("res://Sprites/UI/Items/Nothing.png");
+        }
         return texture;
     }
 }

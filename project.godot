@@ -23,7 +23,6 @@ config/icon="res://icon.png"
 
 ItemClass="*res://Scenes/Environment/Items/ItemClass.tscn"
 GameData="*res://Scripts/Globals/GameData.cs"
-GlobalParticleEmitter="*res://Scenes/Globals/GlobalParticleEmitter.tscn"
 PackedScenes="*res://Scenes/Globals/PackedScenes.tscn"
 SceneSwitcher="*res://Scenes/Globals/SceneSwitcher.tscn"
 

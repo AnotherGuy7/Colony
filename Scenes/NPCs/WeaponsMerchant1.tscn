@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/NPCs/WeaponsMerchant.cs" type="Script" id=1]
+[ext_resource path="res://Sprites/NPCs/Merchants/WeaponsMerchant1.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.22642
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[node name="WeaponsMerchant" type="RigidBody2D"]
+mode = 1
+mass = 0.01
+script = ExtResource( 1 )
+starterText = "Hello there, what can I do for you today!"
+speakerName = "Merchant"
+itemsToSell = PoolIntArray( 5, 3, 0, 0, 0 )
+
+[node name="MerchantSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="MerchantShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6.58259 )
+shape = SubResource( 1 )
+
+[node name="TalkArea" type="Area2D" parent="."]
+
+[node name="TalkAreaShape" type="CollisionShape2D" parent="TalkArea"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="TalkArea" to="." method="OnTalkAreaEntered"]
+[connection signal="body_exited" from="TalkArea" to="." method="OnTalkAreaExited"]

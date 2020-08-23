@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RedVial.png-9db9c22f7525555b4dcd6f05f7d30cb7.stex"
+path="res://.import/ToolsFilledTable.png-4f23a6ddc12d0d07cdb4517c16c75a42.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Items/RedVial.png"
-dest_files=[ "res://.import/RedVial.png-9db9c22f7525555b4dcd6f05f7d30cb7.stex" ]
+source_file="res://Sprites/Environment/Indoors/ToolsFilledTable.png"
+dest_files=[ "res://.import/ToolsFilledTable.png-4f23a6ddc12d0d07cdb4517c16c75a42.stex" ]
 
 [params]
 

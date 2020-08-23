@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/NPCs/WeaponsMerchant.cs" type="Script" id=1]
-[ext_resource path="res://Sprites/NPCs/Merchants/WeaponsMerchant1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/NPCs/Merchants/PotionsMerchant1.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.22642
@@ -9,17 +9,17 @@ radius = 5.22642
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[node name="WeaponsMerchant" type="RigidBody2D"]
+[node name="PotionsBrewer" type="RigidBody2D"]
 mode = 1
 mass = 0.01
 script = ExtResource( 1 )
 starterText = "Hello there, what can I do for you today!"
-speakerName = "Merchant"
+speakerName = "Brewer"
 
-[node name="MerchantSprite" type="Sprite" parent="."]
+[node name="BrewerSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="MerchantShape" type="CollisionShape2D" parent="."]
+[node name="BrewerShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6.58259 )
 shape = SubResource( 1 )
 

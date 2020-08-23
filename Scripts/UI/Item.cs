@@ -39,7 +39,8 @@ public class Item : Node2D
         Apple,
         Sword,
         Bow,
-        Rapier
+        Rapier,
+        SmallHealthVial
     }
 
     public override void _Ready()
@@ -84,6 +85,16 @@ public class Item : Node2D
         rapier.sprite = GetTexture("Rapier");
         rapier.buyPrice = 35;
         itemList.Add(rapier);
+
+        Item smallHealthVial = new Item();
+        smallHealthVial.name = "Apple";
+        smallHealthVial.type = (int)ItemTypes.SmallHealthVial;
+        smallHealthVial.useType = Healing;
+        smallHealthVial.sprite = GetTexture(smallHealthVial.name);
+        smallHealthVial.consumeAmount = 1;
+        smallHealthVial.healAmount = 2;
+        smallHealthVial.buyPrice = 20;
+        itemList.Add(smallHealthVial);
     }
 
     private Texture GetTexture(string textureName)

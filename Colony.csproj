@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Objects\MerchantShop.cs" />
     <Compile Include="Scripts\UI\ShopMenu.cs" />
     <Compile Include="Scripts\Items\BaseItem.cs" />
     <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />

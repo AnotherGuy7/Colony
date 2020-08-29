@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Enemies/LivingTrunk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/NPCs/TownNPC01.tscn" type="PackedScene" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://Scenes/Maps/Woodville/WoodvilleMerchant.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Sprites/Environment/Outdoors/Door_Open.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/Environment/Outdoors/Door.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Environment/Buildings/BrewerShop1.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleBrewer.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9757, 12.5707 )
@@ -53,6 +55,9 @@ position = Vector2( -28.981, -304.437 )
 
 [node name="SpawnPos5" type="Position2D" parent="."]
 position = Vector2( -164.981, -0.437012 )
+
+[node name="SpawnPos6" type="Position2D" parent="."]
+position = Vector2( -521.981, -0.437012 )
 
 [node name="CameraLimitTop" type="Position2D" parent="."]
 position = Vector2( -28.8881, -331.982 )
@@ -198,6 +203,12 @@ position = Vector2( -140.981, 175.563 )
 [node name="MerchantShop1" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -196.981, -40.437 )
 mapToGoTo = ExtResource( 17 )
+doorClosed = ExtResource( 19 )
+doorOpen = ExtResource( 18 )
+
+[node name="BerwerShop1" parent="YSort" instance=ExtResource( 20 )]
+position = Vector2( -524.981, -48.437 )
+mapToGoTo = ExtResource( 21 )
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
 

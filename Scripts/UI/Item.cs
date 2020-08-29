@@ -87,10 +87,10 @@ public class Item : Node2D
         itemList.Add(rapier);
 
         Item smallHealthVial = new Item();
-        smallHealthVial.name = "Apple";
+        smallHealthVial.name = "Samll Health Vial";
         smallHealthVial.type = (int)ItemTypes.SmallHealthVial;
         smallHealthVial.useType = Healing;
-        smallHealthVial.sprite = GetTexture(smallHealthVial.name);
+        smallHealthVial.sprite = GetTexture("SmallHealthVial");
         smallHealthVial.consumeAmount = 1;
         smallHealthVial.healAmount = 2;
         smallHealthVial.buyPrice = 20;

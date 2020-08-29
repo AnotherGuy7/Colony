@@ -78,6 +78,20 @@ public class GameData : Node2D
 		Item selectedItem = playerInventory[selectedInventorySlot];
 		bool itemPlaced = false;
 
+		//First, we check if a stack of the item exists
+		for (int i = 0; i < 5; i++)
+		{
+			if (!itemPlaced)
+			{
+				if (playerInventory[i].type == itemToGive.type)
+				{
+					playerInventory[i].stack += stack;
+					itemPlaced = true;
+				}
+			}
+		}
+
+		//Second, we check if there's an empty slot
 		for (int i = 0; i < 5; i++)
 		{
 			if (!itemPlaced)
@@ -89,26 +103,21 @@ public class GameData : Node2D
 				}
 			}
 		}
+
+		//Lastly, if the item can't be picked up, throw out whatever you're holding
 		if (!itemPlaced)
 		{
-			if (selectedItem.type == itemToGive.type)
+			if (selectedItem.type != (int)Item.ItemTypes.Air)
 			{
-				playerInventory[selectedInventorySlot].stack += stack;
+				PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
+				Node2D droppedItem = itemScene.Instance() as Node2D;
+				droppedItem.Set("initializeTimer", 30);
+				droppedItem.Set("itemType", selectedItem.type);
+				droppedItem.Set("amount", selectedItem.stack);
+				mapYSort.AddChild(droppedItem);
+				droppedItem.GlobalPosition = Player.player.GlobalPosition;
 			}
-			else
-			{
-				if (selectedItem.type != (int)Item.ItemTypes.Air)
-				{
-					PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
-					Node2D droppedItem = itemScene.Instance() as Node2D;
-					droppedItem.Set("initializeTimer", 30);
-					droppedItem.Set("itemType", selectedItem.type);
-					droppedItem.Set("amount", selectedItem.stack);
-					mapYSort.AddChild(droppedItem);
-					droppedItem.GlobalPosition = Player.player.GlobalPosition;
-				}
-				playerInventory[selectedInventorySlot] = itemToGive;
-			}
+			playerInventory[selectedInventorySlot] = itemToGive;
 		}
 
 		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Objects/MerchantShop.cs" type="Script" id=1]
+[ext_resource path="res://Sprites/Environment/Outdoors/Door.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Environment/Buildings/BrewerShop1.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10.5166, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 8 )
+
+[node name="BerwerShop1" type="StaticBody2D"]
+script = ExtResource( 1 )
+
+[node name="BrewerShop" type="Sprite" parent="."]
+position = Vector2( 0, -16.8418 )
+texture = ExtResource( 3 )
+
+[node name="ShopShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( -5.65685, -9.45926 )
+polygon = PoolVector2Array( -40.4852, 33.9856, -3.21815, 33.2093, -3.46815, 6.83426, 19.6568, 6.95926, 18.9068, 33.2093, 48.1299, 32.4611, 48.4982, 7.01894, -40.2146, 6.70507 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 2.5, 12.66 )
+
+[node name="DoorSprite" type="Sprite" parent="Door"]
+texture = ExtResource( 2 )
+
+[node name="DoorShape" type="CollisionShape2D" parent="Door"]
+position = Vector2( 0, 6 )
+shape = SubResource( 1 )
+
+[node name="OpenArea" type="Area2D" parent="Door"]
+
+[node name="OpenShape" type="CollisionShape2D" parent="Door/OpenArea"]
+position = Vector2( 0, 12 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Door" to="." method="OnDoorBodyEntered"]
+[connection signal="body_entered" from="Door/OpenArea" to="." method="OnOpenAreaBodyEntered"]
+[connection signal="body_exited" from="Door/OpenArea" to="." method="OnOpenAreaBodyExited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/UI/PlayerHeart_Empty.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/HalfHeart.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Sprites/UI/InventorySlot.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/UI/InventorySlot_Active.png" type="Texture" id=9]
 [ext_resource path="res://Fonts/MajorlRetroRegular-aqom.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -345,3 +346,136 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="QuestsPanel" type="Panel" parent="Layer1"]
+visible = false
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 248.0
+margin_bottom = 144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quest" type="Label" parent="Layer1/QuestsPanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 124.0
+margin_bottom = 44.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quests: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestSlot1" type="Container" parent="Layer1/QuestsPanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestName1" type="Label" parent="Layer1/QuestsPanel/QuestSlot1"]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 226.0
+margin_bottom = 68.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Name 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestDescription1" type="Label" parent="Layer1/QuestsPanel/QuestSlot1"]
+margin_left = 24.0
+margin_top = 48.0
+margin_right = 278.0
+margin_bottom = 84.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon1" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot1"]
+margin_left = 12.0
+margin_top = 35.0
+margin_right = 17.0
+margin_bottom = 40.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="QuestSlot2" type="Container" parent="Layer1/QuestsPanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestName2" type="Label" parent="Layer1/QuestsPanel/QuestSlot2"]
+margin_left = 24.0
+margin_top = 64.0
+margin_right = 232.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Name 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestDescription2" type="Label" parent="Layer1/QuestsPanel/QuestSlot2"]
+margin_left = 24.0
+margin_top = 80.0
+margin_right = 278.0
+margin_bottom = 116.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon2" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot2"]
+margin_left = 12.0
+margin_top = 67.0
+margin_right = 17.0
+margin_bottom = 72.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="QuestSlot3" type="Container" parent="Layer1/QuestsPanel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="QuestName3" type="Label" parent="Layer1/QuestsPanel/QuestSlot3"]
+margin_left = 24.0
+margin_top = 96.0
+margin_right = 232.0
+margin_bottom = 132.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Name 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestDescription3" type="Label" parent="Layer1/QuestsPanel/QuestSlot3"]
+margin_left = 24.0
+margin_top = 112.0
+margin_right = 278.0
+margin_bottom = 148.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon3" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot3"]
+margin_left = 12.0
+margin_top = 98.0
+margin_right = 17.0
+margin_bottom = 103.0
+rect_scale = Vector2( 2, 2 )

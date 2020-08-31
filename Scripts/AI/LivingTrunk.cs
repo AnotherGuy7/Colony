@@ -213,6 +213,8 @@ public class LivingTrunk : RigidBody2D
 			stunDurationTimer.Start();
 			if (health <= 0)
 			{
+				GameData.SpawnDeathClouds(GlobalPosition);
+				GameData.gameData.EmitSignal(nameof(GameData.UpdateQuestProgress), GetType().ToString());
 				QueueFree();
 			}
 		}

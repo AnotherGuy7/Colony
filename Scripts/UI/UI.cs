@@ -25,6 +25,7 @@ public class UI : Control
 	private TextureRect playerMarker;
 	private Panel heartsPanel;
 	private Panel inventoryPanel;
+	private Panel questPanel;
 
 	private int currentHeart = 0;
 
@@ -37,6 +38,7 @@ public class UI : Control
 		playerMarker = GetNode<TextureRect>("Layer1/MapPanel/PlayerMarkerCenter/PlayerMarker");
 		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
+		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
 
 		foreach (TextureRect heart in heartsPanel.GetChildren())
@@ -74,10 +76,8 @@ public class UI : Control
 	public override void _Process(float delta)
 	{
 		if (Input.IsActionJustPressed("map"))
-		{
 			mapPanel.Visible = !mapPanel.Visible;
-			Notification(NotificationDraw);
-		}
+
 		currentHeart = GameData.playerHealth / 2;
 		for (int i = 0; i < hearts.Count; i++)		//change this so that it changes upon a signal
 		{
@@ -103,6 +103,29 @@ public class UI : Control
 				{
 					hearts[i].Texture = halfHeart;
 				}
+			}
+		}
+
+		if (Input.IsActionJustPressed("quest"))
+		{
+			UpdateQuestListings();
+			questPanel.Visible = !questPanel.Visible;
+		}
+	}
+
+	private void UpdateQuestListings()
+	{
+		for (int q = 0; q < GameData.activeQuests.Length; q++)
+		{
+			Label questName = questPanel.GetNode("QuestSlot" + (q + 1) + "/QuestName" + (q + 1)) as Label;
+			Label questDescription = questPanel.GetNode("QuestSlot" + (q + 1) + "/QuestDescription" + (q + 1)) as Label;
+			TextureRect questIcon = questPanel.GetNode("QuestSlot" + (q + 1) + "/Icon" + (q + 1)) as TextureRect;
+
+			if (GameData.activeQuests[q].questName != "")
+			{
+				questName.Text = GameData.activeQuests[q].questName;
+				questDescription.Text = GameData.activeQuests[q].questDescription;
+				questIcon.Texture = GameData.activeQuests[q].iconSprite;
 			}
 		}
 	}

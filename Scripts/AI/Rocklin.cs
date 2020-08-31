@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Rocklin : RigidBody2D
 {
@@ -102,6 +101,8 @@ public class Rocklin : RigidBody2D
 
 		if (health <= 0)
 		{
+			GameData.gameData.EmitSignal(nameof(GameData.UpdateQuestProgress), GetType().ToString());
+			GameData.SpawnDeathClouds(GlobalPosition);
 			QueueFree();
 		}
 	}

@@ -1,7 +1,5 @@
 using Godot;
-using System;
-using System.ComponentModel;
-using System.Linq;
+using System.Runtime.CompilerServices;
 
 public class GameData : Node2D
 {
@@ -10,6 +8,9 @@ public class GameData : Node2D
 
 	[Signal]
 	public delegate void UpdateInventorySlotDrawings();       //this is sent after the player receives an item, or uses one
+
+	[Signal]
+	public delegate void UpdateQuestProgress(string enemyName);       //this is sent after a map change
 
 	public static GameData gameData;
 	public static YSort mapYSort;
@@ -21,6 +22,7 @@ public class GameData : Node2D
 	public static int playerCurrency = 100;
 	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air]};
 	public static Item[] playerInventory = new Item[5];
+	public static Quests[] activeQuests = new Quests[3];
 
 	//Player action bools
 	public static bool playerHurt = false;      //I could also emit a signal... but this is easier and a signal would require me to check anyway
@@ -35,6 +37,7 @@ public class GameData : Node2D
 	public override void _Ready()
 	{
 		gameData = this;
+		Connect(nameof(UpdateQuestProgress), this, nameof(UpdateQuestProgressMethod));
 		for (int i = 0; i < playerInventory.Length; i++)
 		{
 			if (i == 0)
@@ -42,6 +45,9 @@ public class GameData : Node2D
 			else
 				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
 		}
+		activeQuests[0] = Quests.questsDict[0];
+		activeQuests[1] = Quests.questsDict[-1];
+		activeQuests[2] = Quests.questsDict[-1];
 	}
 
 	public override void _Input(InputEvent @event)
@@ -66,6 +72,22 @@ public class GameData : Node2D
 		}
 	}
 
+	private void UpdateQuestProgressMethod(string name)
+	{
+		for (int q = 0; q < activeQuests.Length; q++)
+		{
+			if (activeQuests[q].targetNPCName == name)
+			{
+				activeQuests[q].progress -= 1;
+			}
+			if (activeQuests[q].progress < 0)
+			{
+				activeQuests[q].questDescription = "This quest is done. Go talk to " + activeQuests[q].askerName + " for your reward.";
+			}
+		}
+	}
+
+	//Methods that can be used anywhere
 	public static void HurtPlayer(int damage, float knockBack = 1f)
 	{
 		playerHealth -= damage;
@@ -138,5 +160,13 @@ public class GameData : Node2D
 		}
 
 		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
+	}
+
+	public static void SpawnDeathClouds(Vector2 pos)
+	{
+		AnimatedSprite clouds = PackedScenes.packedScenesClass.deathClouds.Instance() as AnimatedSprite;
+		mapYSort.AddChild(clouds);
+		clouds.GlobalPosition = pos;
+		clouds.Play("default");
 	}
 }

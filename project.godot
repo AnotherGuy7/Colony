@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ItemClass="*res://Scenes/Environment/Items/ItemClass.tscn"
+Quests="*res://Scenes/UI/Quests.tscn"
 GameData="*res://Scripts/Globals/GameData.cs"
 PackedScenes="*res://Scenes/Globals/PackedScenes.tscn"
 SceneSwitcher="*res://Scenes/Globals/SceneSwitcher.tscn"
@@ -96,6 +97,11 @@ Continue={
 map={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"unicode":0,"echo":false,"script":null)
+ ]
+}
+quest={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":81,"unicode":0,"echo":false,"script":null)
  ]
 }
 

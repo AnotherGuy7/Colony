@@ -17,6 +17,9 @@ public class PackedScenes : Node2D
 	[Export]
 	public PackedScene WoodvilleQuarry;
 
+	[Export]
+	public PackedScene deathClouds;
+
 	public override void _Ready()
 	{
 		packedScenesClass = this;

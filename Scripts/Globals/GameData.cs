@@ -1,5 +1,8 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting;
 
 public class GameData : Node2D
 {
@@ -33,6 +36,7 @@ public class GameData : Node2D
 	public static bool inventoryFull = false;
 	public static int selectedInventorySlot = 0;
 	public static int latestOpenSlot = 1;
+	public static Vector2 playerSavedPosition;
 
 	public override void _Ready()
 	{
@@ -45,7 +49,7 @@ public class GameData : Node2D
 			else
 				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
 		}
-		activeQuests[0] = Quests.questsDict[0];
+		activeQuests[0] = Quests.questsDict[-1];
 		activeQuests[1] = Quests.questsDict[-1];
 		activeQuests[2] = Quests.questsDict[-1];
 	}
@@ -78,11 +82,7 @@ public class GameData : Node2D
 		{
 			if (activeQuests[q].targetNPCName == name)
 			{
-				activeQuests[q].progress -= 1;
-			}
-			if (activeQuests[q].progress < 0)
-			{
-				activeQuests[q].questDescription = "This quest is done. Go talk to " + activeQuests[q].askerName + " for your reward.";
+				activeQuests[q].progress += 1;
 			}
 		}
 	}
@@ -143,6 +143,36 @@ public class GameData : Node2D
 		}
 
 		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
+	}
+
+	public static bool AddQuest(Quests quest, int objectiveAmount)
+	{
+		bool questPlaced = false;
+
+		//Checks for if the quest is already active, in which case, it does nothing
+		for (int q = 0; q < activeQuests.Length; q++)
+		{
+			if (activeQuests[q].questName == quest.questName)
+			{
+				questPlaced = true;
+			}
+		}
+
+		//Checks for empty quest slots then puts it in there if there's an empty one
+		for (int q = 0; q < activeQuests.Length; q++)
+		{
+			if (!questPlaced)
+			{
+				if (activeQuests[q].questName == "None")
+				{
+					activeQuests[q] = quest;
+					questPlaced = true;
+				}
+			}
+		}
+
+		//gameData.EmitSignal(nameof(UpdateQuestProgress));
+		return questPlaced;
 	}
 
 	public static void ConsumeItem(Item item, int amount = 1)

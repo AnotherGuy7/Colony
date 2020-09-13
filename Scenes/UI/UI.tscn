@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sprites/UI/PlayerHeart_Empty.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/HalfHeart.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sprites/UI/InventorySlot_Active.png" type="Texture" id=9]
 [ext_resource path="res://Fonts/MajorlRetroRegular-aqom.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Sprites/UI/Arrow.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -357,125 +358,140 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quest" type="Label" parent="Layer1/QuestsPanel"]
+[node name="QuestName" type="Label" parent="Layer1/QuestsPanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 124.0
+margin_right = 268.0
+margin_bottom = 88.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Name"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestDescription" type="Label" parent="Layer1/QuestsPanel"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 568.0
+margin_bottom = 248.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Quest Description"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuestProvider" type="Label" parent="Layer1/QuestsPanel"]
+margin_left = 120.0
+margin_top = 8.0
+margin_right = 400.0
 margin_bottom = 44.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
-text = "Quests: "
+text = "Provider"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuestSlot1" type="Container" parent="Layer1/QuestsPanel"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestName1" type="Label" parent="Layer1/QuestsPanel/QuestSlot1"]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 226.0
-margin_bottom = 68.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Quest Name 1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestDescription1" type="Label" parent="Layer1/QuestsPanel/QuestSlot1"]
-margin_left = 24.0
-margin_top = 48.0
-margin_right = 278.0
+[node name="QuestProgress" type="Label" parent="Layer1/QuestsPanel"]
+margin_left = 120.0
+margin_top = 24.0
+margin_right = 400.0
 margin_bottom = 84.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
-text = "Quest Description"
+text = "Progress"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon1" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot1"]
-margin_left = 12.0
-margin_top = 35.0
-margin_right = 17.0
-margin_bottom = 40.0
+[node name="Icon" type="TextureRect" parent="Layer1/QuestsPanel"]
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 13.0
+margin_bottom = 125.0
 rect_scale = Vector2( 2, 2 )
 
-[node name="QuestSlot2" type="Container" parent="Layer1/QuestsPanel"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestName2" type="Label" parent="Layer1/QuestsPanel/QuestSlot2"]
-margin_left = 24.0
-margin_top = 64.0
-margin_right = 232.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Quest Name 2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestDescription2" type="Label" parent="Layer1/QuestsPanel/QuestSlot2"]
-margin_left = 24.0
-margin_top = 80.0
-margin_right = 278.0
-margin_bottom = 116.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Quest Description"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon2" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot2"]
-margin_left = 12.0
-margin_top = 67.0
-margin_right = 17.0
-margin_bottom = 72.0
-rect_scale = Vector2( 2, 2 )
-
-[node name="QuestSlot3" type="Container" parent="Layer1/QuestsPanel"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="QuestName3" type="Label" parent="Layer1/QuestsPanel/QuestSlot3"]
-margin_left = 24.0
-margin_top = 96.0
-margin_right = 232.0
-margin_bottom = 132.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Quest Name 3"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="QuestDescription3" type="Label" parent="Layer1/QuestsPanel/QuestSlot3"]
-margin_left = 24.0
+[node name="QuestBackButton" type="Button" parent="Layer1/QuestsPanel"]
+margin_left = 192.0
 margin_top = 112.0
-margin_right = 278.0
-margin_bottom = 148.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Quest Description"
+margin_right = 216.0
+margin_bottom = 136.0
+rect_pivot_offset = Vector2( 12, 12 )
+custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
+icon = ExtResource( 12 )
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon3" type="TextureRect" parent="Layer1/QuestsPanel/QuestSlot3"]
-margin_left = 12.0
-margin_top = 98.0
-margin_right = 17.0
-margin_bottom = 103.0
-rect_scale = Vector2( 2, 2 )
+[node name="QuestForwardButton" type="Button" parent="Layer1/QuestsPanel"]
+margin_left = 216.0
+margin_top = 112.0
+margin_right = 240.0
+margin_bottom = 136.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 12, 12 )
+custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" type="Panel" parent="Layer1"]
+pause_mode = 2
+visible = false
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 232.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 72.0
+margin_top = 24.0
+margin_right = 210.0
+margin_bottom = 66.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 72.0
+margin_top = 48.0
+margin_right = 210.0
+margin_bottom = 90.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackToMenuButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 48.0
+margin_top = 72.0
+margin_right = 328.0
+margin_bottom = 114.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Back to Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Layer1/QuestsPanel/QuestBackButton" to="." method="OnQuestBackButtonPressed"]
+[connection signal="pressed" from="Layer1/QuestsPanel/QuestForwardButton" to="." method="OnQuestForwardButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/ContinueButton" to="." method="OnContinueButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/BackToMenuButton" to="." method="OnBackToMenuButtonPressed"]

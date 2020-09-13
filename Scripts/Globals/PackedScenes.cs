@@ -6,6 +6,9 @@ public class PackedScenes : Node2D
 	public static PackedScenes packedScenesClass;
 
 	[Export]
+	public PackedScene TitleScreen;
+
+	[Export]
 	public PackedScene Woodville;
 
 	[Export]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DirtStep4.wav-38b152c7d03882957b4d8bf678c2fce7.sample"
+
+[deps]
+
+source_file="res://Sounds/SoundEffects/DirtStep4.wav"
+dest_files=[ "res://.import/DirtStep4.wav-38b152c7d03882957b4d8bf678c2fce7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

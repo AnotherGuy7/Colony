@@ -11,6 +11,7 @@ public class Item : Node2D
     public int buyPrice = 10;
     public int useType = 1;
     public Texture sprite;
+    public AudioStream useSound;
 
     //Things for weapons
     public int weaponDamage;
@@ -57,6 +58,7 @@ public class Item : Node2D
         apple.consumeAmount = 1;
         apple.healAmount = 1;
         apple.buyPrice = 5;
+        apple.useSound = GetSound("Eat");
         itemList.Add(apple);
 
         Item sword = new Item();
@@ -65,6 +67,7 @@ public class Item : Node2D
         sword.useType = Weapon;
         sword.sprite = GetTexture("Sword1");
         sword.buyPrice = 20;
+        sword.useSound = GetSound("SwordSwing");
         itemList.Add(sword);
 
         Item bow = new Item();
@@ -102,5 +105,15 @@ public class Item : Node2D
             texture = (Texture)GD.Load("res://Sprites/UI/Items/Nothing.png");
         }
         return texture;
+    }
+
+    private AudioStream GetSound(string soundName)
+    {
+        AudioStream sound = (AudioStream)GD.Load("res://Sounds/ItemSFX/" + soundName + ".wav");
+        /*if (sound == null)
+        {
+
+        }*/
+        return sound;
     }
 }

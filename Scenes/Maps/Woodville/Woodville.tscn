@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Enemies/LivingTrunk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/NPCs/TownNPC01.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Sprites/Environment/Outdoors/Door.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/Environment/Buildings/BrewerShop1.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Maps/Woodville/WoodvilleBrewer.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/NPCs/TownNPC04.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.9757, 12.5707 )
@@ -171,8 +172,6 @@ mass = 0.00102041
 
 [node name="TownNPC01" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 91.019, 7.56299 )
-dialogue = PoolStringArray( "Hey! Pretty nice weather today right!", "Listen, I heard there\'s some living trunks walking around in the forest to the right", "You mind stopping them so I can walk through safely\?", "I\'ll take your silence as a yes! Take care and watch out!" )
-speakerNames = PoolStringArray( "William", "William", "William", "William" )
 
 [node name="Rocklin" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( -140.981, -144.437 )
@@ -211,6 +210,18 @@ position = Vector2( -524.981, -48.437 )
 mapToGoTo = ExtResource( 21 )
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
+
+[node name="TownNPC04" parent="YSort" instance=ExtResource( 22 )]
+position = Vector2( -108.981, 71.563 )
+dialogue = PoolStringArray( "Hello there!", "Would you mind killing those pesky Living Trunks northeast of here\?", "I would kill them myself but I have no weapons around I can use." )
+speakerNames = PoolStringArray( "Farmer Joe", "Farmer Joe", "Farmer Joe" )
+anchored = true
+questName = "Dead Trunks"
+questDescription = "Farmer Joe wants you to eliminate 6 Living Trunks."
+questType = 2
+targetNPCName = "LivingTrunk"
+questsFullMessage = "Actually, you look like a busy man to me... Sorry to bother you."
+questObjectiveAmount = 6
 
 [node name="AreaToQuarry" type="Area2D" parent="."]
 position = Vector2( -31.785, -331.866 )

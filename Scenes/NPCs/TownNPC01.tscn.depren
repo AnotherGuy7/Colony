@@ -17,6 +17,7 @@
 [ext_resource path="res://Sprites/NPCs/NPC_01/npc_04.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/NPCs/BaseTownNPC01.cs" type="Script" id=16]
 
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 13 ) ],

@@ -9,6 +9,9 @@ public class Player : KinematicBody2D
 	private AnimatedSprite weaponAnim;
 	private CollisionShape2D swordShape;
 	private PackedScene arrow;
+	private AudioStreamPlayer swingSound;
+	private AudioStreamPlayer dirtStepSound;
+	private Timer stepTimer;
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
 	private bool swinging = false;
@@ -21,8 +24,15 @@ public class Player : KinematicBody2D
 	public static Area2D playerSword;       //for easier player sword referencing
 	public static Camera2D playerCam;
 
+	private Random rand = new Random();
+
 	private readonly Color reddened = new Color(1f, 0.28f, 0.28f, 1f);
 	private readonly Color normal = new Color(1f, 1f, 1f, 1f);
+
+	private AudioStream dirtStep1;
+	private AudioStream dirtStep2;
+	private AudioStream dirtStep3;
+	private AudioStream dirtStep4;
 
 	public override void _Ready()
 	{
@@ -31,9 +41,17 @@ public class Player : KinematicBody2D
 		playerAnim = GetNode<AnimatedSprite>("PlayerAnim");
 		weaponAnim = GetNode<AnimatedSprite>("WeaponAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
+		swingSound = GetNode<AudioStreamPlayer>("SwingSound");
+		dirtStepSound = GetNode<AudioStreamPlayer>("DirtStepSound");
+		stepTimer = GetNode<Timer>("StepTimer");
 		playerCam = GetNode<Camera2D>("PlayerCam");
 
 		arrow = GD.Load<PackedScene>("res://Scenes/Environment/Projectiles/Arrow.tscn");
+
+		dirtStep1 = GD.Load("res://Sounds/SoundEffects/DirtStep1.wav") as AudioStream;
+		dirtStep2 = GD.Load("res://Sounds/SoundEffects/DirtStep2.wav") as AudioStream;
+		dirtStep3 = GD.Load("res://Sounds/SoundEffects/DirtStep3.wav") as AudioStream;
+		dirtStep4 = GD.Load("res://Sounds/SoundEffects/DirtStep4.wav") as AudioStream;
 
 		GameData.gameData.Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
 		GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
@@ -154,6 +172,14 @@ public class Player : KinematicBody2D
 		if (velocity == Vector2.Zero)
 		{
 			running = false;
+			stepTimer.Stop();
+		}
+		else
+		{
+			if (stepTimer.TimeLeft == 0)
+			{
+				stepTimer.Start();
+			}
 		}
 
 		MoveAndSlide(velocity);
@@ -173,6 +199,13 @@ public class Player : KinematicBody2D
 				}
 			}
 		}
+
+		if (GameData.playerSavedPosition != Vector2.Zero)
+		{
+			GlobalPosition = GameData.playerSavedPosition;
+			GameData.playerSavedPosition = Vector2.Zero;
+		}
+
 		direction = passedDirection;
 	}
 
@@ -181,6 +214,26 @@ public class Player : KinematicBody2D
 		swinging = false;
 		weaponAnim.Visible = false;
 		weaponAnim.Stop();
+	}
+
+	private void OnStepTimerOut()
+	{
+		switch (rand.Next(1, 5))
+		{
+			case 1:
+				dirtStepSound.Stream = dirtStep1;
+				break;
+			case 2:
+				dirtStepSound.Stream = dirtStep2;
+				break;
+			case 3:
+				dirtStepSound.Stream = dirtStep3;
+				break;
+			case 4:
+				dirtStepSound.Stream = dirtStep4;
+				break;
+		}
+		dirtStepSound.Play();
 	}
 
 	//Methods
@@ -221,16 +274,19 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	private void HandleItemUsages(Item item, int consumeAmount = 0)
+	private void HandleItemUsages(Item item, int consumeAmount = 1)
 	{
 		switch (item.useType)
 		{
 			case Item.Weapon:
 				Attack(item.type);
+				weaponAnim.Visible = true;
+				swingSound.Stream = item.useSound;
+				swingSound.Play();
 				break;
 			case Item.Healing:
 				GameData.playerHealth += item.healAmount;
-				GameData.ConsumeItem(item);
+				GameData.ConsumeItem(item, consumeAmount);
 				break;
 			case Item.Equip:
 				break;
@@ -243,13 +299,11 @@ public class Player : KinematicBody2D
 		{
 			case (int)Item.ItemTypes.Sword:
 				swinging = true;
-				weaponAnim.Visible = true;
 				weaponAnim.Play("Sword_" + direction);
 				weaponAnim.Stop();
 				break;
 			case (int)Item.ItemTypes.Rapier:
 				swinging = true;
-				weaponAnim.Visible = true;
 				weaponAnim.Play("Rapier_" + direction);
 				weaponAnim.Stop();
 				break;

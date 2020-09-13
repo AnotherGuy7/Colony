@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/SwordSwing.wav-e8a09f1e4092787debda1c8c2c7bf1cc.sample"
+path="res://.import/DirtStep2.wav-3c737fd5563b13c4e4d0cc345f378f11.sample"
 
 [deps]
 
-source_file="res://Sounds/SoundEffects/SwordSwing.wav"
-dest_files=[ "res://.import/SwordSwing.wav-e8a09f1e4092787debda1c8c2c7bf1cc.sample" ]
+source_file="res://Sounds/SoundEffects/DirtStep2.wav"
+dest_files=[ "res://.import/DirtStep2.wav-3c737fd5563b13c4e4d0cc345f378f11.sample" ]
 
 [params]
 

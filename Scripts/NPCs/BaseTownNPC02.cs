@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class TownNPC01 : RigidBody2D
+public class BaseTownNPC02 : RigidBody2D
 {
 	[Export]
 	public string[] dialogue = new string[4];
@@ -14,6 +14,43 @@ public class TownNPC01 : RigidBody2D
 
 	[Export]
 	public float anchoredDistance = 0f;
+
+
+	//[Export]
+	//public int questKey = 0;
+
+	[Export]
+	public string questName = "";
+
+	[Export]
+	public string questDescription = "";
+
+	[Export]
+	public int questType;
+
+	[Export]
+	public string targetNPCName;
+
+	[Export]
+	public string questsFullMessage = "";
+
+	[Export]
+	public int questObjectiveAmount = 0;
+
+	[Export]
+	public string[] questDoneDialog;
+
+	[Export]
+	public string[] questDoneNames;
+
+	[Export]
+	public int playerRewardMoney = 0;
+
+	[Export]
+	public int playerRewardItemType = 0;
+
+	[Export]
+	public int playerRewardItemStack = 0;
 
 	private AnimatedSprite npcAnim;
 	private Timer moveDurationTimer;
@@ -135,9 +172,28 @@ public class TownNPC01 : RigidBody2D
 	{
 		if (canBeTalkedTo && !isBeingTalkedTo && Input.IsActionJustPressed("Continue"))
 		{
-			DialogueManager.StartDialog(dialogue, speakerNames);
-			isBeingTalkedTo = true;
-			GameData.isPlayerTalking = true;
+			bool questDone = false;
+			for (int q = 0; q < GameData.activeQuests.Length; q++)
+			{
+				if (GetType().ToString() == GameData.activeQuests[q].askerName)
+				{
+					questDone = true;
+					break;
+				}
+			}
+
+			if (!questDone)
+			{
+				DialogueManager.StartDialogWithQuest(dialogue, speakerNames, questName, questDescription, questType, targetNPCName, questsFullMessage, questObjectiveAmount);
+				isBeingTalkedTo = true;
+				GameData.isPlayerTalking = true;
+			}
+			else
+			{
+				DialogueManager.StartDialogWithReward(questDoneDialog, questDoneNames, playerRewardMoney, Item.itemList[playerRewardItemType], playerRewardItemStack);
+				isBeingTalkedTo = true;
+				GameData.isPlayerTalking = true;
+			}
 		}
 	}
 
@@ -163,10 +219,10 @@ public class TownNPC01 : RigidBody2D
 			moveDurationTimer.Stop();
 		}
 	}
-	
+
 	private void OnStaticBodyEntered(int body_id, object body, int body_shape, int local_shape)
 	{
-	   	moving = false;
+		moving = false;
 		moveRestTimer.Start(rand.Next(2, 3));
 		moveDurationTimer.Stop();
 	}

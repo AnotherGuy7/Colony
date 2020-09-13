@@ -1,8 +1,5 @@
 using Godot;
 using System;
-using System.IO;
-using System.Net.Configuration;
-using System.Reflection;
 
 public class LivingTrunk : RigidBody2D
 {

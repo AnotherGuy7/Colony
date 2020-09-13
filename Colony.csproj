@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Globals\SaveManager.cs" />
+    <Compile Include="Scripts\NPCs\BaseTownNPC02.cs" />
     <Compile Include="Scripts\Objects\BaseParticle.cs" />
     <Compile Include="Scripts\Objects\MerchantShop.cs" />
     <Compile Include="Scripts\UI\Quests.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="Scripts\Maps\Quarry.cs" />
     <Compile Include="Scripts\Maps\Woodville.cs" />
     <Compile Include="Scripts\Maps\WoodvilleHouses.cs" />
-    <Compile Include="Scripts\NPCs\TownNPC01.cs" />
+    <Compile Include="Scripts\NPCs\BaseTownNPC01.cs" />
     <Compile Include="Scripts\Objects\Bush.cs" />
     <Compile Include="Scripts\Objects\Door.cs" />
     <Compile Include="Scripts\Objects\House1.cs" />

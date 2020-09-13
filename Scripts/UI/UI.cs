@@ -26,8 +26,10 @@ public class UI : Control
 	private Panel heartsPanel;
 	private Panel inventoryPanel;
 	private Panel questPanel;
+	private Panel pauseMenu;
 
 	private int currentHeart = 0;
+	private int questIndex = 0;
 
 	private List<TextureRect> inventorySlots = new List<TextureRect>();
 	private List<TextureRect> hearts = new List<TextureRect>();
@@ -39,6 +41,7 @@ public class UI : Control
 		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
 		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
+		pauseMenu = GetNode<Panel>("Layer1/PauseMenu");
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
 
 		foreach (TextureRect heart in heartsPanel.GetChildren())
@@ -77,6 +80,8 @@ public class UI : Control
 	{
 		if (Input.IsActionJustPressed("map"))
 			mapPanel.Visible = !mapPanel.Visible;
+		if (Input.IsActionJustPressed("pause"))
+			pauseMenu.Visible = !pauseMenu.Visible;
 
 		currentHeart = GameData.playerHealth / 2;
 		for (int i = 0; i < hearts.Count; i++)		//change this so that it changes upon a signal
@@ -115,18 +120,71 @@ public class UI : Control
 
 	private void UpdateQuestListings()
 	{
-		for (int q = 0; q < GameData.activeQuests.Length; q++)
-		{
-			Label questName = questPanel.GetNode("QuestSlot" + (q + 1) + "/QuestName" + (q + 1)) as Label;
-			Label questDescription = questPanel.GetNode("QuestSlot" + (q + 1) + "/QuestDescription" + (q + 1)) as Label;
-			TextureRect questIcon = questPanel.GetNode("QuestSlot" + (q + 1) + "/Icon" + (q + 1)) as TextureRect;
+		Label questName = questPanel.GetNode("QuestName") as Label;
+		Label questDescription = questPanel.GetNode("QuestDescription") as Label;
+		Label questProvider = questPanel.GetNode("QuestProvider") as Label;
+		Label questProgress = questPanel.GetNode("QuestProgress") as Label;
+		TextureRect questIcon = questPanel.GetNode("Icon") as TextureRect;
 
-			if (GameData.activeQuests[q].questName != "")
+		if (GameData.activeQuests[questIndex].questName != "None")
+		{
+			questName.Text = GameData.activeQuests[questIndex].questName;
+			questDescription.Text = GameData.activeQuests[questIndex].questDescription;
+			questIcon.Texture = GameData.activeQuests[questIndex].iconSprite;
+			questProvider.Text = "Provider: " + GameData.activeQuests[questIndex].askerName;
+			questProgress.Text = "Progress: " + GameData.activeQuests[questIndex].progress + " / " + GameData.activeQuests[questIndex].maxProgress;
+			if (GameData.activeQuests[questIndex].progress >= GameData.activeQuests[questIndex].maxProgress)
 			{
-				questName.Text = GameData.activeQuests[q].questName;
-				questDescription.Text = GameData.activeQuests[q].questDescription;
-				questIcon.Texture = GameData.activeQuests[q].iconSprite;
+				questProgress.Text = "Progress: Completed";
 			}
 		}
+		else
+		{
+			questName.Text = "None";
+			questDescription.Text = "No quest occupies this slot. Go talk to someone and start a quest!";
+			questIcon.Texture = GameData.activeQuests[questIndex].iconSprite;
+			questProvider.Text = "Provider: None";
+			questProgress.Text = "Progress: None";
+		}
+	}
+
+	private void OnQuestBackButtonPressed()
+	{
+		questIndex--;
+
+		if (questIndex < 0)
+			questIndex = GameData.activeQuests.Length - 1;
+
+		UpdateQuestListings();
+	}
+
+
+	private void OnQuestForwardButtonPressed()
+	{
+		questIndex++;
+
+		if (questIndex > GameData.activeQuests.Length - 1)
+			questIndex = 0;
+
+		UpdateQuestListings();
+	}
+
+	private void OnContinueButtonPressed()
+	{
+		GetTree().Paused = false;
+		pauseMenu.Visible = false;
+	}
+
+
+	private void OnSettingsButtonPressed()
+	{
+		// Replace with function body.
+	}
+
+
+	private void OnBackToMenuButtonPressed()
+	{
+		SaveManager.saveManager.SaveGame();
+		SceneSwitcher.sceneSwitcher.GotoScene(PackedScenes.packedScenesClass.TitleScreen, 1, "Back");
 	}
 }

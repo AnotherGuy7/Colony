@@ -33,6 +33,7 @@ public class TitleScreen : Control
 	private void OnPlayButtonPressed()
 	{
 		SceneSwitcher.sceneSwitcher.GotoScene(PackedScenes.packedScenesClass.Woodville, 1, "Front");
+		SaveManager.saveManager.LoadGame();
 	}
 	
 	

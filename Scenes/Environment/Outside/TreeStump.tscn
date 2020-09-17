@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/Environment/Outdoors/TreeTrunk.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Environment/Outdoors/TreeStump.png" type="Texture" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.35531
 height = 14.9969
 
-[node name="TreeTrunk" type="StaticBody2D"]
+[node name="TreeStump" type="StaticBody2D"]
 
-[node name="Trunk" type="Sprite" parent="."]
+[node name="StumpSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -8 )
 
-[node name="TrunkShape" type="CollisionShape2D" parent="."]
+[node name="StumpShape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.263207, 7.85751 )
 rotation = 1.5708
 shape = SubResource( 1 )

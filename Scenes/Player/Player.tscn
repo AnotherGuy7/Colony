@@ -114,14 +114,14 @@ animations = [ {
 "name": "Idle_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Walking_Right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": false,
 "name": "Idle_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Walking_Right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 6 ) ],
@@ -139,11 +139,6 @@ animations = [ {
 "name": "Swinging_Back",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 39 ) ],
-"loop": false,
-"name": "Swinging_Front",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 40 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 26 ) ],
 "loop": false,
 "name": "Swinging_Left",
@@ -152,6 +147,11 @@ animations = [ {
 "frames": [ ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 32 ) ],
 "loop": false,
 "name": "Swinging_Right",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 39 ) ],
+"loop": false,
+"name": "Swinging_Front",
 "speed": 12.0
 } ]
 
@@ -167,24 +167,14 @@ animations = [ {
 "name": "Sword_Back",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 73 ) ],
-"loop": true,
-"name": "Rapier_Front",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 60 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 63 ), ExtResource( 53 ), ExtResource( 62 ) ],
-"loop": true,
-"name": "Sword_Right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
-"loop": true,
-"name": "Rapier_Back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 52 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 66 ) ],
 "loop": true,
 "name": "Sword_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 78 ), ExtResource( 76 ) ],
+"loop": true,
+"name": "Rapier_Right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
@@ -192,9 +182,19 @@ animations = [ {
 "name": "Rapier_Left",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 78 ), ExtResource( 76 ) ],
+"frames": [ ExtResource( 60 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 63 ), ExtResource( 53 ), ExtResource( 62 ) ],
 "loop": true,
-"name": "Rapier_Right",
+"name": "Sword_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 73 ) ],
+"loop": true,
+"name": "Rapier_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
+"loop": true,
+"name": "Rapier_Back",
 "speed": 5.0
 } ]
 
@@ -233,11 +233,6 @@ shape = SubResource( 4 )
 [node name="SwingSound" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0
 
-[node name="DirtStepSound" type="AudioStreamPlayer" parent="."]
-
-[node name="StepTimer" type="Timer" parent="."]
-wait_time = 0.25
-
 [node name="UI" parent="." instance=ExtResource( 42 )]
 
 [node name="DialogueManager" parent="." instance=ExtResource( 43 )]
@@ -248,4 +243,3 @@ margin_bottom = -74.3256
 
 [node name="ShopMenu" parent="." instance=ExtResource( 91 )]
 [connection signal="animation_finished" from="PlayerAnim" to="." method="OnPlayerAnimAnimationDone"]
-[connection signal="timeout" from="StepTimer" to="." method="OnStepTimerOut"]

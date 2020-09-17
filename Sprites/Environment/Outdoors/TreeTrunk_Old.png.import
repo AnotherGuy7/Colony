@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeTrunk2.png-ea47a72c994e4f38181e8709db4dd2b3.stex"
+path="res://.import/TreeTrunk_Old.png-52959723b07d10efe5504ac5e5b8fa5c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Environment/Outdoors/TreeTrunk2.png"
-dest_files=[ "res://.import/TreeTrunk2.png-ea47a72c994e4f38181e8709db4dd2b3.stex" ]
+source_file="res://Sprites/Environment/Outdoors/TreeTrunk_Old.png"
+dest_files=[ "res://.import/TreeTrunk_Old.png-52959723b07d10efe5504ac5e5b8fa5c.stex" ]
 
 [params]
 

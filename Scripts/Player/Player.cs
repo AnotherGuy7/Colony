@@ -10,8 +10,6 @@ public class Player : KinematicBody2D
 	private CollisionShape2D swordShape;
 	private PackedScene arrow;
 	private AudioStreamPlayer swingSound;
-	private AudioStreamPlayer dirtStepSound;
-	private Timer stepTimer;
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
 	private bool swinging = false;
@@ -29,11 +27,6 @@ public class Player : KinematicBody2D
 	private readonly Color reddened = new Color(1f, 0.28f, 0.28f, 1f);
 	private readonly Color normal = new Color(1f, 1f, 1f, 1f);
 
-	private AudioStream dirtStep1;
-	private AudioStream dirtStep2;
-	private AudioStream dirtStep3;
-	private AudioStream dirtStep4;
-
 	public override void _Ready()
 	{
 		player = this;
@@ -42,16 +35,9 @@ public class Player : KinematicBody2D
 		weaponAnim = GetNode<AnimatedSprite>("WeaponAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
 		swingSound = GetNode<AudioStreamPlayer>("SwingSound");
-		dirtStepSound = GetNode<AudioStreamPlayer>("DirtStepSound");
-		stepTimer = GetNode<Timer>("StepTimer");
 		playerCam = GetNode<Camera2D>("PlayerCam");
 
 		arrow = GD.Load<PackedScene>("res://Scenes/Environment/Projectiles/Arrow.tscn");
-
-		dirtStep1 = GD.Load("res://Sounds/SoundEffects/DirtStep1.wav") as AudioStream;
-		dirtStep2 = GD.Load("res://Sounds/SoundEffects/DirtStep2.wav") as AudioStream;
-		dirtStep3 = GD.Load("res://Sounds/SoundEffects/DirtStep3.wav") as AudioStream;
-		dirtStep4 = GD.Load("res://Sounds/SoundEffects/DirtStep4.wav") as AudioStream;
 
 		GameData.gameData.Connect(nameof(GameData.SwitchedMaps), this, nameof(SpawnedInMap));
 		GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
@@ -172,14 +158,6 @@ public class Player : KinematicBody2D
 		if (velocity == Vector2.Zero)
 		{
 			running = false;
-			stepTimer.Stop();
-		}
-		else
-		{
-			if (stepTimer.TimeLeft == 0)
-			{
-				stepTimer.Start();
-			}
 		}
 
 		MoveAndSlide(velocity);
@@ -214,26 +192,6 @@ public class Player : KinematicBody2D
 		swinging = false;
 		weaponAnim.Visible = false;
 		weaponAnim.Stop();
-	}
-
-	private void OnStepTimerOut()
-	{
-		switch (rand.Next(1, 5))
-		{
-			case 1:
-				dirtStepSound.Stream = dirtStep1;
-				break;
-			case 2:
-				dirtStepSound.Stream = dirtStep2;
-				break;
-			case 3:
-				dirtStepSound.Stream = dirtStep3;
-				break;
-			case 4:
-				dirtStepSound.Stream = dirtStep4;
-				break;
-		}
-		dirtStepSound.Play();
 	}
 
 	//Methods

@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53688C67-2CA4-48E7-8E11-FF32FD146FEA}</ProjectGuid>
+    <ProjectGuid>{30675A86-9E4D-48E9-A1B6-B3853E9B85EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>Colony</RootNamespace>
     <AssemblyName>Colony</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <GodotProjectGeneratorVersion>1.0.0.0</GodotProjectGeneratorVersion>
+    <GodotProjectGeneratorVersion>1.0.7333.3918</GodotProjectGeneratorVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)</IntermediateOutputPath>
-    <ApiConfiguration Condition=" '$(Configuration)' != 'ExportRelease' ">Debug</ApiConfiguration>
-    <ApiConfiguration Condition=" '$(Configuration)' == 'ExportRelease' ">Release</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' == 'Release' ">Release</ApiConfiguration>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportDebug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ExportRelease|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>portable</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(GodotDefineConstants);GODOT;</DefineConstants>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Tools|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
@@ -42,15 +42,11 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies">
-      <Version>1.0.0</Version>
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
     <Reference Include="GodotSharp">
       <Private>False</Private>
       <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharp.dll</HintPath>
     </Reference>
-    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Debug' ">
+    <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' ">
       <Private>False</Private>
       <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
     </Reference>
@@ -58,33 +54,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\Globals\SaveManager.cs" />
-    <Compile Include="Scripts\NPCs\BaseTownNPC02.cs" />
-    <Compile Include="Scripts\Objects\BaseParticle.cs" />
-    <Compile Include="Scripts\Objects\MerchantShop.cs" />
-    <Compile Include="Scripts\UI\Quests.cs" />
-    <Compile Include="Scripts\UI\ShopMenu.cs" />
-    <Compile Include="Scripts\Items\BaseItem.cs" />
-    <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />
-    <Compile Include="Scripts\Projectiles\Arrow.cs" />
-    <Compile Include="Scripts\UI\Item.cs" />
-    <Compile Include="Scripts\UI\TitleScreen.cs" />
-    <Compile Include="Scripts\UI\UI.cs" />
+    <Compile Include="Scripts\AI\GrassEater.cs" />
     <Compile Include="Scripts\AI\LivingTrunk.cs" />
     <Compile Include="Scripts\AI\Rocklin.cs" />
     <Compile Include="Scripts\Globals\GameData.cs" />
     <Compile Include="Scripts\Globals\PackedScenes.cs" />
+    <Compile Include="Scripts\Globals\SaveManager.cs" />
     <Compile Include="Scripts\Globals\SceneSwitcher.cs" />
+    <Compile Include="Scripts\Items\BaseItem.cs" />
     <Compile Include="Scripts\Maps\Quarry.cs" />
     <Compile Include="Scripts\Maps\Woodville.cs" />
     <Compile Include="Scripts\Maps\WoodvilleHouses.cs" />
     <Compile Include="Scripts\NPCs\BaseTownNPC01.cs" />
+    <Compile Include="Scripts\NPCs\BaseTownNPC02.cs" />
+    <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />
+    <Compile Include="Scripts\Objects\BaseParticle.cs" />
     <Compile Include="Scripts\Objects\Bush.cs" />
     <Compile Include="Scripts\Objects\Door.cs" />
     <Compile Include="Scripts\Objects\House1.cs" />
+    <Compile Include="Scripts\Objects\MerchantShop.cs" />
     <Compile Include="Scripts\Player\Player.cs" />
+    <Compile Include="Scripts\Projectiles\Arrow.cs" />
     <Compile Include="Scripts\Projectiles\PerfectlyCircularRock.cs" />
     <Compile Include="Scripts\UI\DialogueManager.cs" />
+    <Compile Include="Scripts\UI\Item.cs" />
+    <Compile Include="Scripts\UI\Quests.cs" />
+    <Compile Include="Scripts\UI\ShopMenu.cs" />
+    <Compile Include="Scripts\UI\TitleScreen.cs" />
+    <Compile Include="Scripts\UI\UI.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

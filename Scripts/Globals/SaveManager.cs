@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using System;
 
 public class SaveManager : Node
 {
@@ -18,15 +19,29 @@ public class SaveManager : Node
 		if (!saveFile.IsOpen())
 			saveFile.Open(filePath, File.ModeFlags.Write);
 
-		Dictionary<string, object> thingsToSave = new Dictionary<string, object>
+		Dictionary<string, object> thingsToSave = new Dictionary<string, object>		//In here we save the stuff that should be saved easily
 		{
 			{ "Health", GameData.playerHealth },
 			{ "Money", GameData.playerCurrency },
-			{ "Inventory", GameData.playerInventory },
-			{ "Quests", GameData.activeQuests },
 			{ "PosX", Player.player.GlobalPosition.x },
 			{ "PosY", Player.player.GlobalPosition.y }
 		};
+
+		//Stuff that's a bit harder to save
+		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		{
+			thingsToSave.Add("ItemType" + (i + 1), GameData.playerInventory[i].type);
+			thingsToSave.Add("ItemStack" + (i + 1), GameData.playerInventory[i].stack);
+		}
+
+		for (int q = 0; q < GameData.activeQuests.Length; q++)
+		{
+			Quests quest = GameData.activeQuests[q];
+			thingsToSave.Add("Quest" + q + "Name", quest.Name);
+			thingsToSave.Add("Quest" + q + "Desc", quest.questDescription);
+			thingsToSave.Add("Quest" + q + "MaxProgress", quest.maxProgress);
+			thingsToSave.Add("Quest" + q + "Progress", quest.progress);
+		}
 
 		saveFile.StoreLine(JSON.Print(thingsToSave));
 		saveFile.Close();
@@ -46,22 +61,25 @@ public class SaveManager : Node
 
 		saveFile.Close();
 
-		GD.Print(saveData);
+		GameData.playerHealth = int.Parse(saveData["Health"].ToString());
+		GameData.playerCurrency = int.Parse(saveData["Money"].ToString());
 
-		var health = saveData["Health"];        //oddly enough, casting as a type breaks the game?
-		var money = saveData["Money"];
-		var items = saveData["Inventory"];
-		var quests = saveData["Quests"];
-		var posX = saveData["PosX"];
-		var posY = saveData["PosY"];
+		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		{
+			int itemType = int.Parse(saveData["ItemType" + (i + 1)].ToString());
+			int itemStack = int.Parse(saveData["ItemStack" + (i + 1)].ToString());
+			GameData.playerInventory[i] = Item.itemList[itemType];
+			GameData.playerInventory[i].stack = itemStack;
+		}
 
-		GD.Print(health);
+		for (int q = 0; q < GameData.activeQuests.Length; q++)
+		{
+			GameData.activeQuests[q].questName = saveData["Quest" + q + "Name"].ToString();
+			GameData.activeQuests[q].questDescription = saveData["Quest" + q + "Desc"].ToString();
+			GameData.activeQuests[q].maxProgress = int.Parse(saveData["Quest" + q + "MaxProgress"].ToString());
+			GameData.activeQuests[q].maxProgress = int.Parse(saveData["Quest" + q + "Progress"].ToString());
+		}
 
-		/*GameData.playerHealth = (int)health;
-		GameData.playerCurrency = (int)money;
-		GameData.playerInventory = (Item[])items;
-		GameData.activeQuests = (Quests[])quests;
-		GameData.playerSavedPosition = new Vector2((float)posX, (float)posY);
-		*/
+		GameData.playerSavedPosition = new Vector2((float)saveData["PosX"], (float)saveData["PosY"]);
 	}
 }

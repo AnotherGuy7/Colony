@@ -1,17 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Environment/Outside/Rock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Maps/SceneSwitchArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Tilesets/OutdoorsTileset.tres" type="TileSet" id=5]
 [ext_resource path="res://Scenes/Enemies/Rocklin.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Environment/Outside/OakTree.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/Maps/Quarry.cs" type="Script" id=12]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.9757, 12.5707 )
-
-[node name="Woodville" type="Node2D"]
-script = ExtResource( 12 )
+[node name="Quarry" type="Node2D"]
 
 [node name="MainTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
@@ -43,6 +39,7 @@ position = Vector2( 280, 0 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -152, 272 )
 
 [node name="Tree" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( -296, 280 )
@@ -194,9 +191,9 @@ position = Vector2( -248, 88 )
 [node name="Rock3" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( -64, 152 )
 
-[node name="AreaToWoodville" type="Area2D" parent="."]
+[node name="SceneSwitchArea" parent="." instance=ExtResource( 3 )]
 position = Vector2( -152, 304 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaToWoodville"]
-shape = SubResource( 1 )
-[connection signal="body_entered" from="AreaToWoodville" to="." method="OnAreaToWoodvilleEntered"]
+locationName = "Woodville"
+direction = "Down"
+spawnPoint = 4
+showFlag = true

@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/UI/TitleScreen.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Sprites/UI/Arrow.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/UI/ColonyTitle.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/InventorySlot.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/Items/Sword1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/player_00.png" type="Texture" id=7]
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
@@ -52,55 +55,208 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveLabel1" type="Label" parent="SavesPanel"]
+[node name="SavePanel" type="Panel" parent="SavesPanel"]
+margin_top = 8.0
+margin_right = 240.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveLabel" type="Label" parent="SavesPanel/SavePanel"]
 margin_left = 8.0
-margin_top = 16.0
-margin_right = 48.0
-margin_bottom = 40.0
+margin_top = 4.76837e-07
+margin_right = 102.0
+margin_bottom = 36.0
 rect_scale = Vector2( 0.66, 0.66 )
 custom_fonts/font = ExtResource( 2 )
-text = "Save 1:"
+text = "Save #:"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveLabel2" type="Label" parent="SavesPanel"]
+[node name="LocationLabel" type="Label" parent="SavesPanel/SavePanel"]
 margin_left = 8.0
+margin_top = 32.0
+margin_right = 149.0
+margin_bottom = 71.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Location: "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoneyLabel" type="Label" parent="SavesPanel/SavePanel"]
+margin_left = 8.00001
 margin_top = 56.0
-margin_right = 102.0
-margin_bottom = 92.0
-rect_scale = Vector2( 0.66, 0.66 )
+margin_right = 111.0
+margin_bottom = 95.0
+rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 2 )
-text = "Save 2:"
+text = "Money:"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveLabel3" type="Label" parent="SavesPanel"]
-margin_left = 8.0
-margin_top = 96.0
-margin_right = 102.0
+[node name="InventorySlot1" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 80.0
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 21.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="SavesPanel/SavePanel/InventorySlot1"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 14.0
+texture = ExtResource( 6 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot2" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 104.0
+margin_top = 5.0
+margin_right = 120.0
+margin_bottom = 21.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="SavesPanel/SavePanel/InventorySlot2"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 14.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot3" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 128.0
+margin_top = 5.0
+margin_right = 144.0
+margin_bottom = 21.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="SavesPanel/SavePanel/InventorySlot3"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 14.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot4" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 152.0
+margin_top = 5.0
+margin_right = 168.0
+margin_bottom = 21.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="SavesPanel/SavePanel/InventorySlot4"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 14.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot5" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 176.0
+margin_top = 5.0
+margin_right = 192.0
+margin_bottom = 21.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemTexture" type="TextureRect" parent="SavesPanel/SavePanel/InventorySlot5"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 14.0
+margin_bottom = 14.0
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="TextureRect" parent="SavesPanel/SavePanel"]
+margin_left = 200.0
+margin_right = 240.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 7 )
+
+[node name="SaveIndexLabel" type="Label" parent="SavesPanel/SavePanel"]
+margin_left = 192.0
+margin_top = 104.0
+margin_right = 205.0
+margin_bottom = 143.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveIndexMinusButton" type="Button" parent="SavesPanel"]
+margin_left = 168.0
+margin_top = 112.0
+margin_right = 192.0
 margin_bottom = 132.0
-rect_scale = Vector2( 0.66, 0.66 )
+rect_pivot_offset = Vector2( 12, 9.5 )
+icon = ExtResource( 3 )
+flat = true
+
+[node name="SaveIndexPlusButton" type="Button" parent="SavesPanel"]
+margin_left = 200.0
+margin_top = 112.0
+margin_right = 224.0
+margin_bottom = 132.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 12, 9.5 )
+icon = ExtResource( 3 )
+flat = true
+
+[node name="LoadGameButton" type="Button" parent="SavesPanel"]
+margin_left = 8.0
+margin_top = 104.0
+margin_right = 178.0
+margin_bottom = 149.0
+rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
-text = "Save 3:"
-align = 1
-valign = 1
+text = "Load Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Save1Button" type="TextureButton" parent="SavesPanel"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Player" type="TextureRect" parent="SavesPanel/Save1Button"]
-margin_right = 40.0
-margin_bottom = 40.0
 
 [node name="SettingsPanel" type="Panel" parent="."]
 visible = false
@@ -171,6 +327,9 @@ icon = ExtResource( 3 )
 flat = true
 [connection signal="pressed" from="PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="SavesPanel/SaveIndexMinusButton" to="." method="OnSaveIndexMinusButtonPressed"]
+[connection signal="pressed" from="SavesPanel/SaveIndexPlusButton" to="." method="OnSaveIndexPlusButtonPressed"]
+[connection signal="pressed" from="SavesPanel/LoadGameButton" to="." method="OnLoadGameButtonPressed"]
 [connection signal="pressed" from="SettingsPanel/FullscreenButton" to="." method="OnFullscreenPressed"]
 [connection signal="pressed" from="SettingsPanel/LowerResolutionButton" to="." method="OnLowerResPresse"]
 [connection signal="pressed" from="SettingsPanel/HigherResolutionButton" to="." method="OnHigherResPressed"]

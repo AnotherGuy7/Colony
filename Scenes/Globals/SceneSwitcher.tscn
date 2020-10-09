@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Globals/SceneSwitcher.cs" type="Script" id=1]
 [ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/LocationFlag.png" type="Texture" id=3]
+[ext_resource path="res://Shaders/Distortion.tres" type="Material" id=4]
+[ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "InTransition"
@@ -33,6 +36,22 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "FlagAnim"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlagPlayer/FlagSprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -96, 104 ), Vector2( -16, 104 ), Vector2( -16, 104 ), Vector2( -96, 104 ) ]
+}
+
 [node name="SceneSwitcher" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -47,4 +66,29 @@ texture = ExtResource( 2 )
 autoplay = "InTransition"
 anims/InTransition = SubResource( 1 )
 anims/OutTransition = SubResource( 2 )
+
+[node name="FlagPlayer" type="AnimationPlayer" parent="Layer2"]
+anims/FlagAnim = SubResource( 3 )
+
+[node name="FlagSprite" type="Sprite" parent="Layer2/FlagPlayer"]
+material = ExtResource( 4 )
+position = Vector2( -96, 104 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="LocationNameLabel" type="RichTextLabel" parent="Layer2/FlagPlayer/FlagSprite"]
+margin_left = 19.0
+margin_top = 12.0
+margin_right = 167.0
+margin_bottom = 48.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/normal_font = ExtResource( 5 )
+custom_colors/default_color = Color( 0.313726, 0.152941, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave]Woodville"
+text = "Woodville"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="animation_finished" from="Layer2/TransitionPlayer" to="." method="OnTransitionDone"]

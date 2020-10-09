@@ -1,8 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting;
 
 public class GameData : Node2D
 {
@@ -23,6 +19,7 @@ public class GameData : Node2D
 	public static int playerHealth = 8;
 	public static int playerDamage = 1;
 	public static int playerCurrency = 100;
+	public static string playerLocation = "";
 	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air]};
 	public static Item[] playerInventory = new Item[5];
 	public static Quests[] activeQuests = new Quests[3];
@@ -32,6 +29,7 @@ public class GameData : Node2D
 	public static bool isPlayerTalking = false;
 
 	//Misc stuff
+	public const int MaxSaveSlots = 10;
 	public static float inflictedKnockback = 1f;
 	public static bool inventoryFull = false;
 	public static int selectedInventorySlot = 0;
@@ -194,7 +192,7 @@ public class GameData : Node2D
 
 	public static void SpawnDeathClouds(Vector2 pos)
 	{
-		AnimatedSprite clouds = PackedScenes.packedScenesClass.deathClouds.Instance() as AnimatedSprite;
+		AnimatedSprite clouds = PackedScenes.scenesDict["DeathClouds"].Instance() as AnimatedSprite;
 		mapYSort.AddChild(clouds);
 		clouds.GlobalPosition = pos;
 		clouds.Play("default");

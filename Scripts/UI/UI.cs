@@ -27,9 +27,11 @@ public class UI : Control
 	private Panel inventoryPanel;
 	private Panel questPanel;
 	private Panel pauseMenu;
+	private Label saveSlotLabel;
 
 	private int currentHeart = 0;
 	private int questIndex = 0;
+	private int saveSlotIndex = 1;
 
 	private List<TextureRect> inventorySlots = new List<TextureRect>();
 	private List<TextureRect> hearts = new List<TextureRect>();
@@ -42,6 +44,7 @@ public class UI : Control
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
 		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
 		pauseMenu = GetNode<Panel>("Layer1/PauseMenu");
+		saveSlotLabel = GetNode<Label>("Layer1/PauseMenu/SaveIndexLabel");
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
 
 		foreach (TextureRect heart in heartsPanel.GetChildren())
@@ -152,7 +155,7 @@ public class UI : Control
 	{
 		questIndex--;
 
-		if (questIndex < 0)
+		if (questIndex <= 0)
 			questIndex = GameData.activeQuests.Length - 1;
 
 		UpdateQuestListings();
@@ -164,7 +167,7 @@ public class UI : Control
 		questIndex++;
 
 		if (questIndex > GameData.activeQuests.Length - 1)
-			questIndex = 0;
+			questIndex = 1;
 
 		UpdateQuestListings();
 	}
@@ -184,7 +187,31 @@ public class UI : Control
 
 	private void OnBackToMenuButtonPressed()
 	{
-		SaveManager.saveManager.SaveGame();
-		SceneSwitcher.sceneSwitcher.GotoScene(PackedScenes.packedScenesClass.TitleScreen, 1, "Back");
+		SceneSwitcher.sceneSwitcher.GotoScene("Title", 1, "Back");
+	}
+
+	private void OnSaveButtonPressed()
+	{
+		SaveManager.saveManager.SaveGame(saveSlotIndex);
+	}
+
+	private void OnSaveSlotPlusButtonPressed()
+	{
+		saveSlotIndex++;
+		if (saveSlotIndex > 10)
+		{
+			saveSlotIndex = 0;
+		}
+		saveSlotLabel.Text = saveSlotIndex.ToString();
+	}
+
+	private void OnSaveSlotMinusButtonPressed()
+	{
+		saveSlotIndex--;
+		if (saveSlotIndex < 0)
+		{
+			saveSlotIndex = 10;
+		}
+		saveSlotLabel.Text = saveSlotIndex.ToString();
 	}
 }

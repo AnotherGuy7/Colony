@@ -3,7 +3,7 @@ using Godot;
 public class MerchantShop : StaticBody2D
 {
 	[Export]
-	public PackedScene mapToGoTo;
+	public string mapToGoTo;
 
 	[Export]
 	public Texture doorClosed;

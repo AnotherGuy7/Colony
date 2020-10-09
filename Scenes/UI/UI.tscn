@@ -456,10 +456,10 @@ __meta__ = {
 }
 
 [node name="ContinueButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 72.0
-margin_top = 24.0
-margin_right = 210.0
-margin_bottom = 66.0
+margin_left = 8.00001
+margin_top = 16.0
+margin_right = 146.0
+margin_bottom = 58.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Continue"
@@ -468,10 +468,10 @@ __meta__ = {
 }
 
 [node name="SettingsButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 72.0
-margin_top = 48.0
-margin_right = 210.0
-margin_bottom = 90.0
+margin_left = 8.00001
+margin_top = 40.0
+margin_right = 146.0
+margin_bottom = 82.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Settings"
@@ -480,13 +480,65 @@ __meta__ = {
 }
 
 [node name="BackToMenuButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 48.0
-margin_top = 72.0
-margin_right = 328.0
-margin_bottom = 114.0
+margin_left = 8.00001
+margin_top = 64.0
+margin_right = 288.0
+margin_bottom = 106.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Back to Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 136.0
+margin_top = 16.0
+margin_right = 218.0
+margin_bottom = 58.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveSlotMinusButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 128.0
+margin_top = 40.0
+margin_right = 152.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 12, 11.5 )
+custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveSlotPlusButton" type="Button" parent="Layer1/PauseMenu"]
+margin_left = 160.0
+margin_top = 40.0
+margin_right = 184.0
+margin_bottom = 63.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 12, 11.5 )
+custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
+icon = ExtResource( 12 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveIndexLabel" type="Label" parent="Layer1/PauseMenu"]
+margin_left = 152.0
+margin_top = 43.0
+margin_right = 176.0
+margin_bottom = 83.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 11 )
+text = "1"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -495,3 +547,6 @@ __meta__ = {
 [connection signal="pressed" from="Layer1/PauseMenu/ContinueButton" to="." method="OnContinueButtonPressed"]
 [connection signal="pressed" from="Layer1/PauseMenu/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="Layer1/PauseMenu/BackToMenuButton" to="." method="OnBackToMenuButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/SaveButton" to="." method="OnSaveButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/SaveSlotMinusButton" to="." method="OnSaveSlotMinusButtonPressed"]
+[connection signal="pressed" from="Layer1/PauseMenu/SaveSlotPlusButton" to="." method="OnSaveSlotPlusButtonPressed"]

@@ -62,7 +62,6 @@
     <Compile Include="Scripts\Globals\SaveManager.cs" />
     <Compile Include="Scripts\Globals\SceneSwitcher.cs" />
     <Compile Include="Scripts\Items\BaseItem.cs" />
-    <Compile Include="Scripts\Maps\Quarry.cs" />
     <Compile Include="Scripts\Maps\Woodville.cs" />
     <Compile Include="Scripts\Maps\WoodvilleHouses.cs" />
     <Compile Include="Scripts\NPCs\BaseTownNPC01.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Scripts\Objects\Door.cs" />
     <Compile Include="Scripts\Objects\House1.cs" />
     <Compile Include="Scripts\Objects\MerchantShop.cs" />
+    <Compile Include="Scripts\Objects\SceneSwitchArea.cs" />
     <Compile Include="Scripts\Player\Player.cs" />
     <Compile Include="Scripts\Projectiles\Arrow.cs" />
     <Compile Include="Scripts\Projectiles\PerfectlyCircularRock.cs" />

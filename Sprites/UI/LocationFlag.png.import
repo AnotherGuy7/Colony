@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Banner1.png-cd68293eaf8a4e41fca52e895c18a41e.stex"
+path="res://.import/LocationFlag.png-21eb9ded70c0491356940137f1652544.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/Banner1.png"
-dest_files=[ "res://.import/Banner1.png-cd68293eaf8a4e41fca52e895c18a41e.stex" ]
+source_file="res://Sprites/UI/LocationFlag.png"
+dest_files=[ "res://.import/LocationFlag.png-21eb9ded70c0491356940137f1652544.stex" ]
 
 [params]
 

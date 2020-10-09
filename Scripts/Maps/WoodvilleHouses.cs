@@ -10,7 +10,7 @@ public class WoodvilleHouses : Node2D
 	{
 		if (body == Player.player)
 		{
-			SceneSwitcher.sceneSwitcher.GotoScene(PackedScenes.packedScenesClass.Woodville, positionToSpawnAt, "Front");
+			SceneSwitcher.sceneSwitcher.GotoScene("Woodville", positionToSpawnAt, "Front");
 		}
 	}
 }

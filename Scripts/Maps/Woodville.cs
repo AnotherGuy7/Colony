@@ -7,7 +7,7 @@ public class Woodville : Node2D
 	{
 		if (body == Player.player)
 		{
-			SceneSwitcher.sceneSwitcher.GotoScene(PackedScenes.packedScenesClass.WoodvilleQuarry, 1, "Back");
+			SceneSwitcher.sceneSwitcher.GotoScene("Quarry", 1, "Back", true);
 		}
 	}
 }

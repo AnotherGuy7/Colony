@@ -7,20 +7,26 @@ public class SceneSwitcher : Node
 	public static SceneSwitcher sceneSwitcher;
 
 	private AnimationPlayer transitionPlayer;
+	private AnimationPlayer flagPlayer;
+	private RichTextLabel locationNameLabel;
 
 	private PackedScene whatToLoad;
 	private int spawnPointNumber;
 	private string spawnDirection;
+	private string modifiedLocationName;
+	private bool showMapFlag;
 
 	public override void _Ready()
 	{
 		sceneSwitcher = this;
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
+		flagPlayer = GetNode<AnimationPlayer>("Layer2/FlagPlayer");
 		transitionPlayer = GetNode<AnimationPlayer>("Layer2/TransitionPlayer");
+		locationNameLabel = GetNode<RichTextLabel>("Layer2/FlagPlayer/FlagSprite/LocationNameLabel");
 	}
 
-	public void GotoScene(PackedScene sceneToLoad, int pointNum, string direction)
+	public void GotoScene(string sceneToLoad, int pointNum, string direction, bool showEntranceFlag = false, string modLocationName = "")
 	{
 		// This function will usually be called from a signal callback,
 		// or some other function from the current scene.
@@ -32,9 +38,15 @@ public class SceneSwitcher : Node
 		// we can be sure that no code from the current scene is running:
 
 		transitionPlayer.Play("OutTransition");
-		whatToLoad = sceneToLoad;
+		whatToLoad = PackedScenes.scenesDict[sceneToLoad];
 		spawnPointNumber = pointNum;
 		spawnDirection = direction;
+		modifiedLocationName = GameData.playerLocation = sceneToLoad;
+		showMapFlag = showEntranceFlag;
+		if (modLocationName != "")
+		{
+			modifiedLocationName = modLocationName;
+		}
 	}
 
 	public void DeferredGotoScene()
@@ -93,6 +105,19 @@ public class SceneSwitcher : Node
 	{
 		if (anim_name == "InTransition")
 		{
+			if (showMapFlag)
+			{
+				if (modifiedLocationName != "")
+				{
+					locationNameLabel.BbcodeText = "[wave]" + modifiedLocationName;
+				}
+				else
+				{
+					locationNameLabel.BbcodeText = "[wave]" + GameData.playerLocation;
+				}
+				flagPlayer.Play("FlagAnim");
+				showMapFlag = false;
+			}
 		}
 		if (anim_name == "OutTransition")
 		{

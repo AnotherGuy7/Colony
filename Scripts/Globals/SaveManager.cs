@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
 
 public class SaveManager : Node
 {
@@ -12,19 +11,20 @@ public class SaveManager : Node
 		saveManager = this;
 	}
 
-	public void SaveGame()
+	public void SaveGame(int saveIndex)
 	{
 		File saveFile = new File();
 
 		if (!saveFile.IsOpen())
-			saveFile.Open(filePath, File.ModeFlags.Write);
+			saveFile.Open("user://savegame" + saveIndex.ToString() + ".save", File.ModeFlags.Write);
 
 		Dictionary<string, object> thingsToSave = new Dictionary<string, object>		//In here we save the stuff that should be saved easily
 		{
 			{ "Health", GameData.playerHealth },
 			{ "Money", GameData.playerCurrency },
 			{ "PosX", Player.player.GlobalPosition.x },
-			{ "PosY", Player.player.GlobalPosition.y }
+			{ "PosY", Player.player.GlobalPosition.y },
+			{ "Location", GameData.playerLocation }
 		};
 
 		//Stuff that's a bit harder to save
@@ -47,15 +47,16 @@ public class SaveManager : Node
 		saveFile.Close();
 	}
 
-	public void LoadGame()
+	public void LoadGame(int saveSlotIndex)
 	{
 		File saveFile = new File();
+		string newFilePath = filePath + saveSlotIndex.ToString();
 
-		if (!saveFile.FileExists(filePath))
+		if (!saveFile.FileExists(newFilePath))
 			return;
 
 		if (!saveFile.IsOpen())
-			saveFile.Open(filePath, File.ModeFlags.Read);
+			saveFile.Open(newFilePath, File.ModeFlags.Read);
 
 		Dictionary<string, object> saveData = new Dictionary<string, object>((Dictionary)JSON.Parse(saveFile.GetLine()).Result);        //Cloning the dictionary stored in the save
 
@@ -63,6 +64,7 @@ public class SaveManager : Node
 
 		GameData.playerHealth = int.Parse(saveData["Health"].ToString());
 		GameData.playerCurrency = int.Parse(saveData["Money"].ToString());
+		GameData.playerLocation = saveData["Location"].ToString();
 
 		for (int i = 0; i < GameData.playerInventory.Length; i++)
 		{

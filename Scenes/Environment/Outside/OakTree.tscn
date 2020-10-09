@@ -4,8 +4,8 @@
 [ext_resource path="res://Sprites/Environment/Outdoors/TreeLeaves.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.35531
-height = 24.485
+radius = 5.29381
+height = 30.4077
 
 [node name="Tree" type="StaticBody2D"]
 
@@ -19,6 +19,6 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -8 )
 
 [node name="TreeShape" type="CollisionShape2D" parent="."]
-position = Vector2( 0.157241, 10.0649 )
+position = Vector2( -0.5, 7.2 )
 rotation = 1.5708
 shape = SubResource( 1 )

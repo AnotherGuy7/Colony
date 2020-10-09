@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Enemies/LivingTrunk.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/NPCs/TownNPC01.tscn" type="PackedScene" id=2]
@@ -8,23 +8,17 @@
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Environment/Outside/Bush.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Environment/Outside/OakTree.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleHouse2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleHouse1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Enemies/Rocklin.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scripts/Maps/Woodville.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/NPCs/TownNPC02.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Environment/Items/Apple.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Environment/Items/Bow.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Environment/Buildings/MerchantShop.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleMerchant.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Sprites/Environment/Outdoors/Door_Open.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/Environment/Outdoors/Door.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/Environment/Buildings/BrewerShop1.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleBrewer.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/NPCs/TownNPC04.tscn" type="PackedScene" id=22]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.9757, 12.5707 )
+[ext_resource path="res://Scenes/Maps/SceneSwitchArea.tscn" type="PackedScene" id=23]
 
 [node name="Woodville" type="Node2D"]
 position = Vector2( 508.981, 304.437 )
@@ -76,7 +70,6 @@ position = Vector2( 683.019, 15.563 )
 
 [node name="House1" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 147.019, -24.437 )
-mapToGoTo = ExtResource( 10 )
 
 [node name="Bush" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 19.019, -16.437 )
@@ -104,11 +97,9 @@ position = Vector2( 267.019, -16.437 )
 
 [node name="House2" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 419.019, -24.437 )
-mapToGoTo = ExtResource( 9 )
 
 [node name="House3" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( -356.981, -136.437 )
-mapToGoTo = ExtResource( 9 )
 
 [node name="Bush9" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 291.019, -16.437 )
@@ -201,13 +192,11 @@ position = Vector2( -140.981, 175.563 )
 
 [node name="MerchantShop1" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -196.981, -40.437 )
-mapToGoTo = ExtResource( 17 )
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
 
 [node name="BerwerShop1" parent="YSort" instance=ExtResource( 20 )]
 position = Vector2( -524.981, -48.437 )
-mapToGoTo = ExtResource( 21 )
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
 
@@ -223,9 +212,10 @@ targetNPCName = "LivingTrunk"
 questsFullMessage = "Actually, you look like a busy man to me... Sorry to bother you."
 questObjectiveAmount = 6
 
-[node name="AreaToQuarry" type="Area2D" parent="."]
+[node name="SceneSwitchArea" parent="." instance=ExtResource( 23 )]
 position = Vector2( -31.785, -331.866 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaToQuarry"]
-shape = SubResource( 1 )
-[connection signal="body_entered" from="AreaToQuarry" to="." method="OnAreaToQuarryBodyEntered"]
+scale = Vector2( 4, 1.6 )
+locationName = "WoodvilleQuarry"
+direction = "Back"
+showFlag = true
+modifiedLocationName = "Quarry"

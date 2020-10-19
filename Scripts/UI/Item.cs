@@ -116,4 +116,72 @@ public class Item : Node2D
         }*/
         return sound;
     }
+
+    //Static methods
+    public static void AddItemToInventory(Item itemToGive, int stack)
+    {
+        Item selectedItem = GameData.playerInventory[GameData.selectedInventorySlot];
+        bool itemPlaced = false;
+
+        //First, we check if a stack of the item exists
+        for (int i = 0; i < 5; i++)
+        {
+            if (!itemPlaced)
+            {
+                if (GameData.playerInventory[i].type == itemToGive.type)
+                {
+                    GameData.playerInventory[i].stack += stack;
+                    itemPlaced = true;
+                }
+            }
+        }
+
+        //Second, we check if there's an empty slot
+        for (int i = 0; i < 5; i++)
+        {
+            if (!itemPlaced)
+            {
+                if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
+                {
+                    GameData.playerInventory[i] = itemToGive;
+                    itemPlaced = true;
+                }
+            }
+        }
+
+        //Lastly, if the item can't be picked up, throw out whatever you're holding
+        if (!itemPlaced)
+        {
+            if (selectedItem.type != (int)Item.ItemTypes.Air)
+            {
+                PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
+                Node2D droppedItem = itemScene.Instance() as Node2D;
+                droppedItem.Set("initializeTimer", 30);
+                droppedItem.Set("itemType", selectedItem.type);
+                droppedItem.Set("amount", selectedItem.stack);
+                GameData.mapYSort.AddChild(droppedItem);
+                droppedItem.GlobalPosition = Player.player.GlobalPosition;
+            }
+            GameData.playerInventory[GameData.selectedInventorySlot] = itemToGive;
+        }
+
+        GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
+    }
+
+    public static void ConsumeItem(Item item, int amount = 1)
+    {
+        for (int i = 0; i < GameData.playerInventory.Length; i++)
+        {
+            if (GameData.playerInventory[i].type == item.type)
+            {
+                GameData.playerInventory[i].stack -= amount;
+                if (GameData.playerInventory[i].stack <= 0)
+                {
+                    GameData.playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
+                }
+            }
+        }
+
+        GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
+    }
 }

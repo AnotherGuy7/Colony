@@ -21,7 +21,11 @@ public class UI : Control
 	[Export]
 	public Texture activeSlot;
 
+	public static Panel savePanel;
+
 	private Panel mapPanel;
+	private Camera2D mainMapCam;
+	private Camera2D mapCam;
 	private TextureRect playerMarker;
 	private Panel heartsPanel;
 	private Panel inventoryPanel;
@@ -39,12 +43,15 @@ public class UI : Control
 	public override void _Ready()
 	{
 		mapPanel = GetNode<Panel>("Layer1/MapPanel");
+		mainMapCam = GetNode<Camera2D>("Layer1/MapPanel/MainMapCam");
+		mapCam = GetNode<Camera2D>("Layer1/MapPanel/MapCam");
 		playerMarker = GetNode<TextureRect>("Layer1/MapPanel/PlayerMarkerCenter/PlayerMarker");
 		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
 		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
 		pauseMenu = GetNode<Panel>("Layer1/PauseMenu");
-		saveSlotLabel = GetNode<Label>("Layer1/PauseMenu/SaveIndexLabel");
+		saveSlotLabel = GetNode<Label>("Layer1/SavePanel/SaveSlotLabel");
+		savePanel = GetNode<Panel>("Layer1/SavePanel");
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
 
 		foreach (TextureRect heart in heartsPanel.GetChildren())
@@ -81,11 +88,6 @@ public class UI : Control
 
 	public override void _Process(float delta)
 	{
-		if (Input.IsActionJustPressed("map"))
-			mapPanel.Visible = !mapPanel.Visible;
-		if (Input.IsActionJustPressed("pause"))
-			pauseMenu.Visible = !pauseMenu.Visible;
-
 		currentHeart = GameData.playerHealth / 2;
 		for (int i = 0; i < hearts.Count; i++)		//change this so that it changes upon a signal
 		{
@@ -113,11 +115,51 @@ public class UI : Control
 				}
 			}
 		}
+	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionJustPressed("map"))
+		{
+			mapPanel.Visible = !mapPanel.Visible;
+			mainMapCam.Current = !mainMapCam.Current;
+		}
+		if (Input.IsActionJustPressed("pause"))
+		{
+			pauseMenu.Visible = !pauseMenu.Visible;
+		}
 		if (Input.IsActionJustPressed("quest"))
 		{
 			UpdateQuestListings();
 			questPanel.Visible = !questPanel.Visible;
+		}
+
+		if (mapPanel.Visible)
+		{
+			if (@event is InputEventMouseButton scroll)
+			{
+				if (scroll.IsPressed())
+				{
+					if (scroll.ButtonIndex == (int)ButtonList.WheelUp)
+					{
+						mapCam.Zoom = new Vector2(mapCam.Zoom.x + 0.05f, mapCam.Zoom.y + 0.05f);
+					}
+					if (scroll.ButtonIndex == (int)ButtonList.WheelDown)
+					{
+						mapCam.Zoom = new Vector2(mapCam.Zoom.x - 0.05f, mapCam.Zoom.y - 0.05f);
+					}
+				}
+			}
+			if (@event is InputEventMouseButton click)
+			{
+				if (click.IsPressed())
+				{
+					if (click.ButtonIndex == (int)ButtonList.Left)
+					{
+
+					}
+				}
+			}
 		}
 	}
 
@@ -193,6 +235,8 @@ public class UI : Control
 	private void OnSaveButtonPressed()
 	{
 		SaveManager.saveManager.SaveGame(saveSlotIndex);
+		GameData.gameData.EmitSignal(nameof(GameData.SavedGame));
+		savePanel.Visible = false;
 	}
 
 	private void OnSaveSlotPlusButtonPressed()

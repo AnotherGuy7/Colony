@@ -9,6 +9,7 @@ public class Player : KinematicBody2D
 	private AnimatedSprite weaponAnim;
 	private CollisionShape2D swordShape;
 	private PackedScene arrow;
+	private AnimationPlayer deathAnim;
 	private AudioStreamPlayer swingSound;
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
@@ -35,6 +36,7 @@ public class Player : KinematicBody2D
 		weaponAnim = GetNode<AnimatedSprite>("WeaponAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
 		swingSound = GetNode<AudioStreamPlayer>("SwingSound");
+		deathAnim = GetNode<AnimationPlayer>("DeathAnimPlayer");
 		playerCam = GetNode<Camera2D>("PlayerCam");
 
 		arrow = GD.Load<PackedScene>("res://Scenes/Environment/Projectiles/Arrow.tscn");
@@ -62,6 +64,11 @@ public class Player : KinematicBody2D
 		HandleHitboxRotationAndSize();
 
 		weaponAnim.Frame = playerAnim.Frame;
+
+		if (GameData.playerHealth <= 0)
+		{
+			deathAnim.Play("DeathAnim");
+		}
 
 		//Post-Stun stuff
 		if (!GameData.playerHurt && Modulate == reddened)
@@ -122,7 +129,10 @@ public class Player : KinematicBody2D
 			}
 			else
 			{
-				playerAnim.Play("Walking_" + direction);
+				if (running)
+					playerAnim.Play("Running_" + direction);
+				else
+					playerAnim.Play("Walking_" + direction);
 			}
 		}
 		else
@@ -132,21 +142,6 @@ public class Player : KinematicBody2D
 		}
 
 		//Hurt movement
-		if (GameData.playerHurt)
-		{
-			hurtTimer++;
-			velocity *= -GameData.inflictedKnockback * 7f;
-			Flash(6);
-			if (hurtTimer >= 30)
-			{
-				GameData.playerHurt = false;
-				hurtTimer = 0;
-			}
-		}
-		if (GameData.isPlayerTalking)
-		{
-			velocity = Vector2.Zero;
-		}
 		if (running)
 		{
 			velocity *= 2f;
@@ -159,8 +154,24 @@ public class Player : KinematicBody2D
 		{
 			running = false;
 		}
+		if (GameData.playerHurt)
+		{
+			hurtTimer++;
+			velocity = GameData.inflictedKnockbackVector;
+			Flash(6);
+			if (hurtTimer >= 30)
+			{
+				GameData.playerHurt = false;
+				hurtTimer = 0;
+			}
+		}
+		if (GameData.isPlayerTalking)
+		{
+			velocity = Vector2.Zero;
+		}
 
-		MoveAndSlide(velocity);
+		if (!GameData.playerDead)
+			MoveAndSlide(velocity);
 	}
 
 	//Signal stuff
@@ -192,6 +203,11 @@ public class Player : KinematicBody2D
 		swinging = false;
 		weaponAnim.Visible = false;
 		weaponAnim.Stop();
+	}
+
+	private void OnDeathAnimDone(String anim_name)
+	{
+		SceneSwitcher.sceneSwitcher.GotoScene("DeathScreen", 0, "Back");
 	}
 
 	//Methods
@@ -244,7 +260,7 @@ public class Player : KinematicBody2D
 				break;
 			case Item.Healing:
 				GameData.playerHealth += item.healAmount;
-				GameData.ConsumeItem(item, consumeAmount);
+				Item.ConsumeItem(item, consumeAmount);
 				break;
 			case Item.Equip:
 				break;

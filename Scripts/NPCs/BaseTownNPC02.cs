@@ -15,6 +15,9 @@ public class BaseTownNPC02 : RigidBody2D
 	[Export]
 	public float anchoredDistance = 0f;
 
+	[Export]
+	public string NPCName = "";		//This is used for quest completion comparison
+
 
 	//[Export]
 	//public int questKey = 0;
@@ -175,7 +178,8 @@ public class BaseTownNPC02 : RigidBody2D
 			bool questDone = false;
 			for (int q = 0; q < GameData.activeQuests.Length; q++)
 			{
-				if (GetType().ToString() == GameData.activeQuests[q].askerName)
+				Quests quest = GameData.activeQuests[q];
+				if (quest.askerName == NPCName && quest.progress == quest.maxProgress)
 				{
 					questDone = true;
 					break;

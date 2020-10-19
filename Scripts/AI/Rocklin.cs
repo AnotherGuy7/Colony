@@ -163,7 +163,7 @@ public class Rocklin : RigidBody2D
 	{
 		if (body == Player.player && meleeAttackTimer.TimeLeft == 0 && alerted)
 		{
-			GameData.HurtPlayer(1);
+			GameData.HurtPlayer(1, GlobalPosition, 6f);
 			meleeAttackTimer.Start();
 		}
 	}

@@ -8,8 +8,8 @@
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Environment/Outside/Bush.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Environment/Outside/OakTree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Environment/Misc/Bed.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/Rocklin.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scripts/Maps/Woodville.cs" type="Script" id=12]
 [ext_resource path="res://Scenes/NPCs/TownNPC02.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Environment/Items/Apple.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Environment/Items/Bow.tscn" type="PackedScene" id=15]
@@ -22,7 +22,6 @@
 
 [node name="Woodville" type="Node2D"]
 position = Vector2( 508.981, 304.437 )
-script = ExtResource( 12 )
 
 [node name="MainTileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
@@ -54,6 +53,9 @@ position = Vector2( -164.981, -0.437012 )
 [node name="SpawnPos6" type="Position2D" parent="."]
 position = Vector2( -521.981, -0.437012 )
 
+[node name="SpawnPos7" type="Position2D" parent="."]
+position = Vector2( 651.019, 15.563 )
+
 [node name="CameraLimitTop" type="Position2D" parent="."]
 position = Vector2( -28.8881, -331.982 )
 
@@ -70,6 +72,7 @@ position = Vector2( 683.019, 15.563 )
 
 [node name="House1" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 147.019, -24.437 )
+mapToGoTo = "WoodvilleHouse1"
 
 [node name="Bush" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 19.019, -16.437 )
@@ -97,9 +100,11 @@ position = Vector2( 267.019, -16.437 )
 
 [node name="House2" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 419.019, -24.437 )
+mapToGoTo = "WoodvilleHouse3"
 
 [node name="House3" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( -356.981, -136.437 )
+mapToGoTo = "WoodvilleHouse2"
 
 [node name="Bush9" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 291.019, -16.437 )
@@ -192,25 +197,36 @@ position = Vector2( -140.981, 175.563 )
 
 [node name="MerchantShop1" parent="YSort" instance=ExtResource( 16 )]
 position = Vector2( -196.981, -40.437 )
+mapToGoTo = "WoodvilleMerchant"
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
 
 [node name="BerwerShop1" parent="YSort" instance=ExtResource( 20 )]
 position = Vector2( -524.981, -48.437 )
+mapToGoTo = "WoodvilleBrewer"
 doorClosed = ExtResource( 19 )
 doorOpen = ExtResource( 18 )
 
 [node name="TownNPC04" parent="YSort" instance=ExtResource( 22 )]
 position = Vector2( -108.981, 71.563 )
-dialogue = PoolStringArray( "Hello there!", "Would you mind killing those pesky Living Trunks northeast of here\?", "I would kill them myself but I have no weapons around I can use." )
+dialogue = PoolStringArray( "Hello there!", "Would you mind killing those pesky Living Trunks in the Woodville Forest\?", "I would kill them myself but I have no weapons around I can use." )
 speakerNames = PoolStringArray( "Farmer Joe", "Farmer Joe", "Farmer Joe" )
 anchored = true
+NPCName = "Farmer Joe"
 questName = "Dead Trunks"
 questDescription = "Farmer Joe wants you to eliminate 6 Living Trunks."
 questType = 2
 targetNPCName = "LivingTrunk"
 questsFullMessage = "Actually, you look like a busy man to me... Sorry to bother you."
 questObjectiveAmount = 6
+questDoneDialog = PoolStringArray( "Thanks you so much, now I can peacefully pass through the forst!", "Here\'s a little thank you gift.", "You obtained 50 coins." )
+questDoneNames = PoolStringArray( "Farmer Joe", "Farmer Joe", "" )
+playerRewardMoney = 50
+
+[node name="Bed" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 99.019, 215.563 )
+dialogue = PoolStringArray( "The bed speaks to you...", "\"Which Slot would you save in\?" )
+speakerNames = PoolStringArray( "Your mind", "Bed" )
 
 [node name="SceneSwitchArea" parent="." instance=ExtResource( 23 )]
 position = Vector2( -31.785, -331.866 )
@@ -219,3 +235,11 @@ locationName = "WoodvilleQuarry"
 direction = "Back"
 showFlag = true
 modifiedLocationName = "Quarry"
+
+[node name="SceneSwitchArea2" parent="." instance=ExtResource( 23 )]
+position = Vector2( 683, 18 )
+scale = Vector2( 1.6, 4.2 )
+locationName = "WoodvilleForest"
+direction = "Right"
+spawnPoint = 1
+modifiedLocationName = ""

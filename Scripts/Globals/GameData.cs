@@ -11,6 +11,9 @@ public class GameData : Node2D
 	[Signal]
 	public delegate void UpdateQuestProgress(string enemyName);       //this is sent after a map change
 
+	[Signal]
+	public delegate void SavedGame();
+
 	public static GameData gameData;
 	public static YSort mapYSort;
 
@@ -20,6 +23,7 @@ public class GameData : Node2D
 	public static int playerDamage = 1;
 	public static int playerCurrency = 100;
 	public static string playerLocation = "";
+	public static bool playerDead = false;
 	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air]};
 	public static Item[] playerInventory = new Item[5];
 	public static Quests[] activeQuests = new Quests[3];
@@ -30,11 +34,12 @@ public class GameData : Node2D
 
 	//Misc stuff
 	public const int MaxSaveSlots = 10;
-	public static float inflictedKnockback = 1f;
+	public static Vector2 inflictedKnockbackVector = Vector2.Zero;
 	public static bool inventoryFull = false;
 	public static int selectedInventorySlot = 0;
 	public static int latestOpenSlot = 1;
 	public static Vector2 playerSavedPosition;
+	public static int currentPlayerSaveIndex = 0;
 
 	public override void _Ready()
 	{
@@ -47,9 +52,11 @@ public class GameData : Node2D
 			else
 				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
 		}
-		activeQuests[0] = Quests.questsDict[-1];
-		activeQuests[1] = Quests.questsDict[-1];
-		activeQuests[2] = Quests.questsDict[-1];
+
+		for (int q = 0; q < activeQuests.Length; q++)		//This is so that upon loading, the array has object values while will be modified on save
+		{
+			activeQuests[q] = Quests.emptyQuest;
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -86,108 +93,12 @@ public class GameData : Node2D
 	}
 
 	//Methods that can be used anywhere
-	public static void HurtPlayer(int damage, float knockBack = 1f)
+	public static void HurtPlayer(int damage, Vector2 enemyPos, float knockBackStrength = 1f)
 	{
 		playerHealth -= damage;
 		playerHurt = true;
-		inflictedKnockback = knockBack;
-	}
-
-	public static void AddItemToInventory(Item itemToGive, int stack)
-	{
-		Item selectedItem = playerInventory[selectedInventorySlot];
-		bool itemPlaced = false;
-
-		//First, we check if a stack of the item exists
-		for (int i = 0; i < 5; i++)
-		{
-			if (!itemPlaced)
-			{
-				if (playerInventory[i].type == itemToGive.type)
-				{
-					playerInventory[i].stack += stack;
-					itemPlaced = true;
-				}
-			}
-		}
-
-		//Second, we check if there's an empty slot
-		for (int i = 0; i < 5; i++)
-		{
-			if (!itemPlaced)
-			{
-				if (playerInventory[i].type == (int)Item.ItemTypes.Air)
-				{
-					playerInventory[i] = itemToGive;
-					itemPlaced = true;
-				}
-			}
-		}
-
-		//Lastly, if the item can't be picked up, throw out whatever you're holding
-		if (!itemPlaced)
-		{
-			if (selectedItem.type != (int)Item.ItemTypes.Air)
-			{
-				PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
-				Node2D droppedItem = itemScene.Instance() as Node2D;
-				droppedItem.Set("initializeTimer", 30);
-				droppedItem.Set("itemType", selectedItem.type);
-				droppedItem.Set("amount", selectedItem.stack);
-				mapYSort.AddChild(droppedItem);
-				droppedItem.GlobalPosition = Player.player.GlobalPosition;
-			}
-			playerInventory[selectedInventorySlot] = itemToGive;
-		}
-
-		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
-	}
-
-	public static bool AddQuest(Quests quest, int objectiveAmount)
-	{
-		bool questPlaced = false;
-
-		//Checks for if the quest is already active, in which case, it does nothing
-		for (int q = 0; q < activeQuests.Length; q++)
-		{
-			if (activeQuests[q].questName == quest.questName)
-			{
-				questPlaced = true;
-			}
-		}
-
-		//Checks for empty quest slots then puts it in there if there's an empty one
-		for (int q = 0; q < activeQuests.Length; q++)
-		{
-			if (!questPlaced)
-			{
-				if (activeQuests[q].questName == "None")
-				{
-					activeQuests[q] = quest;
-					questPlaced = true;
-				}
-			}
-		}
-
-		//gameData.EmitSignal(nameof(UpdateQuestProgress));
-		return questPlaced;
-	}
-
-	public static void ConsumeItem(Item item, int amount = 1)
-	{
-		for (int i = 0; i < playerInventory.Length; i++)
-		{
-			if (playerInventory[i].type == item.type)
-			{
-				playerInventory[i].stack -= amount;
-				if (playerInventory[i].stack <= 0)
-				{
-					playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
-				}
-			}
-		}
-
-		gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
+		Vector2 direction = Player.player.GlobalPosition - enemyPos;
+		inflictedKnockbackVector = direction.Normalized() * knockBackStrength;
 	}
 
 	public static void SpawnDeathClouds(Vector2 pos)

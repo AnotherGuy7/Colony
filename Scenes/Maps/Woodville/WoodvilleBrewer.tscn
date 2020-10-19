@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/NPCs/PotionsBrewer1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Maps/WoodvilleHouses.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/Maps/SceneSwitchArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Environment/Indoors/Counter.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=5]
 [ext_resource path="res://Tilesets/IndoorsTileset.tres" type="TileSet" id=6]
@@ -16,12 +16,7 @@ extents = Vector2( 10, 3.14557 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 17.4208 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 24, 8 )
-
 [node name="WoodvilleBrewer" type="Node2D"]
-script = ExtResource( 3 )
-positionToSpawnAt = 6
 
 [node name="EmptyVoid" type="Sprite" parent="."]
 position = Vector2( 132, 176.735 )
@@ -167,14 +162,12 @@ shape = SubResource( 1 )
 position = Vector2( 104, 88 )
 itemsToSell = PoolIntArray( 5, 1, 0, 0, 0 )
 
-[node name="LeaveArea" type="Area2D" parent="."]
-position = Vector2( 184, 232 )
-
-[node name="LeaveShape" type="CollisionShape2D" parent="LeaveArea"]
-shape = SubResource( 3 )
-
 [node name="HouseBody" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseBody"]
 polygon = PoolVector2Array( -14.5, 63.5, -15, 48, 220.711, 46.5956, 224, 256, 144, 256, 144, 224, -13.5, 222, -14, 64, -0.5, 64, -0.754518, 207.915, 160, 208, 160, 240, 208, 240, 208.012, 63.8586 )
-[connection signal="body_entered" from="LeaveArea" to="." method="OnLeaveAreaEntered"]
+
+[node name="SceneSwitchArea" parent="." instance=ExtResource( 3 )]
+locationName = "Woodville"
+direction = "Front"
+spawnPoint = 6

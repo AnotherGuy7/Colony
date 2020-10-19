@@ -1,7 +1,5 @@
 using Godot;
 using Godot.Collections;
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 public class PackedScenes : Node2D
 {
@@ -21,6 +19,18 @@ public class PackedScenes : Node2D
 	[Export]
 	public PackedScene WoodvilleQuarry;
 
+	[Export]
+	public PackedScene WoodvilleMerchant;
+
+	[Export]
+	public PackedScene WoodvilleBrewer;
+
+	[Export]
+	public PackedScene WoodvilleForest;
+
+	[Export]
+	public PackedScene deathScreen;
+
 
 	//Misc scenes
 	[Export]
@@ -35,6 +45,10 @@ public class PackedScenes : Node2D
 		scenesDict.Add("WoodvilleHouse1", WoodvilleHouse1);
 		scenesDict.Add("WoodvilleHouse2", WoodvilleHouse2);
 		scenesDict.Add("WoodvilleQuarry", WoodvilleQuarry);
+		scenesDict.Add("WoodvilleMerchant", WoodvilleMerchant);
+		scenesDict.Add("WoodvilleBrewer", WoodvilleBrewer);
+		scenesDict.Add("WoodvilleForest", WoodvilleForest);
+		scenesDict.Add("DeathScreen", deathScreen);
 
 		scenesDict.Add("DeathClouds", deathClouds);
 	}

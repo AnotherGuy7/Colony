@@ -41,6 +41,8 @@ public class SaveManager : Node
 			thingsToSave.Add("Quest" + q + "Desc", quest.questDescription);
 			thingsToSave.Add("Quest" + q + "MaxProgress", quest.maxProgress);
 			thingsToSave.Add("Quest" + q + "Progress", quest.progress);
+			thingsToSave.Add("Quest" + q + "AskerName", quest.askerName);
+			thingsToSave.Add("Quest" + q + "TargetName", quest.targetNPCName);
 		}
 
 		saveFile.StoreLine(JSON.Print(thingsToSave));
@@ -79,7 +81,9 @@ public class SaveManager : Node
 			GameData.activeQuests[q].questName = saveData["Quest" + q + "Name"].ToString();
 			GameData.activeQuests[q].questDescription = saveData["Quest" + q + "Desc"].ToString();
 			GameData.activeQuests[q].maxProgress = int.Parse(saveData["Quest" + q + "MaxProgress"].ToString());
-			GameData.activeQuests[q].maxProgress = int.Parse(saveData["Quest" + q + "Progress"].ToString());
+			GameData.activeQuests[q].progress = int.Parse(saveData["Quest" + q + "Progress"].ToString());
+			GameData.activeQuests[q].askerName = saveData["Quest" + q + "AskerName"].ToString();
+			GameData.activeQuests[q].targetNPCName = saveData["Quest" + q + "TargetName"].ToString();
 		}
 
 		GameData.playerSavedPosition = new Vector2((float)saveData["PosX"], (float)saveData["PosY"]);

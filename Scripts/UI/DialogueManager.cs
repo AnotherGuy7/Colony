@@ -13,7 +13,7 @@ public class DialogueManager : Control
 	public static List<string> speakerNames = new List<string>();
 	public static List<string> activeDialog = new List<string>();
 	public static List<int> shopArray = new List<int>();
-	
+
 	//Talking stuff
 	private string currentText = "";
 	private string currentName = "";
@@ -25,6 +25,11 @@ public class DialogueManager : Control
 	private Item itemToGive = null;
 	private int itemToGivestack = 0;
 
+	//Save Panel stuff
+	private int savePanelIndex = -1;
+
+	private Random rand = new Random();
+
 	public override void _Ready()
 	{
 		dialogManager = this;
@@ -32,6 +37,7 @@ public class DialogueManager : Control
 		nameLabel = GetNode<Label>("Layer2/DialogPanel/NameLabel");
 		dialogPanel = GetNode<Panel>("Layer2/DialogPanel");
 		talkSound = GetNode<AudioStreamPlayer>("TalkSound");
+		GameData.gameData.Connect(nameof(GameData.SavedGame), this, nameof(ForceCloseSaveDialogue));
 	}
 
 	public override void _Process(float delta)
@@ -41,6 +47,7 @@ public class DialogueManager : Control
 			if (textPercentage < 1f)
 			{
 				textPercentage += 0.005f;
+				//talkSound.PitchScale = rand.Next(97, 103) / 100f;
 				//talkSound.Play();
 			}
 			if (Input.IsActionJustPressed("Continue"))
@@ -54,6 +61,10 @@ public class DialogueManager : Control
 					if (dialogIndex < activeDialog.Count)
 					{
 						dialogIndex++;
+						if (savePanelIndex != -1)
+						{
+							UI.savePanel.Visible = true;
+						}
 						if (dialogIndex > activeDialog.Count - 1)
 						{
 							EndDialog();
@@ -77,7 +88,7 @@ public class DialogueManager : Control
 		activeDialog.Clear();
 		GameData.playerCurrency += moneyAmount;
 		if (itemToGive != null)
-			GameData.AddItemToInventory(itemToGive, itemToGivestack);
+			Item.AddItemToInventory(itemToGive, itemToGivestack);
 		moneyAmount = 0;
 		itemToGive = null;
 		itemToGivestack = 0;
@@ -87,11 +98,7 @@ public class DialogueManager : Control
 
 	public static void StartDialog(string[] dialogArray, string[] nameArray)
 	{
-		for (int t = 0; t < dialogArray.Length; t++)       //I'm not sure if there's a better way to do this?
-		{
-			activeDialog.Add(dialogArray[t]);
-			speakerNames.Add(nameArray[t]);
-		}
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
@@ -117,24 +124,22 @@ public class DialogueManager : Control
 
 	public static void StartDialogWithQuest(string[] dialogArray, string[] nameArray, string questName, string questDesc, int questType, string targetNPCName, string questsFullMessage, int questAmount)
 	{
-		for (int t = 0; t < dialogArray.Length; t++)
-		{
-			activeDialog.Add(dialogArray[t]);
-			speakerNames.Add(nameArray[t]);
-		}
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
 
 		Quests newQuest = new Quests();
 		newQuest.questName = questName;
 		newQuest.questDescription = questDesc;
 		newQuest.questType = questType;
+		newQuest.progress = 0;
 		newQuest.maxProgress = questAmount;
 		newQuest.targetNPCName = targetNPCName;
 
-		if (!GameData.AddQuest(newQuest, questAmount))       //tries to add the quest, and if it's full it's gonna add the quest failed line to the dialog
+		if (!Quests.AddQuest(newQuest, questAmount))       //tries to add the quest, and if it's full it's gonna add the quest failed line to the dialog
 		{
 			activeDialog.Add(questsFullMessage);
 			speakerNames.Add(nameArray[0]);
 		}
+
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
@@ -143,11 +148,7 @@ public class DialogueManager : Control
 
 	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, int moneyAmount = 0, Item itemToGive = null, int itemStack = 0)
 	{
-		for (int t = 0; t < dialogArray.Length; t++)
-		{
-			activeDialog.Add(dialogArray[t]);
-			speakerNames.Add(nameArray[t]);
-		}
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
 
 		dialogManager.moneyAmount = moneyAmount;
 		dialogManager.itemToGive = itemToGive;
@@ -157,5 +158,30 @@ public class DialogueManager : Control
 		dialogManager.dialogueText.Text = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
+	}
+
+	public static void StartSaveDialog(string[] dialogArray, string[] nameArray, int panelIndex)
+	{
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.savePanelIndex = panelIndex;
+
+		dialogManager.dialogIndex = 0;
+		dialogManager.dialogueText.Text = dialogArray[0];
+		dialogManager.nameLabel.Text = nameArray[0];
+		dialogManager.dialogPanel.Visible = true;
+	}
+
+	public void InitializeDialogArrays(string[] dialogArray, string[] nameArray)
+	{
+		for (int t = 0; t < dialogArray.Length; t++)
+		{
+			activeDialog.Add(dialogArray[t]);
+			speakerNames.Add(nameArray[t]);
+		}
+	}
+
+	private void ForceCloseSaveDialogue()
+	{
+		EndDialog();
 	}
 }

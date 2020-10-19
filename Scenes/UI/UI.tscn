@@ -1,17 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Sprites/UI/PlayerHeart_Empty.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/UI/HalfHeart.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/UI/PlayerHeart.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/MapPanelPanel.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/UI/UI.cs" type="Script" id=5]
-[ext_resource path="res://Sprites/Minimaps/WoodvilleMap.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Minimaps/WorldMap.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/UI/PlayerMarker.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/UI/InventorySlot.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/UI/InventorySlot_Active.png" type="Texture" id=9]
 [ext_resource path="res://Fonts/MajorlRetroRegular-aqom.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Sprites/UI/Arrow.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/UI/ActionBox.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/SettingsFont_Small.tres" type="DynamicFont" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -32,27 +34,92 @@ activeSlot = ExtResource( 9 )
 [node name="Layer1" type="CanvasLayer" parent="."]
 
 [node name="MapPanel" type="Panel" parent="Layer1"]
-visible = false
 self_modulate = Color( 0, 0, 0, 0 )
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 48.0
-margin_bottom = 48.0
+margin_right = 256.0
+margin_bottom = 152.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="Layer1/MapPanel"]
-margin_right = 240.0
-margin_bottom = 136.0
+[node name="MapPanel" type="TextureRect" parent="Layer1/MapPanel"]
+margin_right = 40.0
+margin_bottom = 152.0
 texture = ExtResource( 4 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Map" type="TextureRect" parent="Layer1/MapPanel"]
+[node name="LocationsLabel" type="Label" parent="Layer1/MapPanel/MapPanel"]
+margin_right = 100.0
+margin_bottom = 23.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+text = "Locations:"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WoodvilleButton" type="Button" parent="Layer1/MapPanel/MapPanel"]
+margin_top = 16.0
+margin_right = 12.0
+margin_bottom = 36.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_pressed = Color( 1, 0.87451, 0.384314, 1 )
+text = "Woodivlle"
+flat = true
+
+[node name="Location2Button" type="Button" parent="Layer1/MapPanel/MapPanel"]
 margin_left = 8.0
-margin_top = 8.0
-margin_right = 232.0
-margin_bottom = 128.0
+margin_top = 32.0
+margin_right = 50.0
+margin_bottom = 61.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_pressed = Color( 1, 0.87451, 0.384314, 1 )
+text = "???"
+flat = true
+
+[node name="Location3Button" type="Button" parent="Layer1/MapPanel/MapPanel"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 50.0
+margin_bottom = 77.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_pressed = Color( 1, 0.87451, 0.384314, 1 )
+text = "???"
+flat = true
+
+[node name="Location4Button" type="Button" parent="Layer1/MapPanel/MapPanel"]
+margin_left = 8.0
+margin_top = 64.0
+margin_right = 50.0
+margin_bottom = 93.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_pressed = Color( 1, 0.87451, 0.384314, 1 )
+text = "???"
+flat = true
+
+[node name="Location5Button" type="Button" parent="Layer1/MapPanel/MapPanel"]
+margin_left = 8.0
+margin_top = 80.0
+margin_right = 50.0
+margin_bottom = 109.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color_pressed = Color( 1, 0.87451, 0.384314, 1 )
+text = "???"
+flat = true
+
+[node name="WorldMap" type="TextureRect" parent="Layer1/MapPanel"]
+margin_left = 40.0
+margin_right = 904.0
+margin_bottom = 608.0
+rect_scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 expand = true
 __meta__ = {
@@ -60,7 +127,7 @@ __meta__ = {
 }
 
 [node name="PlayerMarkerCenter" type="Position2D" parent="Layer1/MapPanel"]
-position = Vector2( 8, 8 )
+position = Vector2( 128, 96 )
 
 [node name="PlayerMarker" type="TextureRect" parent="Layer1/MapPanel/PlayerMarkerCenter"]
 margin_left = -2.5
@@ -73,6 +140,22 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MapCam" type="Camera2D" parent="Layer1/MapPanel"]
+position = Vector2( 144, 72 )
+zoom = Vector2( 0.9, 0.9 )
+limit_left = 40
+limit_top = 0
+limit_right = 256
+limit_bottom = 150
+editor_draw_limits = true
+
+[node name="MainMapCam" type="Camera2D" parent="Layer1/MapPanel"]
+position = Vector2( 128, 75 )
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 
 [node name="HealthBar" type="Panel" parent="Layer1"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -456,10 +539,10 @@ __meta__ = {
 }
 
 [node name="ContinueButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 8.00001
+margin_left = 72.0
 margin_top = 16.0
-margin_right = 146.0
-margin_bottom = 58.0
+margin_right = 216.0
+margin_bottom = 61.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Continue"
@@ -468,10 +551,10 @@ __meta__ = {
 }
 
 [node name="SettingsButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 8.00001
+margin_left = 72.0
 margin_top = 40.0
-margin_right = 146.0
-margin_bottom = 82.0
+margin_right = 210.0
+margin_bottom = 85.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Settings"
@@ -480,10 +563,10 @@ __meta__ = {
 }
 
 [node name="BackToMenuButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 8.00001
+margin_left = 48.0
 margin_top = 64.0
-margin_right = 288.0
-margin_bottom = 106.0
+margin_right = 343.0
+margin_bottom = 109.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 11 )
 text = "Back to Main Menu"
@@ -491,54 +574,70 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 136.0
-margin_top = 16.0
-margin_right = 218.0
-margin_bottom = 58.0
-rect_scale = Vector2( 0.4, 0.4 )
-custom_fonts/font = ExtResource( 11 )
-text = "Save"
+[node name="SavePanel" type="Panel" parent="Layer1"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 208.0
+margin_top = 88.0
+margin_right = 248.0
+margin_bottom = 128.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveSlotMinusButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 128.0
-margin_top = 40.0
-margin_right = 152.0
-margin_bottom = 64.0
-rect_pivot_offset = Vector2( 12, 11.5 )
-custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
-icon = ExtResource( 12 )
-flat = true
+[node name="PanelBackground" type="TextureRect" parent="Layer1/SavePanel"]
+margin_left = -8.0
+margin_right = 24.0
+margin_bottom = 20.0
+rect_scale = Vector2( 1.6, 1.6 )
+texture = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveSlotPlusButton" type="Button" parent="Layer1/PauseMenu"]
-margin_left = 160.0
-margin_top = 40.0
-margin_right = 184.0
-margin_bottom = 63.0
+[node name="SaveSlotMinusButton" type="TextureButton" parent="Layer1/SavePanel"]
+margin_left = -4.0
+margin_top = 4.0
+margin_right = 8.0
+margin_bottom = 13.0
+rect_pivot_offset = Vector2( 6, 4.5 )
+texture_normal = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveSlotPlusButton" type="TextureButton" parent="Layer1/SavePanel"]
+margin_left = 26.0
+margin_top = 4.0
+margin_right = 38.0
+margin_bottom = 13.0
 rect_rotation = 180.0
-rect_pivot_offset = Vector2( 12, 11.5 )
-custom_colors/font_color_pressed = Color( 0.956863, 0.898039, 0.423529, 1 )
-icon = ExtResource( 12 )
-flat = true
+rect_pivot_offset = Vector2( 6, 4.5 )
+texture_normal = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveIndexLabel" type="Label" parent="Layer1/PauseMenu"]
-margin_left = 152.0
-margin_top = 43.0
-margin_right = 176.0
-margin_bottom = 83.0
+[node name="SaveSlotLabel" type="Label" parent="Layer1/SavePanel"]
+margin_left = 14.0
+margin_right = 54.0
+margin_bottom = 39.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 11 )
 text = "1"
-autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="Layer1/SavePanel"]
+margin_left = -48.0
+margin_top = 8.0
+margin_right = 37.0
+margin_bottom = 53.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -547,6 +646,6 @@ __meta__ = {
 [connection signal="pressed" from="Layer1/PauseMenu/ContinueButton" to="." method="OnContinueButtonPressed"]
 [connection signal="pressed" from="Layer1/PauseMenu/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="Layer1/PauseMenu/BackToMenuButton" to="." method="OnBackToMenuButtonPressed"]
-[connection signal="pressed" from="Layer1/PauseMenu/SaveButton" to="." method="OnSaveButtonPressed"]
-[connection signal="pressed" from="Layer1/PauseMenu/SaveSlotMinusButton" to="." method="OnSaveSlotMinusButtonPressed"]
-[connection signal="pressed" from="Layer1/PauseMenu/SaveSlotPlusButton" to="." method="OnSaveSlotPlusButtonPressed"]
+[connection signal="pressed" from="Layer1/SavePanel/SaveSlotMinusButton" to="." method="OnSaveSlotMinusButtonPressed"]
+[connection signal="pressed" from="Layer1/SavePanel/SaveSlotPlusButton" to="." method="OnSaveSlotPlusButtonPressed"]
+[connection signal="pressed" from="Layer1/SavePanel/SaveButton" to="." method="OnSaveButtonPressed"]

@@ -25,7 +25,7 @@ public class BaseItem : Area2D
 
 		if (canBePickedUp && Input.IsKeyPressed((int)KeyList.G) && initializeTimer <= 0)
 		{
-			GameData.AddItemToInventory(Item.itemList[itemType], amount);
+			Item.AddItemToInventory(Item.itemList[itemType], amount);
 			QueueFree();
 		}
 	}

@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections;
 
 public class PerfectlyCircularRock : Area2D
 {
@@ -27,7 +25,7 @@ public class PerfectlyCircularRock : Area2D
 	{
 		if (body == Player.player)
 		{
-			GameData.HurtPlayer(2, 0f);
+			GameData.HurtPlayer(2, GlobalPosition);
 		}
 		if (body.GetType().ToString() != "Rocklin")
 			QueueFree();

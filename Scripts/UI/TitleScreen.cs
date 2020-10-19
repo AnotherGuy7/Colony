@@ -50,6 +50,7 @@ public class TitleScreen : Control
 		{
 			SceneSwitcher.sceneSwitcher.GotoScene(locationName, 1, "Front");
 			SaveManager.saveManager.LoadGame(saveSlotIndex);
+			GameData.currentPlayerSaveIndex = saveSlotIndex;
 		}
 		else
 		{

@@ -70,3 +70,4 @@ __meta__ = {
 
 [node name="TalkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -20.0

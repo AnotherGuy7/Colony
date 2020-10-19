@@ -183,7 +183,7 @@ public class LivingTrunk : RigidBody2D
 	{
 		if (body == Player.player)
 		{
-			GameData.HurtPlayer(1);
+			GameData.HurtPlayer(1, GlobalPosition, 6f);
 		}
 		moving = false;
 		moveRestTimer.Start(rand.Next(1, 2));
@@ -194,7 +194,7 @@ public class LivingTrunk : RigidBody2D
 	{
 		if (body == Player.player)
 		{
-			GameData.HurtPlayer(1);
+			GameData.HurtPlayer(1, GlobalPosition, 6f);
 		}
 		moving = false;
 		moveRestTimer.Start(rand.Next(1, 2));

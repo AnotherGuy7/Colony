@@ -62,13 +62,14 @@
     <Compile Include="Scripts\Globals\SaveManager.cs" />
     <Compile Include="Scripts\Globals\SceneSwitcher.cs" />
     <Compile Include="Scripts\Items\BaseItem.cs" />
-    <Compile Include="Scripts\Maps\Woodville.cs" />
-    <Compile Include="Scripts\Maps\WoodvilleHouses.cs" />
+    <Compile Include="Scripts\Maps\ResurrectionRoom.cs" />
     <Compile Include="Scripts\NPCs\BaseTownNPC01.cs" />
     <Compile Include="Scripts\NPCs\BaseTownNPC02.cs" />
     <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />
     <Compile Include="Scripts\Objects\BaseParticle.cs" />
+    <Compile Include="Scripts\Objects\Bed.cs" />
     <Compile Include="Scripts\Objects\Bush.cs" />
+    <Compile Include="Scripts\Objects\Chests.cs" />
     <Compile Include="Scripts\Objects\Door.cs" />
     <Compile Include="Scripts\Objects\House1.cs" />
     <Compile Include="Scripts\Objects\MerchantShop.cs" />

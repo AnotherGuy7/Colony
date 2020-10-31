@@ -26,7 +26,7 @@ public class DialogueManager : Control
 	private int itemToGivestack = 0;
 
 	//Save Panel stuff
-	private int savePanelIndex = -1;
+	private bool saveDialog = false;
 
 	private Random rand = new Random();
 
@@ -61,12 +61,15 @@ public class DialogueManager : Control
 					if (dialogIndex < activeDialog.Count)
 					{
 						dialogIndex++;
-						if (savePanelIndex != -1)
+						if (dialogIndex > activeDialog.Count)
 						{
-							UI.savePanel.Visible = true;
-						}
-						if (dialogIndex > activeDialog.Count - 1)
-						{
+							if (saveDialog)		//If it's the save prompt then just undo the addition, make the save panel show up, and stop updating text
+							{
+								//dialogIndex--;
+								GD.Print("Run");
+								return;
+							}
+							UI.ui.savePanel.Visible = true;
 							EndDialog();
 							return;
 						}
@@ -160,10 +163,11 @@ public class DialogueManager : Control
 		dialogManager.dialogPanel.Visible = true;
 	}
 
-	public static void StartSaveDialog(string[] dialogArray, string[] nameArray, int panelIndex)
+	public static void StartSaveDialog(string[] dialogArray, string[] nameArray)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
-		dialogManager.savePanelIndex = panelIndex;
+		dialogManager.saveDialog = true;
+		UI.ui.savePanel.Visible = true;
 
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogArray[0];

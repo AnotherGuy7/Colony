@@ -7,11 +7,11 @@ public class TitleScreen : Control
 	private Panel settingsPanel;
 	private Panel savesPanel;
 	private Label resolutionNumber;
-	private string filePath = "user://savegame.save";
 
 	private Vector2[] resolutionsArray = new Vector2[7] { new Vector2(256f, 150f), Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero, Vector2.Zero };
 	private int resolutionsArrayIndex = 0;
 	private int saveSlotIndex = 1;
+	private bool saveExists = false;
 	private string[] locationsArray = new string[GameData.MaxSaveSlots];
 
 	public override void _Ready()
@@ -46,16 +46,16 @@ public class TitleScreen : Control
 	private void OnLoadGameButtonPressed()
 	{
 		string locationName = locationsArray[saveSlotIndex - 1];
-		if (locationName != "None")
+		if (saveExists)
 		{
-			SceneSwitcher.sceneSwitcher.GotoScene(locationName, 1, "Front");
-			SaveManager.saveManager.LoadGame(saveSlotIndex);
+			SaveManager.LoadGame(saveSlotIndex);
 			GameData.currentPlayerSaveIndex = saveSlotIndex;
+			SceneSwitcher.sceneSwitcher.GotoScene(locationName, 1, "Front");
 		}
 		else
 		{
 			SceneSwitcher.sceneSwitcher.GotoScene("Woodville", 1, "Front");
-			SaveManager.saveManager.LoadGame(saveSlotIndex);
+			SaveManager.LoadGame(saveSlotIndex);
 		}
 	}
 
@@ -120,14 +120,15 @@ public class TitleScreen : Control
 	private void LoadSaveData(int index)
 	{
 		File saveFile = new File();
-		string newFilePath = "user://savegame" + index.ToString() + ".save";
+		string newFilePath = SaveManager.GetSavePath(index);
 
 		Panel savePanel = GetNode<Panel>("SavesPanel/SavePanel");
 
 		savePanel.GetNode<Label>("SaveIndexLabel").Text = saveSlotIndex.ToString();
 		savePanel.GetNode<Label>("SaveLabel").Text = "Save " + saveSlotIndex + ":";
 
-		if (saveFile.FileExists(newFilePath))
+		saveExists = saveFile.FileExists(newFilePath);
+		if (saveExists)
 		{
 			if (!saveFile.IsOpen())
 				saveFile.Open(newFilePath, File.ModeFlags.Read);

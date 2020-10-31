@@ -9,6 +9,7 @@ extents = Vector2( 10.6023, 6.11082 )
 
 [node name="WoodsChest" type="Area2D"]
 script = ExtResource( 1 )
+itemType = 5
 openedChest = ExtResource( 3 )
 
 [node name="ChestSprite" type="Sprite" parent="."]

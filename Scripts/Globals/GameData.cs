@@ -52,11 +52,6 @@ public class GameData : Node2D
 			else
 				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
 		}
-
-		for (int q = 0; q < activeQuests.Length; q++)		//This is so that upon loading, the array has object values while will be modified on save
-		{
-			activeQuests[q] = Quests.emptyQuest;
-		}
 	}
 
 	public override void _Input(InputEvent @event)

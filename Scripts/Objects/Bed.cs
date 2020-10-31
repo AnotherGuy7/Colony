@@ -14,7 +14,7 @@ public class Bed : Area2D
 	{
 		if (Input.IsActionJustPressed("Continue") && canAccessBed)
 		{
-			DialogueManager.StartSaveDialog(dialogue, speakerNames, dialogue.Length);
+			DialogueManager.StartSaveDialog(dialogue, speakerNames);
 			GameData.isPlayerTalking = true;
 		}
 	}

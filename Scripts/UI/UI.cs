@@ -1,8 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 
 public class UI : Control
 {
@@ -21,21 +19,29 @@ public class UI : Control
 	[Export]
 	public Texture activeSlot;
 
-	public static Panel savePanel;
+	public static UI ui;
 
+	//Things that are referenced in other files via UI.ui
+	public Panel savePanel;
+	public AnimationPlayer uiAnimPlayer;
+
+	//Things we only need to access here
 	private Panel mapPanel;
-	private Camera2D mainMapCam;
 	private Camera2D mapCam;
+	private Viewport mapViewport;
 	private TextureRect playerMarker;
 	private Panel heartsPanel;
 	private Panel inventoryPanel;
 	private Panel questPanel;
 	private Panel pauseMenu;
+	private Panel tooltipPanel;
 	private Label saveSlotLabel;
 
 	private int currentHeart = 0;
 	private int questIndex = 0;
 	private int saveSlotIndex = 1;
+
+	public static bool mapPanelActive = false;
 
 	private List<TextureRect> inventorySlots = new List<TextureRect>();
 	private List<TextureRect> hearts = new List<TextureRect>();
@@ -43,16 +49,23 @@ public class UI : Control
 	public override void _Ready()
 	{
 		mapPanel = GetNode<Panel>("Layer1/MapPanel");
-		mainMapCam = GetNode<Camera2D>("Layer1/MapPanel/MainMapCam");
-		mapCam = GetNode<Camera2D>("Layer1/MapPanel/MapCam");
-		playerMarker = GetNode<TextureRect>("Layer1/MapPanel/PlayerMarkerCenter/PlayerMarker");
+		mapCam = GetNode<Camera2D>("Layer1/MapPanel/ViewportContainer/MapViewport/MapCam");
+		mapViewport = GetNode<Viewport>("Layer1/MapPanel/ViewportContainer/MapViewport");
+		playerMarker = GetNode<TextureRect>("Layer1/MapPanel/ViewportContainer/MapViewport/PlayerMarkerCenter/PlayerMarker");
 		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
 		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
 		pauseMenu = GetNode<Panel>("Layer1/PauseMenu");
+		tooltipPanel = GetNode<Panel>("Layer1/TooltipPanel");
 		saveSlotLabel = GetNode<Label>("Layer1/SavePanel/SaveSlotLabel");
 		savePanel = GetNode<Panel>("Layer1/SavePanel");
+		uiAnimPlayer = GetNode<AnimationPlayer>("UIAnimPlayer");
+		ui = this;
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
+
+		//Precautions
+		mapViewport.SetProcessInput(false);
+		mapViewport.GuiDisableInput = false;
 
 		foreach (TextureRect heart in heartsPanel.GetChildren())
 		{
@@ -89,7 +102,7 @@ public class UI : Control
 	public override void _Process(float delta)
 	{
 		currentHeart = GameData.playerHealth / 2;
-		for (int i = 0; i < hearts.Count; i++)		//change this so that it changes upon a signal
+		for (int i = 0; i < hearts.Count; i++)      //change this so that it changes upon a signal
 		{
 			if (i < GameData.playerMaxHealth)
 			{
@@ -115,14 +128,21 @@ public class UI : Control
 				}
 			}
 		}
+
+		if (tooltipPanel.Visible)
+		{
+			tooltipPanel.RectPosition = ui.GetLocalMousePosition() + new Vector2(132f, 78f);
+		}
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsActionJustPressed("map"))
+		if (Input.IsActionJustPressed("map") && !uiAnimPlayer.IsPlaying() && !mapPanelActive)
 		{
-			mapPanel.Visible = !mapPanel.Visible;
-			mainMapCam.Current = !mainMapCam.Current;
+			uiAnimPlayer.Play("MapTransitionIn");
+			mapViewport.SetProcessInput(true);
+			mapViewport.HandleInputLocally = true;
+			mapViewport.GuiDisableInput = false;
 		}
 		if (Input.IsActionJustPressed("pause"))
 		{
@@ -132,34 +152,6 @@ public class UI : Control
 		{
 			UpdateQuestListings();
 			questPanel.Visible = !questPanel.Visible;
-		}
-
-		if (mapPanel.Visible)
-		{
-			if (@event is InputEventMouseButton scroll)
-			{
-				if (scroll.IsPressed())
-				{
-					if (scroll.ButtonIndex == (int)ButtonList.WheelUp)
-					{
-						mapCam.Zoom = new Vector2(mapCam.Zoom.x + 0.05f, mapCam.Zoom.y + 0.05f);
-					}
-					if (scroll.ButtonIndex == (int)ButtonList.WheelDown)
-					{
-						mapCam.Zoom = new Vector2(mapCam.Zoom.x - 0.05f, mapCam.Zoom.y - 0.05f);
-					}
-				}
-			}
-			if (@event is InputEventMouseButton click)
-			{
-				if (click.IsPressed())
-				{
-					if (click.ButtonIndex == (int)ButtonList.Left)
-					{
-
-					}
-				}
-			}
 		}
 	}
 
@@ -234,7 +226,7 @@ public class UI : Control
 
 	private void OnSaveButtonPressed()
 	{
-		SaveManager.saveManager.SaveGame(saveSlotIndex);
+		SaveManager.SaveGame(saveSlotIndex);
 		GameData.gameData.EmitSignal(nameof(GameData.SavedGame));
 		savePanel.Visible = false;
 	}
@@ -257,5 +249,23 @@ public class UI : Control
 			saveSlotIndex = 10;
 		}
 		saveSlotLabel.Text = saveSlotIndex.ToString();
+	}
+
+	private void OnUIAnimPlayerAnimationFinished(String anim_name)
+	{
+		if (anim_name == "MapTransitionIn")
+		{
+			mapPanelActive = true;
+		}
+		else if (anim_name == "MapTransitionOut")
+		{
+			mapPanelActive = false;
+		}
+	}
+
+	public static void ControlTooltipBox(bool visibility, string name)
+	{
+		ui.tooltipPanel.GetNode<Label>("NameLabel").Text = name;
+		ui.tooltipPanel.Visible = visibility;
 	}
 }

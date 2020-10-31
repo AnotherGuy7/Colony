@@ -79,6 +79,7 @@
     <Compile Include="Scripts\Projectiles\PerfectlyCircularRock.cs" />
     <Compile Include="Scripts\UI\DialogueManager.cs" />
     <Compile Include="Scripts\UI\Item.cs" />
+    <Compile Include="Scripts\UI\MapPanelViewport.cs" />
     <Compile Include="Scripts\UI\Quests.cs" />
     <Compile Include="Scripts\UI\ShopMenu.cs" />
     <Compile Include="Scripts\UI\TitleScreen.cs" />

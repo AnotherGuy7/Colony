@@ -49,4 +49,14 @@ public class BaseItem : Area2D
 			pickUpBox.Visible = false;
 		}
 	}
+
+	private void OnItemMouseEntered()
+	{
+		UI.ControlTooltipBox(true, Item.itemList[itemType].name + " (" + amount + ")");
+	}
+
+	private void OnItemMouseExited()
+	{
+		UI.ControlTooltipBox(false, "");
+	}
 }

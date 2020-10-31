@@ -5,7 +5,7 @@ public class ResurrectionRoom : Node2D
 {
 	private void OnRespawnButtonPressed()
 	{
-		SaveManager.saveManager.LoadGame(GameData.currentPlayerSaveIndex);
+		SaveManager.LoadGame(GameData.currentPlayerSaveIndex);
 	}
 
 

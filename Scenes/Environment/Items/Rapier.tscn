@@ -42,3 +42,5 @@ __meta__ = {
 }
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="body_exited" from="." to="." method="OnBodyExited"]
+[connection signal="mouse_entered" from="." to="." method="OnItemMouseEntered"]
+[connection signal="mouse_exited" from="." to="." method="OnItemMouseExited"]

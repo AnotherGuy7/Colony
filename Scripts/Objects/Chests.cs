@@ -13,6 +13,11 @@ public class Chests : Area2D
 	private bool canBeOpened = false;
 	private Sprite chestSprite;
 
+	public override void _Ready()
+	{
+		chestSprite = GetNode<Sprite>("ChestSprite");
+	}
+
 	public override void _Input(InputEvent @event)
 	{
 		if (canBeOpened)

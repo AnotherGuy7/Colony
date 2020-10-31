@@ -4,19 +4,18 @@ using Godot.Collections;
 public class SaveManager : Node
 {
 	public static SaveManager saveManager;
-	private string filePath = "user://savegame.save";
 
 	public override void _Ready()
 	{
 		saveManager = this;
 	}
 
-	public void SaveGame(int saveIndex)
+	public static void SaveGame(int saveIndex)
 	{
 		File saveFile = new File();
 
 		if (!saveFile.IsOpen())
-			saveFile.Open("user://savegame" + saveIndex.ToString() + ".save", File.ModeFlags.Write);
+			saveFile.Open(GetSavePath(saveIndex), File.ModeFlags.Write);
 
 		Dictionary<string, object> thingsToSave = new Dictionary<string, object>		//In here we save the stuff that should be saved easily
 		{
@@ -49,13 +48,21 @@ public class SaveManager : Node
 		saveFile.Close();
 	}
 
-	public void LoadGame(int saveSlotIndex)
+	public static void LoadGame(int saveSlotIndex)
 	{
 		File saveFile = new File();
-		string newFilePath = filePath + saveSlotIndex.ToString();
+		string newFilePath = GetSavePath(saveSlotIndex);
+
+		for (int q = 0; q < GameData.activeQuests.Length; q++)       //This is so that upon loading, the array has object values while will be modified on save, and it's above all else since it has to happen
+		{
+			GameData.activeQuests[q] = Quests.emptyQuest;
+		}
 
 		if (!saveFile.FileExists(newFilePath))
+		{
+			GD.Print("Save doesn't exist.");
 			return;
+		}
 
 		if (!saveFile.IsOpen())
 			saveFile.Open(newFilePath, File.ModeFlags.Read);
@@ -87,5 +94,10 @@ public class SaveManager : Node
 		}
 
 		GameData.playerSavedPosition = new Vector2((float)saveData["PosX"], (float)saveData["PosY"]);
+	}
+
+	public static string GetSavePath(int index)
+	{
+		return "user://savegame" + index.ToString() + ".save";
 	}
 }

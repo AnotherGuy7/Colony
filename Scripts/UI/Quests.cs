@@ -15,23 +15,13 @@ public class Quests : Node
 	public string targetNPCName = "";       //self-explanatory, it's what you have to kill for elimination quests
 
 	public static Quests emptyQuest;
-	//public static Dictionary<int, Quests> questsDict = new Dictionary<int, Quests>();
 
 	public override void _Ready()
 	{
-		Quests emptyQuestVar = new Quests();
-		emptyQuestVar.questName = "None";
-		emptyQuestVar.questDescription = "No quest here";
-		emptyQuestVar.iconSprite = GetIcon("Nothing");
-		emptyQuest = emptyQuestVar;
-		//questsDict.Add(-1, emptyQuest);
-
-		/*Quests testQuest = new Quests();
-		testQuest.questName = "Living Trunk Elimination";
-		testQuest.questDescription = "Eliminate " + testQuest.progress + " Living Trunks";
-		testQuest.iconSprite = GetIcon("EliminationIcon");
-		testQuest.questType = 2;
-		questsDict.Add(0, testQuest);*/
+		emptyQuest = new Quests();
+		emptyQuest.questName = "None";
+		emptyQuest.questDescription = "No quest here";
+		emptyQuest.iconSprite = GetIcon("Nothing");
 	}
 
 	private Texture GetIcon(string textureName)
@@ -44,7 +34,7 @@ public class Quests : Node
 		return texture;
 	}
 
-	public static bool AddQuest(Quests quest, int objectiveAmount)
+	public static bool AddQuest(Quests quest)
 	{
 		bool questPlaced = false;
 
@@ -54,6 +44,7 @@ public class Quests : Node
 			if (GameData.activeQuests[q].questName == quest.questName)
 			{
 				questPlaced = true;
+				break;
 			}
 		}
 
@@ -66,6 +57,7 @@ public class Quests : Node
 				{
 					GameData.activeQuests[q] = quest;
 					questPlaced = true;
+					break;
 				}
 			}
 		}

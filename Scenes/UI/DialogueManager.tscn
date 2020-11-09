@@ -51,6 +51,7 @@ rect_scale = Vector2( 0.25, 0.25 )
 custom_fonts/font = SubResource( 1 )
 text = "[Text here]"
 autowrap = true
+percent_visible = 0.0
 max_lines_visible = 2
 __meta__ = {
 "_edit_use_anchors_": false

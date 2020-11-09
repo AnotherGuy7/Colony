@@ -18,6 +18,7 @@ public class Player : KinematicBody2D
 	private bool running = false;
 	private int flashTimer = 0;
 	private int hurtTimer = 0;
+	private bool canMove = true;
 
 	public static Player player;
 	public static Area2D playerSword;       //for easier player sword referencing
@@ -60,6 +61,7 @@ public class Player : KinematicBody2D
 	public override void _Process(float delta)
 	{
 		swordShape.Disabled = !swinging;
+		canMove = !GameData.isPlayerTalking && !GameData.playerDead;
 
 		HandleHitboxRotationAndSize();
 
@@ -100,25 +102,28 @@ public class Player : KinematicBody2D
 	{
 		Vector2 velocity = Vector2.Zero;
 
-		if (Input.IsActionPressed("move_front"))
+		if (canMove)
 		{
-			direction = "Front";
-			velocity.y += moveSpeed;
-		}
-		if (Input.IsActionPressed("move_back"))
-		{
-			direction = "Back";
-			velocity.y -= moveSpeed;
-		}
-		if (Input.IsActionPressed("move_left"))
-		{
-			direction = "Left";
-			velocity.x -= moveSpeed;
-		}
-		if (Input.IsActionPressed("move_right"))
-		{
-			direction = "Right";
-			velocity.x += moveSpeed;
+			if (Input.IsActionPressed("move_front"))
+			{
+				direction = "Front";
+				velocity.y += moveSpeed;
+			}
+			if (Input.IsActionPressed("move_back"))
+			{
+				direction = "Back";
+				velocity.y -= moveSpeed;
+			}
+			if (Input.IsActionPressed("move_left"))
+			{
+				direction = "Left";
+				velocity.x -= moveSpeed;
+			}
+			if (Input.IsActionPressed("move_right"))
+			{
+				direction = "Right";
+				velocity.x += moveSpeed;
+			}
 		}
 
 		if (!swinging)
@@ -170,7 +175,7 @@ public class Player : KinematicBody2D
 			velocity = Vector2.Zero;
 		}
 
-		if (!GameData.playerDead)
+		if (canMove)
 			MoveAndSlide(velocity);
 	}
 

@@ -12,7 +12,7 @@ public class Bed : Area2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (Input.IsActionJustPressed("Continue") && canAccessBed)
+		if (Input.IsActionJustPressed("Continue") && canAccessBed && !GameData.isPlayerTalking)
 		{
 			DialogueManager.StartSaveDialog(dialogue, speakerNames);
 			GameData.isPlayerTalking = true;

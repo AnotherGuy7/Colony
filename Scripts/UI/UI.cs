@@ -36,12 +36,15 @@ public class UI : Control
 	private Panel pauseMenu;
 	private Panel tooltipPanel;
 	private Label saveSlotLabel;
+	private Button questBackButton;
+	private Button questForwardButton;
 
 	private int currentHeart = 0;
 	private int questIndex = 0;
 	private int saveSlotIndex = 1;
 
 	public static bool mapPanelActive = false;
+	private bool questJournalActive = false;
 
 	private List<TextureRect> inventorySlots = new List<TextureRect>();
 	private List<TextureRect> hearts = new List<TextureRect>();
@@ -55,13 +58,17 @@ public class UI : Control
 		heartsPanel = GetNode<Panel>("Layer1/HealthBar");
 		inventoryPanel = GetNode<Panel>("Layer1/InventoryPanel");
 		questPanel = GetNode<Panel>("Layer1/QuestsPanel");
-		pauseMenu = GetNode<Panel>("Layer1/PauseMenu");
+		pauseMenu = GetNode<Panel>("Layer3/PauseMenu");
 		tooltipPanel = GetNode<Panel>("Layer1/TooltipPanel");
-		saveSlotLabel = GetNode<Label>("Layer1/SavePanel/SaveSlotLabel");
-		savePanel = GetNode<Panel>("Layer1/SavePanel");
+		saveSlotLabel = GetNode<Label>("Layer3/SavePanel/SaveSlotLabel");
+		savePanel = GetNode<Panel>("Layer3/SavePanel");
 		uiAnimPlayer = GetNode<AnimationPlayer>("UIAnimPlayer");
 		ui = this;
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
+
+		questBackButton =  questPanel.GetNode<Button>("QuestBackButton");
+		questForwardButton = questPanel.GetNode<Button>("QuestForwardButton");
+
 
 		//Precautions
 		mapViewport.SetProcessInput(false);
@@ -151,7 +158,15 @@ public class UI : Control
 		if (Input.IsActionJustPressed("quest"))
 		{
 			UpdateQuestListings();
-			questPanel.Visible = !questPanel.Visible;
+			if (!questJournalActive)
+			{
+				uiAnimPlayer.Play("QuestJournalIn");
+			}
+			else
+			{
+				uiAnimPlayer.Play("QuestJournalOut");
+
+			}
 		}
 	}
 
@@ -189,8 +204,15 @@ public class UI : Control
 	{
 		questIndex--;
 
+		questForwardButton.Visible = true;
+		questForwardButton.Disabled = false;
+
 		if (questIndex <= 0)
-			questIndex = GameData.activeQuests.Length - 1;
+		{
+			questBackButton.Visible = false;
+			questBackButton.Disabled = true;
+		}
+
 
 		UpdateQuestListings();
 	}
@@ -200,8 +222,14 @@ public class UI : Control
 	{
 		questIndex++;
 
-		if (questIndex > GameData.activeQuests.Length - 1)
-			questIndex = 1;
+		questBackButton.Visible = true;
+		questBackButton.Disabled = false;
+
+		if (questIndex >= GameData.activeQuests.Length - 1)
+		{
+			questForwardButton.Visible = false;
+			questForwardButton.Disabled = true;
+		}
 
 		UpdateQuestListings();
 	}
@@ -253,14 +281,22 @@ public class UI : Control
 
 	private void OnUIAnimPlayerAnimationFinished(String anim_name)
 	{
-		if (anim_name == "MapTransitionIn")
+		switch (anim_name)
 		{
-			mapPanelActive = true;
+			case "MapTransitionIn":
+				mapPanelActive = true;
+				break;
+			case "MapTransitionOut":
+				mapPanelActive = false;
+				break;
+			case "QuestJournalIn":
+				questJournalActive = true;
+				break;
+			case "QuestJournalOut":
+				questJournalActive = false;
+				break;
 		}
-		else if (anim_name == "MapTransitionOut")
-		{
-			mapPanelActive = false;
-		}
+		
 	}
 
 	public static void ControlTooltipBox(bool visibility, string name)

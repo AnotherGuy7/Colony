@@ -133,7 +133,7 @@ public class BaseTownNPC01 : RigidBody2D
 
 	public override void _Process(float delta)
 	{
-		if (canBeTalkedTo && !isBeingTalkedTo && Input.IsActionJustPressed("Continue"))
+		if (canBeTalkedTo && !isBeingTalkedTo && Input.IsActionJustPressed("Continue") && !GameData.isPlayerTalking)
 		{
 			DialogueManager.StartDialog(dialogue, speakerNames);
 			isBeingTalkedTo = true;

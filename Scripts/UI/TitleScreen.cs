@@ -143,11 +143,10 @@ public class TitleScreen : Control
 
 			for (int i = 0; i < GameData.playerInventory.Length; i++)
 			{
-				TextureRect slot = savePanel.GetNode<TextureRect>("InventorySlot" + (i + 1));
-				TextureRect slotSprite = savePanel.GetNode<TextureRect>("InventorySlot" + (i + 1) + "/ItemTexture");
+				TextureRect slotSprite = savePanel.GetNode<TextureRect>("ItemTexture" + (i + 1));
 				int itemType = int.Parse(saveData["ItemType" + (i + 1)].ToString());
 				slotSprite.Texture = Item.itemList[itemType].sprite;
-				slot.Visible = slotSprite.Visible = true;
+				slotSprite.Visible = true;
 			}
 		}
 		else
@@ -157,9 +156,8 @@ public class TitleScreen : Control
 
 			for (int i = 0; i < GameData.playerInventory.Length; i++)
 			{
-				TextureRect slot = savePanel.GetNode<TextureRect>("InventorySlot" + (i + 1));
-				TextureRect slotSprite = savePanel.GetNode<TextureRect>("InventorySlot" + (i + 1) + "/ItemTexture");
-				slot.Visible = slotSprite.Visible = false;
+				TextureRect slotSprite = savePanel.GetNode<TextureRect>("ItemTexture" + (i + 1));
+				slotSprite.Visible = false;
 			}
 		}
 	}

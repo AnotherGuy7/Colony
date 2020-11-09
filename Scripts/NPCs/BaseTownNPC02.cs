@@ -173,7 +173,7 @@ public class BaseTownNPC02 : RigidBody2D
 
 	public override void _Process(float delta)
 	{
-		if (canBeTalkedTo && !isBeingTalkedTo && Input.IsActionJustPressed("Continue"))
+		if (canBeTalkedTo && !isBeingTalkedTo && Input.IsActionJustPressed("Continue") && !GameData.isPlayerTalking)
 		{
 			bool questDone = false;
 			for (int q = 0; q < GameData.activeQuests.Length; q++)
@@ -188,7 +188,7 @@ public class BaseTownNPC02 : RigidBody2D
 
 			if (!questDone)
 			{
-				DialogueManager.StartDialogWithQuest(dialogue, speakerNames, questName, questDescription, questType, targetNPCName, questsFullMessage, questObjectiveAmount);
+				DialogueManager.StartDialogWithQuest(dialogue, speakerNames, questName, questDescription, questType, targetNPCName, NPCName, questsFullMessage, questObjectiveAmount);
 				isBeingTalkedTo = true;
 				GameData.isPlayerTalking = true;
 			}

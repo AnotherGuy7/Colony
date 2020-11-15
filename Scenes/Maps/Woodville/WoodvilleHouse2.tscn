@@ -23,8 +23,8 @@ extents = Vector2( 10, 3.14557 )
 position = Vector2( 136, 168 )
 
 [node name="EmptyVoid" type="Sprite" parent="."]
-position = Vector2( 132, 128 )
-scale = Vector2( 36.5, 24 )
+position = Vector2( 132, 168 )
+scale = Vector2( 36.5, 29 )
 texture = ExtResource( 5 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -116,4 +116,4 @@ position = Vector2( 184, 264 )
 scale = Vector2( 4, 1 )
 locationName = "Woodville"
 direction = "Back"
-spawnPoint = 1
+spawnPoint = 3

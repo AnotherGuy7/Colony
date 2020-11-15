@@ -38,6 +38,8 @@ public class UI : Control
 	private Label saveSlotLabel;
 	private Button questBackButton;
 	private Button questForwardButton;
+	private AudioStreamPlayer mapInSFX;
+	private AudioStreamPlayer mapOutSFX;
 
 	private int currentHeart = 0;
 	private int questIndex = 0;
@@ -63,6 +65,8 @@ public class UI : Control
 		saveSlotLabel = GetNode<Label>("Layer3/SavePanel/SaveSlotLabel");
 		savePanel = GetNode<Panel>("Layer3/SavePanel");
 		uiAnimPlayer = GetNode<AnimationPlayer>("UIAnimPlayer");
+		mapInSFX = GetNode<AudioStreamPlayer>("Layer1/MapPanel/MapInSFX");
+		mapOutSFX = GetNode<AudioStreamPlayer>("Layer1/MapPanel/MapOutSFX");
 		ui = this;
 		GameData.gameData.Connect(nameof(GameData.UpdateInventorySlotDrawings), this, nameof(UpdateInventoryDrawings));
 

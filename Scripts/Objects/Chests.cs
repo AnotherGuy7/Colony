@@ -12,6 +12,8 @@ public class Chests : Area2D
 	private bool opened = false;
 	private bool canBeOpened = false;
 	private Sprite chestSprite;
+	private string[] dialogue = new string[1];
+	private string[] names = new string[1];
 
 	public override void _Ready()
 	{
@@ -25,6 +27,10 @@ public class Chests : Area2D
 			if (Input.IsActionJustPressed("Continue"))
 			{
 				opened = true;
+				dialogue[0] = "You obtained a " + Item.itemList[itemType].name + "!";
+				names[0] = "";
+				DialogueManager.StartDialogForItem(dialogue, names);
+				Player.PlayItemObtainedAnimation(itemType);
 				chestSprite.Texture = openedChest;
 				canBeOpened = false;
 			}

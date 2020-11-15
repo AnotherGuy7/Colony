@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Objects/Chests.cs" type="Script" id=1]
 [ext_resource path="res://Sprites/Environment/Misc/WoodsChest.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Environment/Misc/WoodsChest_Open.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10.6023, 6.11082 )
 
 [node name="WoodsChest" type="Area2D"]
@@ -15,7 +18,12 @@ openedChest = ExtResource( 3 )
 [node name="ChestSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="ChestShape" type="CollisionShape2D" parent="."]
+[node name="ChestArea" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="ChestBody" type="StaticBody2D" parent="."]
+
+[node name="ChestBodyShape" type="CollisionShape2D" parent="ChestBody"]
+shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="OnChestBodyEntered"]
 [connection signal="body_exited" from="." to="." method="OnChestBodyExited"]

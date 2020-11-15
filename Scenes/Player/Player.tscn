@@ -1,45 +1,6 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=61 format=2]
 
-[ext_resource path="res://Sprites/Player/player_01.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/Player/player_00.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Player/player_02.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/player_04.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/player_05.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/player_03.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/player_06.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/player_07.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/player_09.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/player_12.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/player_08.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Player/player_28.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Player/player_30.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Player/player_33.png" type="Texture" id=14]
-[ext_resource path="res://Sprites/Player/player_10.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Player/player_11.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/Player/player_13.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/Player/player_29.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/Player/player_14.png" type="Texture" id=19]
-[ext_resource path="res://Sprites/Player/player_15.png" type="Texture" id=20]
-[ext_resource path="res://Sprites/Player/player_32.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/Player/player_23.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/Player/player_24.png" type="Texture" id=23]
-[ext_resource path="res://Sprites/Player/player_22.png" type="Texture" id=24]
-[ext_resource path="res://Sprites/Player/player_31.png" type="Texture" id=25]
-[ext_resource path="res://Sprites/Player/player_39.png" type="Texture" id=26]
-[ext_resource path="res://Sprites/Player/player_16.png" type="Texture" id=27]
-[ext_resource path="res://Sprites/Player/player_36.png" type="Texture" id=28]
-[ext_resource path="res://Sprites/Player/player_17.png" type="Texture" id=29]
-[ext_resource path="res://Sprites/Player/player_35.png" type="Texture" id=30]
-[ext_resource path="res://Sprites/Player/player_25.png" type="Texture" id=31]
-[ext_resource path="res://Sprites/Player/player_27.png" type="Texture" id=32]
-[ext_resource path="res://Sprites/Player/player_18.png" type="Texture" id=33]
-[ext_resource path="res://Sprites/Player/player_19.png" type="Texture" id=34]
-[ext_resource path="res://Sprites/Player/player_26.png" type="Texture" id=35]
-[ext_resource path="res://Sprites/Player/player_20.png" type="Texture" id=36]
-[ext_resource path="res://Sprites/Player/player_37.png" type="Texture" id=37]
-[ext_resource path="res://Sprites/Player/player_38.png" type="Texture" id=38]
-[ext_resource path="res://Sprites/Player/player_21.png" type="Texture" id=39]
-[ext_resource path="res://Sprites/Player/player_34.png" type="Texture" id=40]
+[ext_resource path="res://Scenes/Player/PlayerSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Player/Player.cs" type="Script" id=41]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Scenes/UI/DialogueManager.tscn" type="PackedScene" id=43]
@@ -92,15 +53,6 @@
 [ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_18.png" type="Texture" id=90]
 [ext_resource path="res://Scenes/UI/ShopMenu.tscn" type="PackedScene" id=91]
 [ext_resource path="res://Sprites/UI/WhitePixel.png" type="Texture" id=92]
-[ext_resource path="res://Sprites/Player/player_40.png" type="Texture" id=93]
-[ext_resource path="res://Sprites/Player/player_43.png" type="Texture" id=94]
-[ext_resource path="res://Sprites/Player/player_46.png" type="Texture" id=95]
-[ext_resource path="res://Sprites/Player/player_44.png" type="Texture" id=96]
-[ext_resource path="res://Sprites/Player/player_45.png" type="Texture" id=97]
-[ext_resource path="res://Sprites/Player/player_47.png" type="Texture" id=98]
-[ext_resource path="res://Sprites/Player/player_48.png" type="Texture" id=99]
-[ext_resource path="res://Sprites/Player/player_41.png" type="Texture" id=100]
-[ext_resource path="res://Sprites/Player/player_42.png" type="Texture" id=101]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -115,94 +67,6 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "Idle_Front",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "Idle_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": true,
-"name": "Walking_Left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 9 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "Walking_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": false,
-"name": "Idle_Left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "Idle_Right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "Walking_Front",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Walking_Right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 32 ) ],
-"loop": false,
-"name": "Swinging_Right",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "Swinging_Back",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 40 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 26 ) ],
-"loop": false,
-"name": "Swinging_Left",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 39 ) ],
-"loop": false,
-"name": "Swinging_Front",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 27 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 39 ), ExtResource( 24 ), ExtResource( 22 ) ],
-"loop": true,
-"name": "Running_Front",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 99 ) ],
-"loop": true,
-"name": "ItemObtained",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 14 ), ExtResource( 40 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 26 ) ],
-"loop": true,
-"name": "Running_Back",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 93 ), ExtResource( 100 ), ExtResource( 101 ), ExtResource( 94 ), ExtResource( 96 ), ExtResource( 97 ), ExtResource( 95 ), ExtResource( 98 ) ],
-"loop": true,
-"name": "Running_Left",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 32 ), ExtResource( 12 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 25 ) ],
-"loop": true,
-"name": "Running_Right",
-"speed": 12.0
-} ]
-
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 46 ), ExtResource( 45 ), ExtResource( 44 ), ExtResource( 48 ), ExtResource( 47 ), ExtResource( 49 ) ],
@@ -210,14 +74,19 @@ animations = [ {
 "name": "Sword_Front",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 52 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 66 ) ],
+"frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
 "loop": true,
-"name": "Sword_Left",
+"name": "Rapier_Back",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 78 ), ExtResource( 76 ) ],
 "loop": true,
 "name": "Rapier_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
+"loop": true,
+"name": "Rapier_Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 50 ), ExtResource( 54 ), ExtResource( 61 ), ExtResource( 51 ), ExtResource( 59 ), ExtResource( 55 ) ],
@@ -230,19 +99,14 @@ animations = [ {
 "name": "Sword_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
-"loop": true,
-"name": "Rapier_Left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
-"loop": true,
-"name": "Rapier_Back",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 73 ) ],
 "loop": true,
 "name": "Rapier_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 52 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 66 ) ],
+"loop": true,
+"name": "Sword_Left",
 "speed": 5.0
 } ]
 
@@ -268,6 +132,23 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "Item Obtained"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("ItemObtainedTexture:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5, 2.2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -7 ), Vector2( 0, -8 ), Vector2( 0, -9 ), Vector2( 0, -8 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 41 )
 
@@ -285,9 +166,8 @@ __meta__ = {
 }
 
 [node name="PlayerAnim" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
+frames = ExtResource( 1 )
 animation = "Idle_Front"
-playing = true
 
 [node name="WeaponAnim" type="AnimatedSprite" parent="."]
 visible = false
@@ -320,7 +200,12 @@ margin_bottom = -74.3256
 
 [node name="ShopMenu" parent="." instance=ExtResource( 91 )]
 
-[node name="DeathAnimPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimPlayer" type="AnimationPlayer" parent="."]
 anims/DeathAnim = SubResource( 7 )
+"anims/Item Obtained" = SubResource( 8 )
+
+[node name="ItemObtainedTexture" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -8 )
 [connection signal="animation_finished" from="PlayerAnim" to="." method="OnPlayerAnimAnimationDone"]
-[connection signal="animation_finished" from="DeathAnimPlayer" to="." method="OnDeathAnimDone"]
+[connection signal="animation_finished" from="AnimPlayer" to="." method="OnDeathAnimDone"]

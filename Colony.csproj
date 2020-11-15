@@ -68,6 +68,7 @@
     <Compile Include="Scripts\NPCs\WeaponsMerchant.cs" />
     <Compile Include="Scripts\Objects\BaseParticle.cs" />
     <Compile Include="Scripts\Objects\Bed.cs" />
+    <Compile Include="Scripts\Objects\BullitenBoard.cs" />
     <Compile Include="Scripts\Objects\Bush.cs" />
     <Compile Include="Scripts\Objects\Chests.cs" />
     <Compile Include="Scripts\Objects\Door.cs" />

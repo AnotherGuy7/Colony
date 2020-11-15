@@ -9,16 +9,21 @@ public class Player : KinematicBody2D
 	private AnimatedSprite weaponAnim;
 	private CollisionShape2D swordShape;
 	private PackedScene arrow;
-	private AnimationPlayer deathAnim;
+	private AnimationPlayer animPlayer;
 	private AudioStreamPlayer swingSound;
+	private Sprite itemObtainedTexture;
 
 	private string direction = "Front";     //the way the player looks at the camera, NOT the direction he's going
-	private bool swinging = false;
 	private bool shooting = false;
 	private bool running = false;
 	private int flashTimer = 0;
 	private int hurtTimer = 0;
 	private bool canMove = true;
+
+	//State stuff
+	private bool swinging = false;
+	private bool eating = false;
+	private bool itemObtained = false;
 
 	public static Player player;
 	public static Area2D playerSword;       //for easier player sword referencing
@@ -37,7 +42,8 @@ public class Player : KinematicBody2D
 		weaponAnim = GetNode<AnimatedSprite>("WeaponAnim");
 		swordShape = GetNode<CollisionShape2D>("SwordHitbox/SwordShape");
 		swingSound = GetNode<AudioStreamPlayer>("SwingSound");
-		deathAnim = GetNode<AnimationPlayer>("DeathAnimPlayer");
+		itemObtainedTexture = GetNode<Sprite>("ItemObtainedTexture");
+		animPlayer = GetNode<AnimationPlayer>("AnimPlayer");
 		playerCam = GetNode<Camera2D>("PlayerCam");
 
 		arrow = GD.Load<PackedScene>("res://Scenes/Environment/Projectiles/Arrow.tscn");
@@ -61,7 +67,7 @@ public class Player : KinematicBody2D
 	public override void _Process(float delta)
 	{
 		swordShape.Disabled = !swinging;
-		canMove = !GameData.isPlayerTalking && !GameData.playerDead;
+		canMove = !GameData.isPlayerTalking && !GameData.playerDead && !itemObtained && !eating;
 
 		HandleHitboxRotationAndSize();
 
@@ -69,7 +75,7 @@ public class Player : KinematicBody2D
 
 		if (GameData.playerHealth <= 0)
 		{
-			deathAnim.Play("DeathAnim");
+			animPlayer.Play("DeathAnim");
 		}
 
 		//Post-Stun stuff
@@ -126,7 +132,7 @@ public class Player : KinematicBody2D
 			}
 		}
 
-		if (!swinging)
+		if (!swinging && !eating && !itemObtained)
 		{
 			if (velocity == Vector2.Zero)
 			{
@@ -143,7 +149,20 @@ public class Player : KinematicBody2D
 		else
 		{
 			velocity = Vector2.Zero;
-			playerAnim.Play("Swinging_" + direction);
+			if (swinging)
+			{
+				playerAnim.Play("Swinging_" + direction);
+			}
+			else if (eating)
+			{
+				direction = "Front";
+				playerAnim.Play("Eating");
+			}
+			else if (itemObtained)
+			{
+				direction = "Front";
+				playerAnim.Play("ItemObtained");
+			}
 		}
 
 		//Hurt movement
@@ -208,6 +227,12 @@ public class Player : KinematicBody2D
 		swinging = false;
 		weaponAnim.Visible = false;
 		weaponAnim.Stop();
+		if (playerAnim.Animation == "Eating")
+		{
+			canMove = true;
+			eating = false;
+			playerAnim.Play("Idle_" + direction);
+		}
 	}
 
 	private void OnDeathAnimDone(String anim_name)
@@ -216,6 +241,24 @@ public class Player : KinematicBody2D
 	}
 
 	//Methods
+
+	public static void PlayItemObtainedAnimation(int itemType)
+	{
+		player.itemObtained = true;
+		player.itemObtainedTexture.Visible = true;
+		player.itemObtainedTexture.Texture = Item.itemList[itemType].sprite;
+		player.animPlayer.Play("Item Obtained");
+		player.canMove = false;
+	}
+
+	public static void StopItemObtainedAnimation()
+	{
+		player.itemObtained = false;
+		player.itemObtainedTexture.Visible = false;
+		player.animPlayer.Stop();
+		player.canMove = true;
+	}
+
 	private void Flash(int eachFlashDuration)
 	{
 		flashTimer++;
@@ -264,6 +307,8 @@ public class Player : KinematicBody2D
 				swingSound.Play();
 				break;
 			case Item.Healing:
+				eating = true;
+				canMove = false;
 				GameData.playerHealth += item.healAmount;
 				Item.ConsumeItem(item, consumeAmount);
 				break;

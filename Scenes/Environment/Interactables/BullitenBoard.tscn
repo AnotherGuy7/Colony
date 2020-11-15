@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Environment/Interactables/BullitenBoard.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Objects/BullitenBoard.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.059, 3.14626 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13.0353, 7.49306 )
+
+[node name="BullitenBoard" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="BullitenBoardBody" type="StaticBody2D" parent="."]
+
+[node name="BullitenBoardBodyShape" type="CollisionShape2D" parent="BullitenBoardBody"]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="ReadingArea" type="Area2D" parent="."]
+position = Vector2( 0, 13 )
+
+[node name="ReadingAreaShape" type="CollisionShape2D" parent="ReadingArea"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="ReadingArea" to="." method="OnReadingAreaBodyEntered"]
+[connection signal="body_exited" from="ReadingArea" to="." method="OnReadingAreaBodyExited"]

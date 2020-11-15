@@ -137,7 +137,6 @@ public class BaseTownNPC01 : RigidBody2D
 		{
 			DialogueManager.StartDialog(dialogue, speakerNames);
 			isBeingTalkedTo = true;
-			GameData.isPlayerTalking = true;
 		}
 	}
 

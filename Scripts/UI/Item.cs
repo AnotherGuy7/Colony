@@ -87,7 +87,7 @@ public class Item : Node2D
         itemList.Add(rapier);
 
         Item smallHealthVial = new Item();
-        smallHealthVial.name = "Samll Health Vial";
+        smallHealthVial.name = "Small Health Vial";
         smallHealthVial.type = (int)ItemTypes.SmallHealthVial;
         smallHealthVial.useType = Healing;
         smallHealthVial.sprite = GetTexture("SmallHealthVial");

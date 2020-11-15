@@ -28,6 +28,9 @@ public class DialogueManager : Control
 	//Save Panel stuff
 	private bool saveDialog = false;
 
+	//Item stuff
+	private bool itemDialog = false;
+
 	private Random rand = new Random();
 
 	public override void _Ready()
@@ -44,7 +47,7 @@ public class DialogueManager : Control
 	{
 		if (GameData.isPlayerTalking)
 		{
-			if (visibleCharacters < currentText.Length)
+			if (visibleCharacters < dialogueText.Text.Length)
 			{
 				visibleCharacters += 1;
 				//talkSound.PitchScale = rand.Next(97, 103) / 100f;
@@ -52,9 +55,9 @@ public class DialogueManager : Control
 			}
 			if (Input.IsActionJustPressed("Continue"))
 			{
-				if (visibleCharacters < currentText.Length)
+				if (visibleCharacters < dialogueText.Text.Length)
 				{
-					visibleCharacters = currentText.Length;
+					visibleCharacters = dialogueText.Text.Length;
 				}
 				else
 				{
@@ -90,7 +93,14 @@ public class DialogueManager : Control
 		saveDialog = false;
 		GameData.playerCurrency += moneyAmount;
 		if (itemToGive != null)
+		{
 			Item.AddItemToInventory(itemToGive, itemToGivestack);
+		}
+		if (itemDialog)
+		{
+			Player.StopItemObtainedAnimation();
+		}
+		itemDialog = false;
 		moneyAmount = 0;
 		itemToGive = null;
 		itemToGivestack = 0;
@@ -101,28 +111,25 @@ public class DialogueManager : Control
 	public static void StartDialog(string[] dialogArray, string[] nameArray)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
+		GameData.isPlayerTalking = true;
 	}
 
-	/*public static void StartDialogWithQuest(string[] dialogArray, string[] nameArray, int questKey, string questsFullMessage, int questAmount)
+	public static void StartDialogForItem(string[] dialogArray, string[] nameArray)
 	{
-		for (int t = 0; t < dialogArray.Length; t++)
-		{
-			activeDialog.Add(dialogArray[t]);
-			speakerNames.Add(nameArray[t]);
-		}
-		if (!GameData.AddQuest(Quests.questsDict[questKey], questAmount))		//tries to add the quest, and if it's full it's gonna add the quest failed line to the dialog
-		{
-			activeDialog.Add(questsFullMessage);
-		}
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.itemDialog = true;
+
 		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogArray[0];
+		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
-	}*/
+		GameData.isPlayerTalking = true;
+	}
 
 	public static void StartDialogWithQuest(string[] dialogArray, string[] nameArray, string questName, string questDesc, int questType, string targetNPCName, string providerName, string questsFullMessage, int questMaxProgress)
 	{
@@ -155,6 +162,7 @@ public class DialogueManager : Control
 		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
+		GameData.isPlayerTalking = true;
 	}
 
 	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, int moneyAmount = 0, Item itemToGive = null, int itemStack = 0)
@@ -169,6 +177,7 @@ public class DialogueManager : Control
 		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
+		GameData.isPlayerTalking = true;
 	}
 
 	public static void StartSaveDialog(string[] dialogArray, string[] nameArray)
@@ -180,6 +189,7 @@ public class DialogueManager : Control
 		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
 		dialogManager.nameLabel.Text = nameArray[0];
 		dialogManager.dialogPanel.Visible = true;
+		GameData.isPlayerTalking = true;
 	}
 
 	public void InitializeDialogArrays(string[] dialogArray, string[] nameArray)

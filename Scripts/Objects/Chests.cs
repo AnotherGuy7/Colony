@@ -1,10 +1,9 @@
 using Godot;
-using System;
 
 public class Chests : Area2D
 {
 	[Export]
-	public int itemType = -1;
+	public string itemName = "";
 
 	[Export]
 	public Texture openedChest;
@@ -27,7 +26,8 @@ public class Chests : Area2D
 			if (Input.IsActionJustPressed("Continue"))
 			{
 				opened = true;
-				dialogue[0] = "You obtained a " + Item.itemList[itemType].name + "!";
+				int itemType = Item.GetItemType(itemName);
+				dialogue[0] = "You obtained a " + Item.itemsDict[itemType].name + "!";
 				names[0] = "";
 				DialogueManager.StartDialogForItem(dialogue, names);
 				Player.PlayItemObtainedAnimation(itemType);

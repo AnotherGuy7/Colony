@@ -235,18 +235,21 @@ public class Player : KinematicBody2D
 		}
 	}
 
-	private void OnDeathAnimDone(String anim_name)
+	private void OnAnimPlayerAnimationFinished(String anim_name)
 	{
-		SceneSwitcher.sceneSwitcher.GotoScene("DeathScreen", 0, "Back");
+		if (anim_name == "DeathAnim")
+		{
+			SceneSwitcher.sceneSwitcher.GotoScene("DeathScreen", 0, "Back");
+		}
 	}
 
-	//Methods
 
+	//Methods
 	public static void PlayItemObtainedAnimation(int itemType)
 	{
 		player.itemObtained = true;
 		player.itemObtainedTexture.Visible = true;
-		player.itemObtainedTexture.Texture = Item.itemList[itemType].sprite;
+		player.itemObtainedTexture.Texture = Item.itemsDict[itemType].sprite;
 		player.animPlayer.Play("Item Obtained");
 		player.canMove = false;
 	}
@@ -321,17 +324,17 @@ public class Player : KinematicBody2D
 	{
 		switch (itemType)
 		{
-			case (int)Item.ItemTypes.Sword:
+			case Item.DullDagger:
 				swinging = true;
-				weaponAnim.Play("Sword_" + direction);
+				weaponAnim.Play("DullDagger_" + direction);
 				weaponAnim.Stop();
 				break;
-			case (int)Item.ItemTypes.Rapier:
+			case Item.Rapier:
 				swinging = true;
 				weaponAnim.Play("Rapier_" + direction);
 				weaponAnim.Stop();
 				break;
-			case (int)Item.ItemTypes.Bow:
+			case Item.Bow:
 				shooting = true;
 				break;
 		}

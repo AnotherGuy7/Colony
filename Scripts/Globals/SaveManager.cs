@@ -27,7 +27,7 @@ public class SaveManager : Node
 		};
 
 		//Stuff that's a bit harder to save
-		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		for (int i = 0; i < GameData.MaxInventorySlots; i++)
 		{
 			thingsToSave.Add("ItemType" + (i + 1), GameData.playerInventory[i].type);
 			thingsToSave.Add("ItemStack" + (i + 1), GameData.playerInventory[i].stack);
@@ -75,11 +75,11 @@ public class SaveManager : Node
 		GameData.playerCurrency = int.Parse(saveData["Money"].ToString());
 		GameData.playerLocation = saveData["Location"].ToString();
 
-		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		for (int i = 0; i < GameData.MaxInventorySlots; i++)
 		{
 			int itemType = int.Parse(saveData["ItemType" + (i + 1)].ToString());
 			int itemStack = int.Parse(saveData["ItemStack" + (i + 1)].ToString());
-			GameData.playerInventory[i] = Item.itemList[itemType];
+			GameData.playerInventory[i] = Item.itemsDict[itemType];
 			GameData.playerInventory[i].stack = itemStack;
 		}
 

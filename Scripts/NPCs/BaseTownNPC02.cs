@@ -50,7 +50,10 @@ public class BaseTownNPC02 : RigidBody2D
 	public int playerRewardMoney = 0;
 
 	[Export]
-	public int playerRewardItemType = 0;
+	public string playerRewardItemName = "";
+
+	[Export]
+	public string inventoryFullMessage = "";
 
 	[Export]
 	public int playerRewardItemStack = 0;
@@ -65,6 +68,7 @@ public class BaseTownNPC02 : RigidBody2D
 	private bool canBeTalkedTo = false;
 	private bool moving = false;
 	private bool isBeingTalkedTo = false;
+	private bool questRewardGiven = false;
 	private Vector2 savedStartPosition;     //this is what we use to measure the distance for anchors
 
 	private Random rand = new Random();
@@ -192,9 +196,10 @@ public class BaseTownNPC02 : RigidBody2D
 				isBeingTalkedTo = true;
 				GameData.isPlayerTalking = true;
 			}
-			else
+			if (questDone && !questRewardGiven)
 			{
-				DialogueManager.StartDialogWithReward(questDoneDialog, questDoneNames, playerRewardMoney, Item.itemList[playerRewardItemType], playerRewardItemStack);
+				int itemType = Item.GetItemType(playerRewardItemName);
+				DialogueManager.StartDialogWithReward(questDoneDialog, questDoneNames, inventoryFullMessage, playerRewardMoney, itemType, playerRewardItemStack);
 				isBeingTalkedTo = true;
 				GameData.isPlayerTalking = true;
 			}

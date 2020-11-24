@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=70 format=2]
+[gd_resource type="SpriteFrames" load_steps=71 format=2]
 
 [ext_resource path="res://Sprites/Player/player_70.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Player/player_21.png" type="Texture" id=2]
@@ -69,6 +69,7 @@
 [ext_resource path="res://Sprites/Player/player_66.png" type="Texture" id=67]
 [ext_resource path="res://Sprites/Player/player_44.png" type="Texture" id=68]
 [ext_resource path="res://Sprites/Player/player_55.png" type="Texture" id=69]
+[ext_resource path="res://Sprites/Player/player_48.png" type="Texture" id=70]
 
 [resource]
 animations = [ {
@@ -77,14 +78,14 @@ animations = [ {
 "name": "Idle_Front",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 13 ), ExtResource( 27 ), ExtResource( 20 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 33 ), ExtResource( 30 ), ExtResource( 17 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "Walking_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ), ExtResource( 3 ), ExtResource( 15 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "Walking_Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ) ],
@@ -92,9 +93,19 @@ animations = [ {
 "name": "Idle_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 27 ), ExtResource( 20 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 63 ), ExtResource( 67 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 50 ) ],
 "loop": true,
-"name": "Walking_Front",
+"name": "Eating",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 33 ) ],
+"loop": false,
+"name": "Idle_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ), ExtResource( 3 ), ExtResource( 15 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "Walking_Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ), ExtResource( 23 ), ExtResource( 19 ), ExtResource( 21 ) ],
@@ -107,19 +118,29 @@ animations = [ {
 "name": "Idle_Left",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 33 ) ],
-"loop": false,
-"name": "Idle_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 63 ), ExtResource( 67 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 50 ) ],
+"frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 35 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 24 ) ],
 "loop": true,
-"name": "Eating",
-"speed": 6.0
+"name": "Running_Front",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 66 ), ExtResource( 62 ), ExtResource( 57 ), ExtResource( 47 ) ],
+"loop": false,
+"name": "Swinging_Left",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 42 ), ExtResource( 61 ), ExtResource( 53 ), ExtResource( 43 ), ExtResource( 68 ), ExtResource( 56 ), ExtResource( 65 ), ExtResource( 54 ) ],
 "loop": true,
 "name": "Running_Left",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 70 ), ExtResource( 51 ), ExtResource( 64 ), ExtResource( 44 ) ],
+"loop": false,
+"name": "Swinging_Front",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 52 ), ExtResource( 46 ), ExtResource( 45 ), ExtResource( 59 ) ],
+"loop": false,
+"name": "Swinging_Back",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 25 ), ExtResource( 6 ), ExtResource( 39 ), ExtResource( 7 ), ExtResource( 34 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 9 ) ],
@@ -127,38 +148,18 @@ animations = [ {
 "name": "Running_Right",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 41 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Running_Back",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 60 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 69 ), ExtResource( 69 ), ExtResource( 69 ) ],
-"loop": false,
-"name": "Swinging_Right",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 51 ), ExtResource( 64 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ) ],
-"loop": false,
-"name": "Swinging_Front",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 66 ), ExtResource( 62 ), ExtResource( 57 ), ExtResource( 47 ), ExtResource( 47 ), ExtResource( 47 ) ],
-"loop": false,
-"name": "Swinging_Left",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 35 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 24 ) ],
-"loop": true,
-"name": "Running_Front",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "ItemObtained",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 52 ), ExtResource( 46 ), ExtResource( 45 ), ExtResource( 59 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 41 ), ExtResource( 32 ), ExtResource( 28 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Running_Back",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 60 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 69 ) ],
 "loop": false,
-"name": "Swinging_Back",
+"name": "Swinging_Right",
 "speed": 12.0
 } ]

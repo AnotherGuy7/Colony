@@ -11,19 +11,13 @@ public class BullitenBoard : Sprite
 
 	private bool canRead = false;
 
-	public override void _Ready()
-	{
-		
-	}
-
 	public override void _Process(float delta)
 	{
 		if (canRead && Input.IsActionJustPressed("Continue") && !GameData.isPlayerTalking)
 		{
 			DialogueManager.StartDialog(messages, names);
-			GameData.isPlayerTalking = true;
+			canRead = false;
 		}
-
 	}
 
 	private void OnReadingAreaBodyEntered(object body)

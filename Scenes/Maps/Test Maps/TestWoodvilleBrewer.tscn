@@ -1,0 +1,173 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Sprites/Tiles/EmptyVoid.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Environment/Indoors/Counter.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Maps/SceneSwitchArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Tilesets/IndoorsTileset.tres" type="TileSet" id=5]
+[ext_resource path="res://Sprites/Environment/Indoors/VialsFilledTable.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Environment/Indoors/CounterSideways.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Environment/Indoors/CounterCurved.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/NPCs/PotionsBrewer1.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 3.14557 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 17.4208 )
+
+[node name="WoodvilleBrewer" type="Node2D"]
+
+[node name="EmptyVoid" type="Sprite" parent="."]
+position = Vector2( 123.832, 164.483 )
+scale = Vector2( 46.5644, 38.6247 )
+texture = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 262144, 3, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 4, 0, 327680, 1, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 6, 0, 393216, 1, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 6, 0, 458752, 1, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 6, 0, 524288, 1, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 6, 0, 589824, 1, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 6, 0, 655360, 1, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 6, 0, 720896, 1, 0, 720897, 0, 0, 720898, 0, 0, 720899, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 6, 0, 786432, 2, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 6, 0, 851978, 1, 0, 851979, 0, 0, 851980, 6, 0, 917514, 2, 0, 917515, 0, 0, 917516, 5, 0 )
+
+[node name="SpawnPos1" type="Position2D" parent="."]
+position = Vector2( 184, 208 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Counter" type="Sprite" parent="YSort"]
+position = Vector2( 82, 101 )
+texture = ExtResource( 2 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 1 )
+
+[node name="Counter2" type="Sprite" parent="YSort"]
+position = Vector2( 101, 101 )
+texture = ExtResource( 2 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter2"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter2/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 1 )
+
+[node name="Counter3" type="Sprite" parent="YSort"]
+position = Vector2( 120, 101 )
+texture = ExtResource( 2 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter3"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter3/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 1 )
+
+[node name="Counter4" type="Sprite" parent="YSort"]
+position = Vector2( 63, 85 )
+texture = ExtResource( 7 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter4"]
+position = Vector2( -6.39199, 2.00679 )
+rotation = 1.5708
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter4/CounterBody"]
+shape = SubResource( 1 )
+
+[node name="Counter5" type="Sprite" parent="YSort"]
+position = Vector2( 63, 69 )
+texture = ExtResource( 7 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter5"]
+position = Vector2( -6.39199, 2.00679 )
+rotation = 1.5708
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter5/CounterBody"]
+shape = SubResource( 1 )
+
+[node name="Counter6" type="Sprite" parent="YSort"]
+position = Vector2( 139, 85 )
+rotation = 3.14159
+texture = ExtResource( 7 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter6"]
+position = Vector2( -6.39199, 2.00679 )
+rotation = 1.5708
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter6/CounterBody"]
+shape = SubResource( 1 )
+
+[node name="Counter7" type="Sprite" parent="YSort"]
+position = Vector2( 139, 69 )
+rotation = 3.14159
+texture = ExtResource( 7 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/Counter7"]
+position = Vector2( -6.39199, 2.00679 )
+rotation = 1.5708
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/Counter7/CounterBody"]
+shape = SubResource( 1 )
+
+[node name="CounterCorner" type="Sprite" parent="YSort"]
+position = Vector2( 139, 101 )
+texture = ExtResource( 8 )
+flip_h = true
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/CounterCorner"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/CounterCorner/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 1 )
+
+[node name="CounterCorner2" type="Sprite" parent="YSort"]
+position = Vector2( 63, 101 )
+texture = ExtResource( 8 )
+
+[node name="CounterBody" type="StaticBody2D" parent="YSort/CounterCorner2"]
+
+[node name="CounterShape" type="CollisionShape2D" parent="YSort/CounterCorner2/CounterBody"]
+position = Vector2( -0.302422, 4.22901 )
+shape = SubResource( 1 )
+
+[node name="Table" type="Sprite" parent="YSort"]
+position = Vector2( 10.053, 167.893 )
+texture = ExtResource( 6 )
+
+[node name="TableBody" type="StaticBody2D" parent="YSort/Table"]
+
+[node name="TableShape" type="CollisionShape2D" parent="YSort/Table/TableBody"]
+position = Vector2( -0.302422, -0.0088439 )
+shape = SubResource( 2 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 184, 208 )
+
+[node name="FillerBody1" type="StaticBody2D" parent="YSort"]
+position = Vector2( 56.5029, 98.3589 )
+rotation = 1.5708
+
+[node name="FillerShapeShape" type="CollisionShape2D" parent="YSort/FillerBody1"]
+shape = SubResource( 1 )
+
+[node name="FillerBody2" type="StaticBody2D" parent="YSort"]
+position = Vector2( 145.322, 98.6264 )
+rotation = 1.5708
+
+[node name="FillerShapeShape" type="CollisionShape2D" parent="YSort/FillerBody2"]
+shape = SubResource( 1 )
+
+[node name="PotionsBrewer" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 104, 88 )
+itemsToSell = PoolIntArray( 5, 1, 0, 0, 0 )
+
+[node name="HouseBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseBody"]
+polygon = PoolVector2Array( -14.5, 63.5, -15, 48, 220.711, 46.5956, 224, 256, 144, 256, 144, 224, -13.5, 222, -14, 64, -0.5, 64, -0.754518, 207.915, 160, 208, 160, 240, 208, 240, 208.012, 63.8586 )
+
+[node name="SceneSwitchArea" parent="." instance=ExtResource( 3 )]
+locationName = "Woodville"
+direction = "Front"
+spawnPoint = 6

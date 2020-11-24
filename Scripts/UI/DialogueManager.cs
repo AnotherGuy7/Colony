@@ -74,6 +74,13 @@ public class DialogueManager : Control
 						}
 						return;
 					}
+					if (dialogIndex > activeDialog.Count - 2)		//For things that should happen before the last message
+                    {
+						if (itemToGive != null)
+						{
+							Player.PlayItemObtainedAnimation(itemToGive.type);
+						}
+					}
 					currentText = activeDialog[dialogIndex];
 					dialogueText.Text = currentText;
 					currentName = speakerNames[dialogIndex];
@@ -111,29 +118,20 @@ public class DialogueManager : Control
 	public static void StartDialog(string[] dialogArray, string[] nameArray)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
-
-		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
-		dialogManager.nameLabel.Text = nameArray[0];
-		dialogManager.dialogPanel.Visible = true;
-		GameData.isPlayerTalking = true;
+		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 	}
 
 	public static void StartDialogForItem(string[] dialogArray, string[] nameArray)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 		dialogManager.itemDialog = true;
-
-		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
-		dialogManager.nameLabel.Text = nameArray[0];
-		dialogManager.dialogPanel.Visible = true;
-		GameData.isPlayerTalking = true;
 	}
 
 	public static void StartDialogWithQuest(string[] dialogArray, string[] nameArray, string questName, string questDesc, int questType, string targetNPCName, string providerName, string questsFullMessage, int questMaxProgress)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 
 		for (int q = 0; q < GameData.activeQuests.Length; q++)       //This is so that upon loading, the array has object values while will be modified on save, and it's above all else since it has to happen
 		{
@@ -158,47 +156,55 @@ public class DialogueManager : Control
 			speakerNames.Add(nameArray[0]);
 		}
 
-		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
-		dialogManager.nameLabel.Text = nameArray[0];
-		dialogManager.dialogPanel.Visible = true;
-		GameData.isPlayerTalking = true;
 	}
 
-	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, int moneyAmount = 0, Item itemToGive = null, int itemStack = 0)
+	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, string inventoryFullMessage, int moneyAmount = 0, int itemType = -1, int itemStack = 0)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 
 		dialogManager.moneyAmount = moneyAmount;
-		dialogManager.itemToGive = itemToGive;
-		dialogManager.itemToGivestack = itemStack;
 
-		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
-		dialogManager.nameLabel.Text = nameArray[0];
-		dialogManager.dialogPanel.Visible = true;
-		GameData.isPlayerTalking = true;
+		if (itemType != -1)
+		{
+			if (!Item.SpaceAvailableInInventory())
+			{
+				activeDialog.Add(inventoryFullMessage);
+				speakerNames.Add(nameArray[0]);
+			}
+			else
+			{
+				dialogManager.itemToGive = Item.itemsDict[itemType];
+				dialogManager.itemToGivestack = itemStack;
+				activeDialog.Add("You have recieved a " + dialogManager.itemToGive.name + " from " + nameArray[0] + "!");
+				speakerNames.Add("");
+			}
+		}
 	}
 
 	public static void StartSaveDialog(string[] dialogArray, string[] nameArray)
 	{
 		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 		dialogManager.saveDialog = true;
-
-		dialogManager.dialogIndex = 0;
-		dialogManager.dialogueText.Text = dialogManager.currentText = dialogArray[0];
-		dialogManager.nameLabel.Text = nameArray[0];
-		dialogManager.dialogPanel.Visible = true;
-		GameData.isPlayerTalking = true;
 	}
 
 	public void InitializeDialogArrays(string[] dialogArray, string[] nameArray)
 	{
+		GameData.isPlayerTalking = true;
 		for (int t = 0; t < dialogArray.Length; t++)
 		{
 			activeDialog.Add(dialogArray[t]);
 			speakerNames.Add(nameArray[t]);
 		}
+	}
+
+	public void ResetDialogUI(string firstDialog, string firstName)
+    {
+		dialogManager.dialogIndex = 0;
+		dialogManager.dialogueText.Text = dialogManager.currentText = firstDialog;
+		dialogManager.nameLabel.Text = firstName;
+		dialogManager.dialogPanel.Visible = true;
 	}
 
 	private void ForceCloseSaveDialogue()

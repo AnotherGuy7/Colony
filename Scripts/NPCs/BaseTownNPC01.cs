@@ -15,6 +15,9 @@ public class BaseTownNPC01 : RigidBody2D
 	[Export]
 	public float anchoredDistance = 0f;
 
+	[Export]
+	public string anchoredDirectionToFace = "";
+
 	private AnimatedSprite npcAnim;
 	private Timer moveDurationTimer;
 	private Timer moveRestTimer;
@@ -90,6 +93,10 @@ public class BaseTownNPC01 : RigidBody2D
 				moving = false;
 				moveRestTimer.Start(rand.Next(2, 3));
 				moveDurationTimer.Stop();
+			}
+			if (anchoredDirectionToFace != "")
+			{
+				direction = anchoredDirectionToFace;
 			}
 		}
 		if (!isBeingTalkedTo)

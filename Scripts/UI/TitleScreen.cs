@@ -141,11 +141,11 @@ public class TitleScreen : Control
 			locationsArray[saveSlotIndex - 1] = saveData["Location"].ToString();
 			savePanel.GetNode<Label>("LocationLabel").Text = "Location: " + locationsArray[saveSlotIndex - 1];
 
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
+			for (int i = 0; i < GameData.MaxInventorySlots; i++)
 			{
 				TextureRect slotSprite = savePanel.GetNode<TextureRect>("ItemTexture" + (i + 1));
 				int itemType = int.Parse(saveData["ItemType" + (i + 1)].ToString());
-				slotSprite.Texture = Item.itemList[itemType].sprite;
+				slotSprite.Texture = Item.itemsDict[itemType].sprite;
 				slotSprite.Visible = true;
 			}
 		}
@@ -154,7 +154,7 @@ public class TitleScreen : Control
 			savePanel.GetNode<Label>("MoneyLabel").Text = "";
 			savePanel.GetNode<Label>("LocationLabel").Text = "None";
 
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
+			for (int i = 0; i < GameData.MaxInventorySlots; i++)
 			{
 				TextureRect slotSprite = savePanel.GetNode<TextureRect>("ItemTexture" + (i + 1));
 				slotSprite.Visible = false;

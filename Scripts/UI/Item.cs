@@ -1,5 +1,5 @@
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 public class Item : Node2D
 {
@@ -24,77 +24,77 @@ public class Item : Node2D
     public const int Healing = 2;
     public const int Equip = 3;
 
-    //public static List<Item> itemList = new List<Item>();
+    //public static List<Item> itemsDict = new List<Item>();
 
     //public static readonly Dictionary<int, Item> itemDict = new Dictionary<int, Item>();
     //public static readonly Dictionary itemDict = new Dictionary();
 
-    public static List<Item> itemList = new List<Item>();
+    //public static List<Item> itemsDict = new List<Item>();
+    public static Dictionary<int, Item> itemsDict = new Dictionary<int, Item>();
 
-    internal enum ItemTypes
-    { 
-        Air,
-        Apple,
-        Sword,
-        Bow,
-        Rapier,
-        SmallHealthVial
-    }
+
+    //No enum cause an enum can only hold up to 32 constants
+    public const int Air = 0;
+    public const int Apple = 1;
+    public const int DullDagger = 2;
+    public const int Bow = 3;
+    public const int Rapier = 4;
+    public const int SmallHealthVial = 5;
 
     public override void _Ready()
     {
         Item air = new Item();
         air.name = "Nothing";
-        air.type = (int)ItemTypes.Air;
+        air.type = Air;
         air.useType = NoUse;
         air.sprite = GetTexture(air.name);
-        itemList.Add(air);
+        itemsDict.Add(Air, air);
 
         Item apple = new Item();
         apple.name = "Apple";
-        apple.type = (int)ItemTypes.Apple;
+        apple.type = Apple;
         apple.useType = Healing;
         apple.sprite = GetTexture(apple.name);
         apple.consumeAmount = 1;
         apple.healAmount = 1;
         apple.buyPrice = 5;
         apple.useSound = GetSound("Eat");
-        itemList.Add(apple);
+        itemsDict.Add(Apple, apple);
 
-        Item sword = new Item();
-        sword.name = "Sword";
-        sword.type = (int)ItemTypes.Sword;
-        sword.useType = Weapon;
-        sword.sprite = GetTexture("Sword1");
-        sword.buyPrice = 20;
-        sword.useSound = GetSound("SwordSwing");
-        itemList.Add(sword);
+        Item dullDagger = new Item();
+        dullDagger.name = "Dull Dagger";
+        dullDagger.type = DullDagger;
+        dullDagger.useType = Weapon;
+        dullDagger.sprite = GetTexture("DullDagger");
+        dullDagger.buyPrice = 20;
+        dullDagger.useSound = GetSound("SwordSwing");
+        itemsDict.Add(DullDagger, dullDagger);
 
         Item bow = new Item();
         bow.name = "Bow";
-        bow.type = (int)ItemTypes.Bow;
+        bow.type = Bow;
         bow.useType = Weapon;
         bow.sprite = GetTexture(bow.name);
         bow.buyPrice = 15;
-        itemList.Add(bow);
+        itemsDict.Add(Bow, bow);
 
         Item rapier = new Item();
         rapier.name = "Rapier";
-        rapier.type = (int)ItemTypes.Rapier;
+        rapier.type = Rapier;
         rapier.useType = Weapon;
         rapier.sprite = GetTexture("Rapier");
         rapier.buyPrice = 35;
-        itemList.Add(rapier);
+        itemsDict.Add(Rapier, rapier);
 
         Item smallHealthVial = new Item();
         smallHealthVial.name = "Small Health Vial";
-        smallHealthVial.type = (int)ItemTypes.SmallHealthVial;
+        smallHealthVial.type = SmallHealthVial;
         smallHealthVial.useType = Healing;
         smallHealthVial.sprite = GetTexture("SmallHealthVial");
         smallHealthVial.consumeAmount = 1;
         smallHealthVial.healAmount = 2;
         smallHealthVial.buyPrice = 20;
-        itemList.Add(smallHealthVial);
+        itemsDict.Add(SmallHealthVial, smallHealthVial);
     }
 
     private Texture GetTexture(string textureName)
@@ -141,7 +141,7 @@ public class Item : Node2D
         {
             if (!itemPlaced)
             {
-                if (GameData.playerInventory[i].type == (int)ItemTypes.Air)
+                if (GameData.playerInventory[i].type == Air)
                 {
                     GameData.playerInventory[i] = itemToGive;
                     itemPlaced = true;
@@ -152,7 +152,7 @@ public class Item : Node2D
         //Lastly, if the item can't be picked up, throw out whatever you're holding
         if (!itemPlaced)
         {
-            if (selectedItem.type != (int)ItemTypes.Air)
+            if (selectedItem.type != Air)
             {
                 PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
                 Node2D droppedItem = itemScene.Instance() as Node2D;
@@ -171,7 +171,7 @@ public class Item : Node2D
     public static void AddItemToInventory(int itemType, int stack)
     {
         Item selectedItem = GameData.playerInventory[GameData.selectedInventorySlot];
-        Item itemToRecieve = itemList[itemType];
+        Item itemToRecieve = itemsDict[itemType];
         bool itemPlaced = false;
 
         //First, we check if a stack of the item exists
@@ -192,7 +192,7 @@ public class Item : Node2D
         {
             if (!itemPlaced)
             {
-                if (GameData.playerInventory[i].type == (int)ItemTypes.Air)
+                if (GameData.playerInventory[i].type == Air)
                 {
                     GameData.playerInventory[i] = itemToRecieve;
                     itemPlaced = true;
@@ -203,7 +203,7 @@ public class Item : Node2D
         //Lastly, if the item can't be picked up, throw out whatever you're holding
         if (!itemPlaced)
         {
-            if (selectedItem.type != (int)ItemTypes.Air)
+            if (selectedItem.type != Air)
             {
                 PackedScene itemScene = GD.Load<PackedScene>("res://Scenes/Environment/Items/" + selectedItem.name + ".tscn");
                 Node2D droppedItem = itemScene.Instance() as Node2D;
@@ -219,20 +219,86 @@ public class Item : Node2D
         GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
     }
 
+    public static bool TryAddItemToInventory(int itemType, int stack)
+    {
+        Item itemToRecieve = itemsDict[itemType];
+        bool itemPlaced = false;
+
+        //First, we check if a stack of the item exists
+        for (int i = 0; i < GameData.MaxInventorySlots; i++)
+        {
+            if (!itemPlaced)
+            {
+                if (GameData.playerInventory[i].type == itemType)
+                {
+                    GameData.playerInventory[i].stack += stack;
+                    itemPlaced = true;
+                }
+            }
+        }
+
+        //Second, we check if there's an empty slot
+        for (int i = 0; i < GameData.MaxInventorySlots; i++)
+        {
+            if (!itemPlaced)
+            {
+                if (GameData.playerInventory[i].type == Air)
+                {
+                    GameData.playerInventory[i] = itemToRecieve;
+                    itemPlaced = true;
+                }
+            }
+        }
+
+        GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
+        return itemPlaced;
+    }
+
+    public static bool SpaceAvailableInInventory()
+    {
+        bool openSlot = false;
+
+        for (int i = 0; i < GameData.MaxInventorySlots; i++)
+        {
+            if (GameData.playerInventory[i].type == Air)
+            {
+                openSlot = true;
+                break;
+            }
+        }
+
+        GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
+        return openSlot;
+    }
+
     public static void ConsumeItem(Item item, int amount = 1)
     {
-        for (int i = 0; i < GameData.playerInventory.Length; i++)
+        for (int i = 0; i < GameData.MaxInventorySlots; i++)
         {
             if (GameData.playerInventory[i].type == item.type)
             {
                 GameData.playerInventory[i].stack -= amount;
                 if (GameData.playerInventory[i].stack <= 0)
                 {
-                    GameData.playerInventory[i] = itemList[(int)ItemTypes.Air];
+                    GameData.playerInventory[i] = itemsDict[Air];
                 }
             }
         }
 
         GameData.gameData.EmitSignal(nameof(GameData.UpdateInventorySlotDrawings));
+    }
+
+    public static int GetItemType(string itemName)
+    {
+        int type = 0;
+        for (int index = 0; index < itemsDict.Count; index++)
+        {
+            if (itemsDict[index].name == itemName)
+            {
+                type = index;
+                break;
+            }
+        }
+        return type;
     }
 }

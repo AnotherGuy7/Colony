@@ -90,7 +90,7 @@ public class UI : Control
 
 	private void UpdateInventoryDrawings()
 	{
-		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		for (int i = 0; i < GameData.MaxInventorySlots; i++)
 		{
 			Item item = GameData.playerInventory[i];
 			TextureRect currentSlot = inventorySlots[i];

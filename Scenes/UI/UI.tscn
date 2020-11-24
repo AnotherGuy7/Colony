@@ -543,7 +543,8 @@ __meta__ = {
 
 [node name="MapPanel" type="Panel" parent="Layer1"]
 self_modulate = Color( 0, 0, 0, 0 )
-margin_right = 256.0
+margin_left = 256.0
+margin_right = 512.0
 margin_bottom = 152.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -573,6 +574,7 @@ script = ExtResource( 14 )
 
 [node name="MapCam" type="Camera2D" parent="Layer1/MapPanel/ViewportContainer/MapViewport"]
 position = Vector2( 144, 72 )
+current = true
 zoom = Vector2( 0.9, 0.9 )
 limit_left = 0
 limit_top = 0

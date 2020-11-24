@@ -82,8 +82,8 @@ public class ShopMenu : Control
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			Item item = Item.itemList[shopArray[i]];
-			if (item.type != (int)Item.ItemTypes.Air)
+			Item item = Item.itemsDict[shopArray[i]];
+			if (item.type != Item.Air)
 			{
 				shopButtons[i].Icon = item.sprite;
 				shopButtons[i].Text = item.name;
@@ -91,7 +91,7 @@ public class ShopMenu : Control
 				shopButtons[i].Visible = true;
 				shopPrices[i].Visible = true;
 			}
-			if (item.type == (int)Item.ItemTypes.Air)
+			if (item.type == Item.Air)
 			{
 				shopButtons[i].Visible = false;
 				shopPrices[i].Visible = false;
@@ -103,10 +103,10 @@ public class ShopMenu : Control
 
 	private void ApplySellShop()
 	{
-		for (int i = 0; i < GameData.playerInventory.Length; i++)
+		for (int i = 0; i < GameData.MaxInventorySlots; i++)
 		{
 			Item item = GameData.playerInventory[i];
-			if (item.type != (int)Item.ItemTypes.Air)
+			if (item.type != Item.Air)
 			{
 				shopButtons[i].Icon = item.sprite;
 				shopButtons[i].Text = item.name;
@@ -114,7 +114,7 @@ public class ShopMenu : Control
 				shopButtons[i].Visible = true;
 				shopPrices[i].Visible = true;
 			}
-			if (item.type == (int)Item.ItemTypes.Air)
+			if (item.type == Item.Air)
 			{
 				shopButtons[i].Visible = false;
 				shopPrices[i].Visible = false;
@@ -147,31 +147,23 @@ public class ShopMenu : Control
 	private void OnItemButton1Pressed()
 	{
 		int index = 0;
-		Item item = Item.itemList[shopArray[index]];
+		Item item = Item.itemsDict[shopArray[index]];
 		if (playerSelling)
 		{
 			GameData.playerCurrency += item.buyPrice * item.stack;
 			GameData.playerInventory[index].stack = 0;
-			GameData.playerInventory[index].type = (int)Item.ItemTypes.Air;
+			GameData.playerInventory[index].type = Item.Air;
 		}
 		else
 		{
-			bool itemPlaced = false;
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				if (!itemPlaced)
-				{
-					if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
-					{
-						GameData.playerInventory[i] = item;
-						Say("Pleasure doing business with you!");
-						itemPlaced = true;
-					}
-				}
-			}
+			bool itemPlaced = Item.TryAddItemToInventory(item.type, 1);
 			if (!itemPlaced)
 			{
 				Say("Sorry, but it seems that your inventory is full... Why not sell me some of those items you have there?");
+			}
+			else
+			{
+				Say("Pleasure doing business with you!");
 			}
 		}
 	}
@@ -180,31 +172,23 @@ public class ShopMenu : Control
 	private void OnItemButton2Pressed()
 	{
 		int index = 1;
-		Item item = Item.itemList[shopArray[index]];
+		Item item = Item.itemsDict[shopArray[index]];
 		if (playerSelling)
 		{
 			GameData.playerCurrency += item.buyPrice * item.stack;
 			GameData.playerInventory[index].stack = 0;
-			GameData.playerInventory[index].type = (int)Item.ItemTypes.Air;
+			GameData.playerInventory[index].type = (int)Item.Air;
 		}
 		else
 		{
-			bool itemPlaced = false;
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				if (!itemPlaced)
-				{
-					if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
-					{
-						GameData.playerInventory[i] = item;
-						Say("Pleasure doing business with you!");
-						itemPlaced = true;
-					}
-				}
-			}
+			bool itemPlaced = Item.TryAddItemToInventory(item.type, 1);
 			if (!itemPlaced)
 			{
 				Say("Sorry, but it seems that your inventory is full... Why not sell me some of those items you have there?");
+			}
+			else
+			{
+				Say("Pleasure doing business with you!");
 			}
 		}
 	}
@@ -213,31 +197,23 @@ public class ShopMenu : Control
 	private void OnItemButton3Pressed()
 	{
 		int index = 2;
-		Item item = Item.itemList[shopArray[index]];
+		Item item = Item.itemsDict[shopArray[index]];
 		if (playerSelling)
 		{
 			GameData.playerCurrency += item.buyPrice * item.stack;
 			GameData.playerInventory[index].stack = 0;
-			GameData.playerInventory[index].type = (int)Item.ItemTypes.Air;
+			GameData.playerInventory[index].type = (int)Item.Air;
 		}
 		else
 		{
-			bool itemPlaced = false;
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				if (!itemPlaced)
-				{
-					if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
-					{
-						GameData.playerInventory[i] = item;
-						Say("Pleasure doing business with you!");
-						itemPlaced = true;
-					}
-				}
-			}
+			bool itemPlaced = Item.TryAddItemToInventory(item.type, 1);
 			if (!itemPlaced)
 			{
 				Say("Sorry, but it seems that your inventory is full... Why not sell me some of those items you have there?");
+			}
+			else
+			{
+				Say("Pleasure doing business with you!");
 			}
 		}
 	}
@@ -246,31 +222,23 @@ public class ShopMenu : Control
 	private void OnItemButton4Pressed()
 	{
 		int index = 3;
-		Item item = Item.itemList[shopArray[index]];
+		Item item = Item.itemsDict[shopArray[index]];
 		if (playerSelling)
 		{
 			GameData.playerCurrency += item.buyPrice * item.stack;
 			GameData.playerInventory[index].stack = 0;
-			GameData.playerInventory[index].type = (int)Item.ItemTypes.Air;
+			GameData.playerInventory[index].type = (int)Item.Air;
 		}
 		else
 		{
-			bool itemPlaced = false;
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				if (!itemPlaced)
-				{
-					if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
-					{
-						GameData.playerInventory[i] = item;
-						Say("Pleasure doing business with you!");
-						itemPlaced = true;
-					}
-				}
-			}
+			bool itemPlaced = Item.TryAddItemToInventory(item.type, 1);
 			if (!itemPlaced)
 			{
 				Say("Sorry, but it seems that your inventory is full... Why not sell me some of those items you have there?");
+			}
+			else
+			{
+				Say("Pleasure doing business with you!");
 			}
 		}
 	}
@@ -279,31 +247,23 @@ public class ShopMenu : Control
 	private void OnItemButton5Pressed()
 	{
 		int index = 4;
-		Item item = Item.itemList[shopArray[index]];
+		Item item = Item.itemsDict[shopArray[index]];
 		if (playerSelling)
 		{
 			GameData.playerCurrency += item.buyPrice * item.stack;
 			GameData.playerInventory[index].stack = 0;
-			GameData.playerInventory[index].type = (int)Item.ItemTypes.Air;
+			GameData.playerInventory[index].type = (int)Item.Air;
 		}
 		else
 		{
-			bool itemPlaced = false;
-			for (int i = 0; i < GameData.playerInventory.Length; i++)
-			{
-				if (!itemPlaced)
-				{
-					if (GameData.playerInventory[i].type == (int)Item.ItemTypes.Air)
-					{
-						GameData.playerInventory[i] = item;
-						Say("Pleasure doing business with you!");
-						itemPlaced = true;
-					}
-				}
-			}
+			bool itemPlaced = Item.TryAddItemToInventory(item.type, 1);
 			if (!itemPlaced)
 			{
 				Say("Sorry, but it seems that your inventory is full... Why not sell me some of those items you have there?");
+			}
+			else
+			{
+				Say("Pleasure doing business with you!");
 			}
 		}
 	}

@@ -24,7 +24,6 @@ __meta__ = {
 layer = 2
 
 [node name="ShopDialog" type="Panel" parent="Layer2"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 256.0
 margin_bottom = 150.0
@@ -120,7 +119,6 @@ __meta__ = {
 }
 
 [node name="ShopPanel" type="Panel" parent="Layer2"]
-visible = false
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 248.0

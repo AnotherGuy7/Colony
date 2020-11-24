@@ -1,32 +1,25 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Scenes/Player/PlayerSpriteFrames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_07.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_03.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_04.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_11.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_12.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_02.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_06.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_09.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_00.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_10.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_14.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_08.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_13.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_01.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_15.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Player/Weapons/Dull Dagger/DullDagger_05.png" type="Texture" id=17]
 [ext_resource path="res://Scripts/Player/Player.cs" type="Script" id=41]
 [ext_resource path="res://Scenes/UI/UI.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Scenes/UI/DialogueManager.tscn" type="PackedScene" id=43]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_02.png" type="Texture" id=44]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_01.png" type="Texture" id=45]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_00.png" type="Texture" id=46]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_04.png" type="Texture" id=47]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_03.png" type="Texture" id=48]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_05.png" type="Texture" id=49]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_12.png" type="Texture" id=50]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_15.png" type="Texture" id=51]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_19.png" type="Texture" id=52]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_10.png" type="Texture" id=53]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_13.png" type="Texture" id=54]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_17.png" type="Texture" id=55]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_20.png" type="Texture" id=56]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_21.png" type="Texture" id=57]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_22.png" type="Texture" id=58]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_16.png" type="Texture" id=59]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_06.png" type="Texture" id=60]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_14.png" type="Texture" id=61]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_11.png" type="Texture" id=62]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_09.png" type="Texture" id=63]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_07.png" type="Texture" id=64]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_08.png" type="Texture" id=65]
-[ext_resource path="res://Sprites/Player/Weapons/Sword1/Sword1_23.png" type="Texture" id=66]
 [ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_02.png" type="Texture" id=67]
 [ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_00.png" type="Texture" id=68]
 [ext_resource path="res://Sprites/Player/Weapons/Rapier/Rapier_01.png" type="Texture" id=69]
@@ -67,16 +60,16 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 46 ), ExtResource( 45 ), ExtResource( 44 ), ExtResource( 48 ), ExtResource( 47 ), ExtResource( 49 ) ],
-"loop": true,
-"name": "Sword_Front",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 80 ), ExtResource( 81 ), ExtResource( 84 ), ExtResource( 82 ), ExtResource( 87 ), ExtResource( 79 ), ExtResource( 90 ) ],
 "loop": true,
 "name": "Rapier_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "DullDagger_Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 75 ), ExtResource( 78 ), ExtResource( 76 ) ],
@@ -84,39 +77,39 @@ animations = [ {
 "name": "Rapier_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
-"loop": true,
-"name": "Rapier_Left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 50 ), ExtResource( 54 ), ExtResource( 61 ), ExtResource( 51 ), ExtResource( 59 ), ExtResource( 55 ) ],
-"loop": true,
-"name": "Sword_Back",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 60 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 63 ), ExtResource( 53 ), ExtResource( 62 ) ],
-"loop": true,
-"name": "Sword_Right",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 68 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 74 ), ExtResource( 77 ), ExtResource( 73 ) ],
 "loop": true,
 "name": "Rapier_Front",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 52 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 66 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 17 ), ExtResource( 8 ), ExtResource( 2 ) ],
 "loop": true,
-"name": "Sword_Left",
+"name": "DullDagger_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 15 ), ExtResource( 7 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "DullDagger_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 86 ), ExtResource( 89 ), ExtResource( 83 ), ExtResource( 85 ), ExtResource( 88 ) ],
+"loop": true,
+"name": "Rapier_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "DullDagger_Back",
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=4]
 radius = 4.83595
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 13.3832, 5.73529 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "DeathAnim"
 length = 4.0
 tracks/0/type = "value"
@@ -132,7 +125,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "Item Obtained"
 length = 3.0
 loop = true
@@ -171,12 +164,12 @@ animation = "Idle_Front"
 
 [node name="WeaponAnim" type="AnimatedSprite" parent="."]
 visible = false
-frames = SubResource( 4 )
-animation = "Rapier_Right"
+frames = SubResource( 3 )
+animation = "DullDagger_Back"
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 position = Vector2( -0.14865, 8.54743 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="PlayerCam" type="Camera2D" parent="."]
 current = true
@@ -185,7 +178,7 @@ current = true
 
 [node name="SwordShape" type="CollisionShape2D" parent="SwordHitbox"]
 position = Vector2( 0, 12 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="SwingSound" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0
@@ -201,11 +194,11 @@ margin_bottom = -74.3256
 [node name="ShopMenu" parent="." instance=ExtResource( 91 )]
 
 [node name="AnimPlayer" type="AnimationPlayer" parent="."]
-anims/DeathAnim = SubResource( 7 )
-"anims/Item Obtained" = SubResource( 8 )
+anims/DeathAnim = SubResource( 6 )
+"anims/Item Obtained" = SubResource( 7 )
 
 [node name="ItemObtainedTexture" type="Sprite" parent="."]
 visible = false
 position = Vector2( 0, -8 )
 [connection signal="animation_finished" from="PlayerAnim" to="." method="OnPlayerAnimAnimationDone"]
-[connection signal="animation_finished" from="AnimPlayer" to="." method="OnDeathAnimDone"]
+[connection signal="animation_finished" from="AnimPlayer" to="." method="OnAnimPlayerAnimationFinished"]

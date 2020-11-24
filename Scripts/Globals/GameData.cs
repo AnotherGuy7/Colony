@@ -24,7 +24,7 @@ public class GameData : Node2D
 	public static int playerCurrency = 100;
 	public static string playerLocation = "";
 	public static bool playerDead = false;
-	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air], Item.itemDict[(int)Item.ItemTypes.Air]};
+	//public static Item[] playerInventory = new Item[5] { Item.itemDict[(int)Item.Air], Item.itemDict[(int)Item.Air], Item.itemDict[(int)Item.Air], Item.itemDict[(int)Item.Air], Item.itemDict[(int)Item.Air]};
 	public static Item[] playerInventory = new Item[5];
 	public static Quests[] activeQuests = new Quests[3];
 
@@ -34,6 +34,8 @@ public class GameData : Node2D
 
 	//Misc stuff
 	public const int MaxSaveSlots = 10;
+	public const int MaxInventorySlots = 5;
+	public const int MaxQuestSlots = 3;
 	public static Vector2 inflictedKnockbackVector = Vector2.Zero;
 	public static bool inventoryFull = false;
 	public static int selectedInventorySlot = 0;
@@ -45,12 +47,12 @@ public class GameData : Node2D
 	{
 		gameData = this;
 		Connect(nameof(UpdateQuestProgress), this, nameof(UpdateQuestProgressMethod));
-		for (int i = 0; i < playerInventory.Length; i++)
+		for (int i = 0; i < MaxInventorySlots; i++)
 		{
 			if (i == 0)
-				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Sword];
+				playerInventory[i] = Item.itemsDict[(int)Item.DullDagger];
 			else
-				playerInventory[i] = Item.itemList[(int)Item.ItemTypes.Air];
+				playerInventory[i] = Item.itemsDict[(int)Item.Air];
 		}
 	}
 
@@ -66,10 +68,10 @@ public class GameData : Node2D
 				if (scroll.ButtonIndex == (int)ButtonList.WheelDown)
 					selectedInventorySlot++;
 
-				if (selectedInventorySlot >= playerInventory.Length)
+				if (selectedInventorySlot >= MaxInventorySlots)
 					selectedInventorySlot = 0;
 				if (selectedInventorySlot < 0)
-					selectedInventorySlot = playerInventory.Length - 1;
+					selectedInventorySlot = MaxInventorySlots - 1;
 
 				gameData.EmitSignal(nameof(UpdateInventorySlotDrawings));
 			}

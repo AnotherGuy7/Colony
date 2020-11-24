@@ -53,7 +53,7 @@ public class BaseItem : Area2D
 
 	private void OnItemMouseEntered()
 	{
-		UI.ControlTooltipBox(true, Item.itemList[itemType].name + " (" + amount + ")");
+		UI.ControlTooltipBox(true, Item.itemsDict[itemType].name + " (" + amount + ")");
 	}
 
 	private void OnItemMouseExited()

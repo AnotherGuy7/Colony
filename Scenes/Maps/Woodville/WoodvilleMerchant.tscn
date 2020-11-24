@@ -20,8 +20,8 @@ extents = Vector2( 10, 17.4208 )
 [node name="WoodvilleMerchant" type="Node2D"]
 
 [node name="EmptyVoid" type="Sprite" parent="."]
-position = Vector2( 132, 176.735 )
-scale = Vector2( 36.5, 30.0919 )
+position = Vector2( 136, 228 )
+scale = Vector2( 56, 47.5 )
 texture = ExtResource( 7 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -169,7 +169,7 @@ position = Vector2( 184, 208 )
 
 [node name="WeaponsMerchant" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 102.721, 88 )
-itemsToSell = PoolIntArray( 4, 2, 0, 0, 0 )
+itemsToSell = PoolStringArray( "Dull Dagger", "Rapier", "Bow" )
 
 [node name="FillerBody1" type="StaticBody2D" parent="YSort"]
 position = Vector2( 56.5029, 98.3589 )
@@ -193,4 +193,4 @@ polygon = PoolVector2Array( -14.5, 63.5, -15, 48, 220.711, 46.5956, 224, 256, 14
 [node name="SceneSwitchArea" parent="." instance=ExtResource( 1 )]
 locationName = "Woodville"
 direction = "Front"
-spawnPoint = 5
+spawnPoint = 1

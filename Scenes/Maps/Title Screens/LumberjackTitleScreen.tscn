@@ -1,0 +1,301 @@
+[gd_scene load_steps=50 format=2]
+
+[ext_resource path="res://Tilesets/OutdoorsTileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Environment/Buildings/House1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_12.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Environment/Outside/SmallBatchOfTrees.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Environment/Outside/StackedLogs.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_13.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_14.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_00.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_02.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_06.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_08.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_10.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_03.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_04.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_07.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_09.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_11.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_01.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_05.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_15.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_19.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_16.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_17.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/NPCs/NPC_05/Axe/TownNPC5Axe_18.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_19.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_16.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_17.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_18.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_03.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_05.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_00.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_14.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_02.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_01.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_06.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_15.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_04.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_13.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_10.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_12.png" type="Texture" id=40]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_07.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_09.png" type="Texture" id=42]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_11.png" type="Texture" id=43]
+[ext_resource path="res://Sprites/NPCs/NPC_05/TownNPC_08.png" type="Texture" id=44]
+[ext_resource path="res://Sounds/ItemSFX/SwordSwing.wav" type="AudioStream" id=45]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "Swinging",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 38 ), ExtResource( 32 ), ExtResource( 36 ) ],
+"loop": true,
+"name": "Walking_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 44 ) ],
+"loop": true,
+"name": "Idle_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ) ],
+"loop": true,
+"name": "Idle_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ), ExtResource( 34 ), ExtResource( 33 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 42 ), ExtResource( 39 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "Walking_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 37 ) ],
+"loop": true,
+"name": "Idle_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 37 ), ExtResource( 30 ), ExtResource( 35 ), ExtResource( 41 ) ],
+"loop": true,
+"name": "Walking_Right",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Swinging",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "Walking_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "Idle_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "Walking_Back",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "Idle_Right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 19 ), ExtResource( 10 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Walking_Right",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.01254
+
+[sub_resource type="Animation" id=5]
+resource_name = "TitleAnim"
+length = 14.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("YSort/TownNPC05:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 4, 6.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 120, 128 ), Vector2( 264, 112 ), Vector2( 264, 112 ), Vector2( 120, 128 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("YSort/TownNPC05/NPCAnim:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5, 4, 6.6, 8.5, 11.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Walking_Right", "Idle_Back", "Walking_Left", "Idle_Left", "Swinging", "Idle_Left" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("YSort/TownNPC05/NPCAnim:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 10.8, 11.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("YSort/TownNPC05/ItemAnim:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2.5, 4, 6.6, 8.5, 11.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Walking_Right", "Idle_Back", "Walking_Left", "Idle_Left", "Swinging", "Idle_Left" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("YSort/TownNPC05/ItemAnim:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 10.8, 11.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SoundsPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 6.104, 8.7, 9.5, 10.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true, true ]
+}
+
+[node name="LumberjackTitleScreen" type="Node2D"]
+
+[node name="MainTileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 65532, 536870916, 0, 65533, 536870916, 0, 65534, 536870916, 0, 65535, 536870916, 0, 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, -2147483646, 0, 5, -536870910, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 11, 4, 0, 12, 4, 0, 13, 4, 0, 14, 4, 0, 15, 4, 0, 16, 4, 0, 17, 4, 0, 18, 4, 0, 19, 4, 0, 20, 4, 0, 21, 4, 0, 22, 536870916, 0, 23, 536870916, 0, 24, 536870916, 0, 25, 536870916, 0, 131068, 536870916, 0, 131069, 536870916, 0, 131070, 536870916, 0, 131071, 536870916, 0, 65536, 4, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, -2147483646, 0, 65541, -536870910, 0, 65542, 4, 0, 65543, 4, 0, 65544, 4, 0, 65545, 4, 0, 65546, 4, 0, 65547, 4, 0, 65548, 4, 0, 65549, 4, 0, 65550, 4, 0, 65551, 4, 0, 65552, 4, 0, 65553, 4, 0, 65554, 4, 0, 65555, 4, 0, 65556, 4, 0, 65557, 4, 0, 65558, 536870916, 0, 65559, 536870916, 0, 65560, 536870916, 0, 65561, 536870916, 0, 196604, 536870916, 0, 196605, 536870916, 0, 196606, 536870916, 0, 196607, 536870916, 0, 131072, 4, 0, 131073, 4, 0, 131074, 5, 0, 131075, 5, 0, 131076, -2147483646, 0, 131077, -536870910, 0, 131078, 4, 0, 131079, 4, 0, 131080, 4, 0, 131081, 4, 0, 131082, 4, 0, 131083, 4, 0, 131084, 4, 0, 131085, 4, 0, 131086, 4, 0, 131087, 4, 0, 131088, 4, 0, 131089, 4, 0, 131090, 4, 0, 131091, 4, 0, 131092, 4, 0, 131093, 4, 0, 131094, 536870916, 0, 131095, 536870916, 0, 131096, 536870916, 0, 131097, 536870916, 0, 262140, 536870916, 0, 262141, 536870916, 0, 262142, 536870916, 0, 262143, 536870916, 0, 196608, 4, 0, 196609, 4, 0, 196610, 5, 0, 196611, 5, 0, 196612, -2147483646, 0, 196613, -536870910, 0, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 4, 0, 196623, 4, 0, 196624, 4, 0, 196625, 5, 0, 196626, 5, 0, 196627, 4, 0, 196628, 4, 0, 196629, 4, 0, 196630, 536870916, 0, 196631, 536870916, 0, 196632, 536870916, 0, 196633, 536870916, 0, 327676, 536870916, 0, 327677, 536870916, 0, 327678, 536870916, 0, 327679, 536870916, 0, 262144, 4, 0, 262145, 4, 0, 262146, 4, 0, 262147, 4, 0, 262148, -2147483646, 0, 262149, -536870910, 0, 262150, 4, 0, 262151, 4, 0, 262152, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262156, 4, 0, 262157, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 5, 0, 262162, 5, 0, 262163, 4, 0, 262164, 4, 0, 262165, 4, 0, 262166, 536870916, 0, 262167, 536870916, 0, 262168, 536870916, 0, 262169, 536870916, 0, 393212, 536870916, 0, 393213, 536870916, 0, 393214, 536870916, 0, 393215, 536870916, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, -2147483646, 0, 327685, -536870910, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 327691, 4, 0, 327692, 4, 0, 327693, 4, 0, 327694, 4, 0, 327695, 4, 0, 327696, 4, 0, 327697, 5, 0, 327698, 5, 0, 327699, 4, 0, 327700, 4, 0, 327701, 4, 0, 327702, 536870916, 0, 327703, 536870916, 0, 327704, 536870916, 0, 327705, 536870916, 0, 458748, 536870916, 0, 458749, 536870916, 0, 458750, 536870916, 0, 458751, 536870916, 0, 393216, 4, 0, 393217, 4, 0, 393218, 4, 0, 393219, 4, 0, 393220, -2147483646, 0, 393221, -536870910, 0, 393222, 4, 0, 393223, 4, 0, 393224, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393228, 4, 0, 393229, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 5, 0, 393234, 5, 0, 393235, 4, 0, 393236, 4, 0, 393237, 4, 0, 393238, 536870916, 0, 393239, 536870916, 0, 393240, 536870916, 0, 393241, 536870916, 0, 524284, 536870916, 0, 524285, 536870916, 0, 524286, 536870916, 0, 524287, 536870916, 0, 458752, 4, 0, 458753, 4, 0, 458754, 4, 0, 458755, 4, 0, 458756, -2147483646, 0, 458757, -536870910, 0, 458758, 536870917, 0, 458759, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, -1073741822, 0, 458763, -536870911, 0, 458764, 4, 0, 458765, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 4, 0, 458769, 4, 0, 458770, 4, 0, 458771, 4, 0, 458772, 4, 0, 458773, 4, 0, 458774, 536870916, 0, 458775, 536870916, 0, 458776, 536870916, 0, 458777, 536870916, 0, 589820, 536870916, 0, 589821, 536870916, 0, 589822, 536870916, 0, 589823, 536870916, 0, 524288, 4, 0, 524289, 4, 0, 524290, 4, 0, 524291, 4, 0, 524292, -2147483646, 0, 524293, -536870910, 0, 524294, 536870917, 0, 524295, 4, 0, 524296, 4, 0, 524297, 4, 0, 524298, -1073741822, 0, 524299, -536870911, 0, 524300, 4, 0, 524301, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 524306, 4, 0, 524307, 4, 0, 524308, 4, 0, 524309, 4, 0, 524310, 536870916, 0, 524311, 536870916, 0, 524312, 536870916, 0, 524313, 536870916, 0, 655356, 536870916, 0, 655357, 536870916, 0, 655358, 536870916, 0, 655359, 536870916, 0, 589824, 4, 0, 589825, 4, 0, 589826, 4, 0, 589827, 4, 0, 589828, -2147483646, 0, 589829, -536870909, 0, 589830, 536870914, 0, 589831, 536870914, 0, 589832, 536870914, 0, 589833, 536870914, 0, 589834, 536870915, 0, 589835, -536870911, 0, 589836, 4, 0, 589837, 4, 0, 589838, 4, 0, 589839, 4, 0, 589840, 4, 0, 589841, 4, 0, 589842, 4, 0, 589843, 4, 0, 589844, 4, 0, 589845, 4, 0, 589846, 536870916, 0, 589847, 536870916, 0, 589848, 536870916, 0, 589849, 536870916, 0, 720892, 536870916, 0, 720893, 536870916, 0, 720894, 536870916, 0, 720895, 536870916, 0, 655360, 4, 0, 655361, 4, 0, 655362, 4, 0, 655363, 4, 0, 655364, -2147483630, 0, 655365, 1073741826, 0, 655366, 1073741826, 0, 655367, 1073741826, 0, 655368, 1073741826, 0, 655369, 1073741826, 0, 655370, -2147483645, 0, 655371, -536870911, 0, 655372, 4, 0, 655373, 4, 0, 655374, 4, 0, 655375, 4, 0, 655376, 4, 0, 655377, 4, 0, 655378, 4, 0, 655379, 4, 0, 655380, 4, 0, 655381, 4, 0, 655382, 536870916, 0, 655383, 536870916, 0, 655384, 536870916, 0, 655385, 536870916, 0, 786428, 536870916, 0, 786429, 536870916, 0, 786430, 536870916, 0, 786431, 536870916, 0, 720896, 4, 0, 720897, 4, 0, 720898, 4, 0, 720899, 4, 0, 720900, 4, 0, 720901, 4, 0, 720902, 4, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, -1073741822, 0, 720907, -536870911, 0, 720908, 4, 0, 720909, 4, 0, 720910, 536870917, 0, 720911, 536870917, 0, 720912, 4, 0, 720913, 4, 0, 720914, 4, 0, 720915, 4, 0, 720916, 4, 0, 720917, 4, 0, 720918, 536870916, 0, 720919, 536870916, 0, 720920, 536870916, 0, 720921, 536870916, 0, 851964, 536870916, 0, 851965, 536870916, 0, 851966, 536870916, 0, 851967, 536870916, 0, 786432, 4, 0, 786433, 4, 0, 786434, 4, 0, 786435, 4, 0, 786436, 4, 0, 786437, 4, 0, 786438, 4, 0, 786439, 4, 0, 786440, 4, 0, 786441, 4, 0, 786442, -1073741822, 0, 786443, -536870911, 0, 786444, 4, 0, 786445, 4, 0, 786446, 536870917, 0, 786447, 536870917, 0, 786448, 4, 0, 786449, 4, 0, 786450, 4, 0, 786451, 4, 0, 786452, 4, 0, 786453, 4, 0, 786454, 536870916, 0, 786455, 536870916, 0, 786456, 536870916, 0, 786457, 536870916, 0, 917500, 536870916, 0, 917501, 536870916, 0, 917502, 536870916, 0, 917503, 536870916, 0, 851968, 4, 0, 851969, 4, 0, 851970, 4, 0, 851971, 536870936, 0, 851972, 5, 0, 851973, 536870936, 0, 851974, 5, 0, 851975, 536870936, 0, 851976, 4, 0, 851977, 4, 0, 851978, -1073741822, 0, 851979, -536870911, 0, 851980, 4, 0, 851981, 4, 0, 851982, 4, 0, 851983, 4, 0, 851984, 4, 0, 851985, 4, 0, 851986, 4, 0, 851987, 4, 0, 851988, 4, 0, 851989, 4, 0, 851990, 536870916, 0, 851991, 536870916, 0, 851992, 536870916, 0, 851993, 536870916, 0, 983036, 536870916, 0, 983037, 536870916, 0, 983038, 536870916, 0, 983039, 536870916, 0, 917504, 4, 0, 917505, 4, 0, 917506, 4, 0, 917507, 536870937, 0, 917508, 5, 0, 917509, 536870937, 0, 917510, 5, 0, 917511, 536870937, 0, 917512, 4, 0, 917513, 4, 0, 917514, -1073741822, 0, 917515, -536870911, 0, 917516, 4, 0, 917517, 4, 0, 917518, 4, 0, 917519, 4, 0, 917520, 4, 0, 917521, 4, 0, 917522, 4, 0, 917523, 5, 0, 917524, 5, 0, 917525, 4, 0, 917526, 536870916, 0, 917527, 536870916, 0, 917528, 536870916, 0, 917529, 536870916, 0, 1048572, 536870916, 0, 1048573, 536870916, 0, 1048574, 536870916, 0, 1048575, 536870916, 0, 983040, 4, 0, 983041, 4, 0, 983042, 4, 0, 983043, 536870937, 0, 983044, 4, 0, 983045, 536870937, 0, 983046, 4, 0, 983047, 536870937, 0, 983048, 4, 0, 983049, 4, 0, 983050, -1073741822, 0, 983051, -536870911, 0, 983052, 4, 0, 983053, 4, 0, 983054, 4, 0, 983055, 4, 0, 983056, 4, 0, 983057, 4, 0, 983058, 4, 0, 983059, 5, 0, 983060, 5, 0, 983061, 4, 0, 983062, 536870916, 0, 983063, 536870916, 0, 983064, 536870916, 0, 983065, 536870916, 0, 1114108, 536870916, 0, 1114109, 536870916, 0, 1114110, 536870916, 0, 1114111, 536870916, 0, 1048576, 4, 0, 1048577, 4, 0, 1048578, 4, 0, 1048579, 536870937, 0, 1048580, 4, 0, 1048581, 536870937, 0, 1048582, 4, 0, 1048583, 536870937, 0, 1048584, 4, 0, 1048585, 4, 0, 1048586, -1073741822, 0, 1048587, -536870909, 0, 1048588, 536870914, 0, 1048589, 536870914, 0, 1048590, 536870914, 0, 1048591, 536870914, 0, 1048592, 536870914, 0, 1048593, -536870894, 0, 1048594, 4, 0, 1048595, 4, 0, 1048596, 4, 0, 1048597, 4, 0, 1048598, 536870916, 0, 1048599, 536870916, 0, 1048600, 536870916, 0, 1048601, 536870916, 0 )
+
+[node name="DecorationsTilemap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 131078, 536870927, 0, 524304, 536870924, 0, 720902, 536870924, 0, 786447, 536870927, 0, 786448, 536870927, 0 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="House1" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 176, 80 )
+
+[node name="SmallBatchOfTrees" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -72, 24 )
+
+[node name="SmallBatchOfTrees2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -72, 104 )
+
+[node name="SmallBatchOfTrees3" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -72, 184 )
+
+[node name="SmallBatchOfTrees4" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 336, 24 )
+
+[node name="SmallBatchOfTrees5" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 336, 104 )
+
+[node name="SmallBatchOfTrees6" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 336, 184 )
+
+[node name="SmallBatchOfTrees7" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 248, 8 )
+
+[node name="StackedLogs" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 264, 104 )
+
+[node name="TownNPC05" type="RigidBody2D" parent="YSort"]
+position = Vector2( 200.916, 119.009 )
+mode = 3
+mass = 0.00102041
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="NPCAnim" type="AnimatedSprite" parent="YSort/TownNPC05"]
+frames = SubResource( 4 )
+animation = "Walking_Right"
+frame = 3
+playing = true
+offset = Vector2( -2, 0 )
+
+[node name="ItemAnim" type="AnimatedSprite" parent="YSort/TownNPC05"]
+frames = SubResource( 1 )
+animation = "Walking_Right"
+frame = 3
+playing = true
+offset = Vector2( -2, 0 )
+
+[node name="NPCShape" type="CollisionShape2D" parent="YSort/TownNPC05"]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="SoundsPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 45 )
+volume_db = 1.0
+
+[node name="SceneAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "TitleAnim"
+anims/TitleAnim = SubResource( 5 )

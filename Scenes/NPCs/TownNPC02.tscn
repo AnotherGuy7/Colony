@@ -25,9 +25,9 @@ animations = [ {
 "name": "Idle_Front",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 15 ) ],
 "loop": true,
-"name": "Walking_Back",
+"name": "Idle_Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ) ],
@@ -35,19 +35,19 @@ animations = [ {
 "name": "Idle_Right",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "Walking_Right",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "Idle_Left",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 15 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "Walking_Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Walking_Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Walking_Right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -55,9 +55,9 @@ animations = [ {
 "name": "Idle_Back",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 17 ), ExtResource( 11 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Walking_Front",
+"name": "Walking_Back",
 "speed": 5.0
 } ]
 
@@ -80,6 +80,12 @@ animation = "Idle_Front"
 position = Vector2( 0, 8 )
 shape = SubResource( 2 )
 
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="AreaShape" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
 [node name="TalkArea" type="Area2D" parent="."]
 
 [node name="TalkAreaShape" type="CollisionShape2D" parent="TalkArea"]
@@ -91,8 +97,7 @@ wait_time = 2.0
 [node name="MoveRestTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
-[connection signal="body_shape_entered" from="." to="." method="OnStaticBodyEntered"]
+[connection signal="body_entered" from="CollisionArea" to="." method="OnCollisionAreaBodyEntered"]
 [connection signal="body_entered" from="TalkArea" to="." method="OnTalkAreaEntered"]
 [connection signal="body_exited" from="TalkArea" to="." method="OnTalkAreaExited"]
 [connection signal="timeout" from="MoveDurationTimer" to="." method="OnMoveDurationTimerOut"]

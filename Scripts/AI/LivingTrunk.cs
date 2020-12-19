@@ -13,6 +13,7 @@ public class LivingTrunk : RigidBody2D
 	private int health = 5;
 	private int flashTimer = 0;
 	private string direction = "Front";
+	private string restrictedDirection = "";
 	private bool moving = false;
 	private bool stunned = false;
 	private bool alerted = false;
@@ -70,8 +71,30 @@ public class LivingTrunk : RigidBody2D
 						direction = "Right";
 						break;
 				}
+				if (direction == restrictedDirection)
+				{
+					while (direction == restrictedDirection)
+					{
+						switch (rand.Next(0, 4))
+						{
+							case 0:
+								direction = "Front";
+								break;
+							case 1:
+								direction = "Back";
+								break;
+							case 2:
+								direction = "Left";
+								break;
+							case 3:
+								direction = "Right";
+								break;
+						}
+					}
+				}
 				moveDurationTimer.Start(rand.Next(1, 3));
 				moveRestTimer.Stop();
+				restrictedDirection = "";
 			}
 			//Moving depending on direction
 			if (moving)
@@ -139,6 +162,13 @@ public class LivingTrunk : RigidBody2D
 		MoveLocalX(velocity.x);
 		MoveLocalY(velocity.y);
 	}
+
+	private void StopMoving(int minimumTime = 1, int maximumTime = 2)
+	{
+		moving = false;
+		moveRestTimer.Start(rand.Next(minimumTime, maximumTime + 1));
+		moveDurationTimer.Stop();
+	}
 	
 	//Player detection
 	private void OnDetectionAreaBodyEntered(object body)
@@ -166,16 +196,7 @@ public class LivingTrunk : RigidBody2D
 
 	private void OnMoveDurationTimerOut()
 	{
-		moving = false;
-		moveRestTimer.Start(rand.Next(2, 3));
-		moveDurationTimer.Stop();
-	}
-	
-	private void OnLivingTrunkStaticBodyEntered(int body_id, object body, int body_shape, int local_shape)
-	{
-		moving = false;
-		moveRestTimer.Start(rand.Next(2, 3));
-		moveDurationTimer.Stop();
+		StopMoving(2, 3);
 	}
 
 	//Attacked and stun stuff
@@ -185,9 +206,7 @@ public class LivingTrunk : RigidBody2D
 		{
 			GameData.HurtPlayer(1, GlobalPosition, 6f);
 		}
-		moving = false;
-		moveRestTimer.Start(rand.Next(1, 2));
-		moveDurationTimer.Stop();
+		StopMoving();
 	}
 
 	private void OnHitboxBodyEntered(object body)
@@ -196,9 +215,11 @@ public class LivingTrunk : RigidBody2D
 		{
 			GameData.HurtPlayer(1, GlobalPosition, 6f);
 		}
-		moving = false;
-		moveRestTimer.Start(rand.Next(1, 2));
-		moveDurationTimer.Stop();
+		else
+		{
+			restrictedDirection = direction;
+		}
+		StopMoving();
 	}
 
 	private void OnHitboxAreaEntered(object area)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Globals/PackedScenes.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Maps/Woodville/Woodville.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Maps/Woodville/WoodvilleMerchant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Maps/Woodville/WoodvilleBrewer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Maps/Woodville/WoodvilleHouse1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Environment/Particles/DeathClouds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/TitleScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Maps/ResurrectionRoom.tscn" type="PackedScene" id=8]
@@ -12,6 +13,7 @@
 script = ExtResource( 1 )
 TitleScreen = ExtResource( 7 )
 Woodville = ExtResource( 2 )
+WoodvilleHouse1 = ExtResource( 5 )
 WoodvilleMerchant = ExtResource( 3 )
 WoodvilleBrewer = ExtResource( 4 )
 deathScreen = ExtResource( 8 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Sprites/Tiles/GrassCorner.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tiles/GrassBorder.png" type="Texture" id=2]
@@ -21,6 +21,10 @@
 [ext_resource path="res://Sprites/Environment/Outdoors/Fence2.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd2.png" type="Texture" id=20]
 [ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd3.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Tiles/Farmland.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Tiles/FarmlandOpen.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Tiles/FarmlandClose.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Tiles/Farmland2.png" type="Texture" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.0799, 2.6174 )
@@ -47,7 +51,10 @@ extents = Vector2( 8.02084, 2.04432 )
 extents = Vector2( 5.5, 2.044 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 5.45192, 2.97469 )
+extents = Vector2( 5.64907, 2.97756 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 4.55019, 5.98401 )
 
 [node name="OutdoorsTileset" type="Node2D"]
 
@@ -230,3 +237,47 @@ rotation = 1.5708
 [node name="FenceShape" type="CollisionShape2D" parent="FenceEnd3/FenceBody"]
 position = Vector2( 2.59859, -1.13588e-07 )
 shape = SubResource( 9 )
+
+[node name="FarmlandOpen" type="Sprite" parent="."]
+position = Vector2( 60, 60 )
+texture = ExtResource( 23 )
+
+[node name="PlantBody" type="StaticBody2D" parent="FarmlandOpen"]
+rotation = 1.5708
+
+[node name="PlantShape" type="CollisionShape2D" parent="FarmlandOpen/PlantBody"]
+position = Vector2( 2.59859, -1.13588e-07 )
+shape = SubResource( 10 )
+
+[node name="Farmland" type="Sprite" parent="."]
+position = Vector2( 60, 80 )
+texture = ExtResource( 22 )
+
+[node name="PlantBody" type="StaticBody2D" parent="Farmland"]
+rotation = 1.5708
+
+[node name="PlantShape" type="CollisionShape2D" parent="Farmland/PlantBody"]
+position = Vector2( 2.59859, -1.13588e-07 )
+shape = SubResource( 10 )
+
+[node name="FarmlandClose" type="Sprite" parent="."]
+position = Vector2( 60, 100 )
+texture = ExtResource( 24 )
+
+[node name="PlantBody" type="StaticBody2D" parent="FarmlandClose"]
+rotation = 1.5708
+
+[node name="PlantShape" type="CollisionShape2D" parent="FarmlandClose/PlantBody"]
+position = Vector2( 2.59859, -1.13588e-07 )
+shape = SubResource( 10 )
+
+[node name="Farmland2" type="Sprite" parent="."]
+position = Vector2( 80, 0 )
+texture = ExtResource( 25 )
+
+[node name="PlantBody" type="StaticBody2D" parent="Farmland2"]
+rotation = 1.5708
+
+[node name="PlantShape" type="CollisionShape2D" parent="Farmland2/PlantBody"]
+position = Vector2( 2.59859, -1.13588e-07 )
+shape = SubResource( 10 )

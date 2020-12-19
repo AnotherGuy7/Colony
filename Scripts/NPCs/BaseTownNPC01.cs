@@ -25,6 +25,7 @@ public class BaseTownNPC01 : RigidBody2D
 	private const float moveSpeed = 0.77f;
 
 	private string direction = "Front";
+	private string restrictedDirection = "";
 	private bool canBeTalkedTo = false;
 	private bool moving = false;
 	private bool isBeingTalkedTo = false;
@@ -61,7 +62,29 @@ public class BaseTownNPC01 : RigidBody2D
 					direction = "Right";
 					break;
 			}
+			if (direction == restrictedDirection)
+			{
+				while (direction == restrictedDirection)
+				{
+					switch (rand.Next(0, 4))
+					{
+						case 0:
+							direction = "Front";
+							break;
+						case 1:
+							direction = "Back";
+							break;
+						case 2:
+							direction = "Left";
+							break;
+						case 3:
+							direction = "Right";
+							break;
+					}
+				}
+			}
 			moveDurationTimer.Start(rand.Next(1, 3));
+			restrictedDirection = "";
 		}
 
 		//Moving depending on direction
@@ -90,9 +113,7 @@ public class BaseTownNPC01 : RigidBody2D
 			Vector2 distanceFromAnchor = GlobalPosition - savedStartPosition;
 			if (distanceFromAnchor.Length() > anchoredDistance)
 			{
-				moving = false;
-				moveRestTimer.Start(rand.Next(2, 3));
-				moveDurationTimer.Stop();
+				StopMoving();
 			}
 			if (anchoredDirectionToFace != "")
 			{
@@ -147,6 +168,13 @@ public class BaseTownNPC01 : RigidBody2D
 		}
 	}
 
+	private void StopMoving(int minimumTime = 2, int maximumTime = 3)
+	{
+		moving = false;
+		moveRestTimer.Start(rand.Next(minimumTime, maximumTime + 1));
+		moveDurationTimer.Stop();
+	}
+
 	//Move Timers
 	private void OnMoveRestTimerOut()
 	{
@@ -155,27 +183,15 @@ public class BaseTownNPC01 : RigidBody2D
 
 	private void OnMoveDurationTimerOut()
 	{
-		moving = false;
-		moveRestTimer.Start(rand.Next(2, 3));
-		moveDurationTimer.Stop();
+		StopMoving();
 	}
 
-	private void OnBodyEntered(object body)
+	private void OnCollisionAreaBodyEntered(object body)
 	{
-		if (body.GetType().ToString() == "StaticBody2D")
-		{
-			moving = false;
-			moveRestTimer.Start(rand.Next(2, 3));
-			moveDurationTimer.Stop();
-		}
+		StopMoving();
+		restrictedDirection = direction;
 	}
-	
-	private void OnStaticBodyEntered(int body_id, object body, int body_shape, int local_shape)
-	{
-	   	moving = false;
-		moveRestTimer.Start(rand.Next(2, 3));
-		moveDurationTimer.Stop();
-	}
+
 
 	//Talk stuff
 	private void OnTalkAreaEntered(object body)

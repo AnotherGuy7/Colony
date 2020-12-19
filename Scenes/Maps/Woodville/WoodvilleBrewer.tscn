@@ -160,7 +160,8 @@ shape = SubResource( 1 )
 
 [node name="PotionsBrewer" parent="YSort" instance=ExtResource( 9 )]
 position = Vector2( 104, 88 )
-itemsToSell = PoolStringArray( "Apple", "Small Health Vial" )
+dialogue = PoolStringArray( "Hello there! I hope you find something useful to you!", "I\'m sure that Small Health Vial over there would help you lots on your journey." )
+speakerNames = PoolStringArray( "Brewer", "Brewer" )
 
 [node name="HouseBody" type="StaticBody2D" parent="."]
 

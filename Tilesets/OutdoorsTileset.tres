@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=31 format=2]
+[gd_resource type="TileSet" load_steps=36 format=2]
 
 [ext_resource path="res://Sprites/Tiles/GrassCorner.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tiles/GrassBorder.png" type="Texture" id=2]
@@ -21,32 +21,39 @@
 [ext_resource path="res://Sprites/Environment/Outdoors/Fence2.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd2.png" type="Texture" id=20]
 [ext_resource path="res://Sprites/Environment/Outdoors/FenceEnd3.png" type="Texture" id=21]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.17654, 2.01912 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4.05513, 2.54424 )
+[ext_resource path="res://Sprites/Tiles/FarmlandOpen.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Tiles/FarmlandClose.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Tiles/Farmland.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Tiles/Farmland2.png" type="Texture" id=25]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 3.88933, 0.988876 )
+extents = Vector2( 4.17654, 2.01912 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 2.51869, 2.58837 )
+extents = Vector2( 4.05513, 2.54424 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 8.02084, 2.04432 )
+extents = Vector2( 3.88933, 0.988876 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 5.5, 2.044 )
+extents = Vector2( 2.51869, 2.58837 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 5.45192, 2.97469 )
+extents = Vector2( 8.02084, 2.04432 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 8.0799, 2.6174 )
+extents = Vector2( 5.5, 2.044 )
 
 [sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 5.64907, 2.97756 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 4.55019, 5.98401 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.0799, 2.6174 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.13023, 0.977726 )
 
 [resource]
@@ -122,7 +129,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.04157, 5.48404 )
 } ]
 6/z_index = 0
@@ -138,7 +145,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8.03544, 11.9458 )
 } ]
 7/z_index = 0
@@ -154,7 +161,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 10.5978, 8.1226 )
 } ]
 8/z_index = 0
@@ -170,7 +177,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.50351, 8.04401 )
 } ]
 9/z_index = 0
@@ -186,13 +193,13 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 1 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 5.98448, 4.1063 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 4.05006, 5.41749 )
 } ]
 10/z_index = 0
@@ -228,13 +235,13 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 12.4745, 11.9818 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 10.517, 13.4671 )
 } ]
 13/z_index = 0
@@ -270,7 +277,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 8, 13.994 )
 } ]
 16/z_index = 0
@@ -286,7 +293,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
 } ]
 17/z_index = 0
@@ -312,7 +319,7 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 8, 8 )
 } ]
 19/z_index = 0
@@ -328,13 +335,13 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 5.50327, 14.0443 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
 } ]
 20/z_index = 0
@@ -350,7 +357,71 @@ extents = Vector2( 8.13023, 0.977726 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 9 ),
 "shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
 } ]
 21/z_index = 0
+22/name = "FarmlandOpen"
+22/texture = ExtResource( 22 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 0, 0, 16, 16 )
+22/tile_mode = 0
+22/occluder_offset = Vector2( 8, 8 )
+22/navigation_offset = Vector2( 8, 8 )
+22/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+22/z_index = 0
+23/name = "Farmland"
+23/texture = ExtResource( 24 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 0, 16, 16 )
+23/tile_mode = 0
+23/occluder_offset = Vector2( 8, 8 )
+23/navigation_offset = Vector2( 8, 8 )
+23/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+23/z_index = 0
+24/name = "FarmlandClose"
+24/texture = ExtResource( 23 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 0, 0, 16, 16 )
+24/tile_mode = 0
+24/occluder_offset = Vector2( 8, 8 )
+24/navigation_offset = Vector2( 8, 8 )
+24/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+24/z_index = 0
+25/name = "Farmland2"
+25/texture = ExtResource( 25 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 0, 0, 16, 16 )
+25/tile_mode = 0
+25/occluder_offset = Vector2( 8, 8 )
+25/navigation_offset = Vector2( 8, 8 )
+25/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 10 ),
+"shape_transform": Transform2D( -3.61999e-06, 1, -1, -3.61999e-06, 7.99999, 10.5986 )
+} ]
+25/z_index = 0

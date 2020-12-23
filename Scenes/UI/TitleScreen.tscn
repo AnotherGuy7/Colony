@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/UI/TitleScreen.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Sprites/UI/Arrow.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Maps/Title Screens/LumberjackTitleScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/UI/TitleSavePanel.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/SettingsJournal.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/SettingsJournalCheckBoxDisabled.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.847059, 0.643137, 0.247059, 1 )
@@ -13,6 +15,38 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.615686, 0.560784, 0.145098, 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "SavesTransition"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("SavesPanel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 8, -144 ), Vector2( 8, 8 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "SettingsTransition"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("SettingsPanel:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 24, 152 ), Vector2( 24, 8 ) ]
+}
 
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
@@ -53,13 +87,127 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SettingsPanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 24.0
+margin_top = 152.0
+margin_right = 236.0
+margin_bottom = 282.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsJournal" type="TextureRect" parent="SettingsPanel"]
+margin_right = 212.0
+margin_bottom = 130.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CategoryLabel" type="Label" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 24.0
+margin_top = 8.0
+margin_right = 183.0
+margin_bottom = 47.0
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = ExtResource( 2 )
+text = "Video"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResolutionLabel" type="Label" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 12.0
+margin_top = 24.0
+margin_right = 171.0
+margin_bottom = 63.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Resolution:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResolutionNumberLabel" type="Label" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 24.0
+margin_top = 40.0
+margin_right = 167.0
+margin_bottom = 79.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = ExtResource( 2 )
+text = "256 x 150"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenButton" type="Button" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 226.0
+margin_bottom = 108.0
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 0.996078, 1, 0.294118, 1 )
+text = "Fullscreen:"
+flat = true
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullScreenCheckBox" type="TextureRect" parent="SettingsPanel"]
+margin_left = 56.0
+margin_top = 54.0
+margin_right = 76.0
+margin_bottom = 74.0
+texture = ExtResource( 7 )
+
+[node name="LowerResolutionButton" type="Button" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 6.0
+margin_top = 36.0
+margin_right = 30.0
+margin_bottom = 56.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 11, 9.5 )
+icon = ExtResource( 3 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HigherResolutionButton" type="Button" parent="SettingsPanel"]
+modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
+margin_left = 62.0
+margin_top = 36.0
+margin_right = 86.0
+margin_bottom = 56.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 11, 9.5 )
+icon = ExtResource( 3 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SavesPanel" type="Panel" parent="."]
-visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 8.0
-margin_top = 8.0
+margin_top = -144.0
 margin_right = 248.0
-margin_bottom = 144.0
+margin_bottom = -8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -69,6 +217,9 @@ margin_right = 240.0
 margin_bottom = 136.0
 texture = ExtResource( 5 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SavePanel" type="Panel" parent="SavesPanel"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -228,78 +379,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsPanel" type="Panel" parent="."]
-visible = false
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 248.0
-margin_bottom = 144.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ResolutionLabel" type="Label" parent="SettingsPanel"]
-margin_left = 8.0
-margin_top = 16.0
-margin_right = 102.0
-margin_bottom = 52.0
-rect_scale = Vector2( 0.66, 0.66 )
-custom_fonts/font = ExtResource( 2 )
-text = "Resolution:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ResolutionNumberLabel" type="Label" parent="SettingsPanel"]
-margin_left = 144.0
-margin_top = 16.0
-margin_right = 278.0
-margin_bottom = 52.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = ExtResource( 2 )
-text = "256 x 150"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FullscreenButton" type="Button" parent="SettingsPanel"]
-margin_left = 8.0
-margin_top = 48.0
-margin_right = 86.0
-margin_bottom = 68.0
-rect_scale = Vector2( 0.66, 0.66 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color_hover = Color( 0.996078, 1, 0.294118, 1 )
-text = "Fullscreen"
-flat = true
-
-[node name="LowerResolutionButton" type="Button" parent="SettingsPanel"]
-margin_left = 112.0
-margin_top = 16.0
-margin_right = 136.0
-margin_bottom = 36.0
-rect_pivot_offset = Vector2( 11, 9.5 )
-icon = ExtResource( 3 )
-flat = true
-
-[node name="HigherResolutionButton" type="Button" parent="SettingsPanel"]
-margin_left = 216.0
-margin_top = 16.0
-margin_right = 240.0
-margin_bottom = 36.0
-rect_rotation = 180.0
-rect_pivot_offset = Vector2( 11, 9.5 )
-icon = ExtResource( 3 )
-flat = true
+[node name="TitleAnimPlayer" type="AnimationPlayer" parent="."]
+anims/SavesTransition = SubResource( 2 )
+anims/SettingsTransition = SubResource( 3 )
 [connection signal="pressed" from="PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButtonPressed"]
-[connection signal="pressed" from="SavesPanel/SaveIndexMinusButton" to="." method="OnSaveIndexMinusButtonPressed"]
-[connection signal="pressed" from="SavesPanel/SaveIndexPlusButton" to="." method="OnSaveIndexPlusButtonPressed"]
-[connection signal="pressed" from="SavesPanel/LoadGameButton" to="." method="OnLoadGameButtonPressed"]
 [connection signal="pressed" from="SettingsPanel/FullscreenButton" to="." method="OnFullscreenPressed"]
 [connection signal="pressed" from="SettingsPanel/LowerResolutionButton" to="." method="OnLowerResPresse"]
 [connection signal="pressed" from="SettingsPanel/HigherResolutionButton" to="." method="OnHigherResPressed"]
+[connection signal="pressed" from="SavesPanel/SaveIndexMinusButton" to="." method="OnSaveIndexMinusButtonPressed"]
+[connection signal="pressed" from="SavesPanel/SaveIndexPlusButton" to="." method="OnSaveIndexPlusButtonPressed"]
+[connection signal="pressed" from="SavesPanel/LoadGameButton" to="." method="OnLoadGameButtonPressed"]

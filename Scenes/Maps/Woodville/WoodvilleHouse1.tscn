@@ -104,8 +104,8 @@ position = Vector2( 184, 208 )
 
 [node name="TownNPC02" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 144, 176 )
-dialogue = PoolStringArray( "Hello there, would you like some of my freshly grown carrots\?", "No\? Aww well that\'s too bad.", "", "" )
-speakerNames = PoolStringArray( "Terrance", "Terrance", "", "" )
+dialogue = PoolStringArray( "Hello there, would you like some of my freshly grown carrots\?", "No\? Aww well that\'s too bad." )
+speakerNames = PoolStringArray( "Terrance", "Terrance" )
 
 [node name="HouseBody" type="StaticBody2D" parent="."]
 

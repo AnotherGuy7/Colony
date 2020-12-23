@@ -17,16 +17,16 @@ public class PackedScenes : Node2D
 	public PackedScene WoodvilleHouse2;
 
 	[Export]
-	public PackedScene WoodvilleQuarry;
+	public PackedScene WoodvilleForest1;
+
+	[Export]
+	public PackedScene LumberJackHouse;
 
 	[Export]
 	public PackedScene WoodvilleMerchant;
 
 	[Export]
 	public PackedScene WoodvilleBrewer;
-
-	[Export]
-	public PackedScene WoodvilleForest;
 
 	[Export]
 	public PackedScene deathScreen;
@@ -44,10 +44,10 @@ public class PackedScenes : Node2D
 		scenesDict.Add("Woodville", Woodville);
 		scenesDict.Add("WoodvilleHouse1", WoodvilleHouse1);
 		scenesDict.Add("WoodvilleHouse2", WoodvilleHouse2);
-		scenesDict.Add("WoodvilleQuarry", WoodvilleQuarry);
+		scenesDict.Add("WoodvilleForest1", WoodvilleForest1);
+		scenesDict.Add("LumberjackHouse", LumberJackHouse);
 		scenesDict.Add("WoodvilleMerchant", WoodvilleMerchant);
 		scenesDict.Add("WoodvilleBrewer", WoodvilleBrewer);
-		scenesDict.Add("WoodvilleForest", WoodvilleForest);
 		scenesDict.Add("DeathScreen", deathScreen);
 
 		scenesDict.Add("DeathClouds", deathClouds);

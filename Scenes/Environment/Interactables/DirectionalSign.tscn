@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Environment/Interactables/DirectionalSign.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Objects/BullitenBoard.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3, 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 6 )
+
+[node name="DirectionalSign" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="DirectionalSign" type="StaticBody2D" parent="."]
+position = Vector2( -1.96819, 6.00852 )
+
+[node name="BullitenBoardBodyShape" type="CollisionShape2D" parent="DirectionalSign"]
+shape = SubResource( 1 )
+
+[node name="ReadingArea" type="Area2D" parent="."]
+position = Vector2( -0.619061, 5.10839 )
+
+[node name="ReadingAreaShape" type="CollisionShape2D" parent="ReadingArea"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="ReadingArea" to="." method="OnReadingAreaBodyEntered"]
+[connection signal="body_exited" from="ReadingArea" to="." method="OnReadingAreaBodyExited"]

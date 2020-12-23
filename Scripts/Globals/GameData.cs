@@ -42,6 +42,7 @@ public class GameData : Node2D
 	public static int latestOpenSlot = 1;
 	public static Vector2 playerSavedPosition;
 	public static int currentPlayerSaveIndex = 0;
+	public static bool transitioning = false;
 
 	public override void _Ready()
 	{

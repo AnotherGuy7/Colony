@@ -13,7 +13,7 @@ public class SceneSwitcher : Node
 	private PackedScene whatToLoad;
 	private int spawnPointNumber;
 	private string spawnDirection;
-	private string modifiedLocationName;
+	private string locationName;
 	private bool showMapFlag;
 
 	public override void _Ready()
@@ -41,12 +41,13 @@ public class SceneSwitcher : Node
 		whatToLoad = PackedScenes.scenesDict[sceneToLoad];
 		spawnPointNumber = pointNum;
 		spawnDirection = direction;
-		modifiedLocationName = GameData.playerLocation = sceneToLoad;
+		locationName = GameData.playerLocation = sceneToLoad;
 		showMapFlag = showEntranceFlag;
 		if (modLocationName != "")
 		{
-			modifiedLocationName = modLocationName;
+			locationName = modLocationName;
 		}
+		GameData.transitioning = true;
 	}
 
 	public void DeferredGotoScene()
@@ -95,9 +96,14 @@ public class SceneSwitcher : Node
 			}
 		}
 
+		GameData.transitioning = false;
+		Player.player.Visible = true;       //For cases where the player is invisible (The rest is resetting variables)
+		Player.moveDuringTransition = false;
+		Player.transitionVelocityVector = Vector2.Zero;
 		GameData.gameData.EmitSignal(nameof(GameData.SwitchedMaps), spawnPointNumber, spawnDirection);
 
 		transitionPlayer.Play("InTransition");
+
 
 	}
 
@@ -107,14 +113,7 @@ public class SceneSwitcher : Node
 		{
 			if (showMapFlag)
 			{
-				if (modifiedLocationName != "")
-				{
-					locationNameLabel.BbcodeText = "[wave]" + modifiedLocationName;
-				}
-				else
-				{
-					locationNameLabel.BbcodeText = "[wave]" + GameData.playerLocation;
-				}
+				locationNameLabel.BbcodeText = "[wave]" + locationName;
 				flagPlayer.Play("FlagAnim");
 				showMapFlag = false;
 			}

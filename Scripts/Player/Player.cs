@@ -28,6 +28,8 @@ public class Player : KinematicBody2D
 	public static Player player;
 	public static Area2D playerSword;       //for easier player sword referencing
 	public static Camera2D playerCam;
+	public static bool moveDuringTransition = false;
+	public static Vector2 transitionVelocityVector = Vector2.Zero;
 
 	private Random rand = new Random();
 
@@ -108,7 +110,7 @@ public class Player : KinematicBody2D
 	{
 		Vector2 velocity = Vector2.Zero;
 
-		if (canMove)
+		if (canMove && !GameData.transitioning)
 		{
 			if (Input.IsActionPressed("move_front"))
 			{
@@ -193,6 +195,14 @@ public class Player : KinematicBody2D
 		{
 			velocity = Vector2.Zero;
 		}
+		if (GameData.transitioning)
+        {
+			if (moveDuringTransition && transitionVelocityVector == Vector2.Zero)
+            {
+				transitionVelocityVector = velocity;
+            }
+			velocity = transitionVelocityVector;
+        }
 
 		if (canMove)
 			MoveAndSlide(velocity);

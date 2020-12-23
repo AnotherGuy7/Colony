@@ -4,6 +4,9 @@ using System;
 public class BaseTownNPC01 : RigidBody2D
 {
 	[Export]
+	public float moveSpeed = 0.77f;
+
+	[Export]
 	public string[] dialogue = new string[4];
 
 	[Export]
@@ -21,8 +24,6 @@ public class BaseTownNPC01 : RigidBody2D
 	private AnimatedSprite npcAnim;
 	private Timer moveDurationTimer;
 	private Timer moveRestTimer;
-
-	private const float moveSpeed = 0.77f;
 
 	private string direction = "Front";
 	private string restrictedDirection = "";

@@ -167,7 +167,6 @@ position = Vector2( -0.302422, -0.0088439 )
 shape = SubResource( 2 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 184, 208 )
 
 [node name="WeaponsMerchant" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 102.721, 88 )
@@ -212,6 +211,8 @@ itemName = "Bow"
 polygon = PoolVector2Array( -14.5, 63.5, -15, 48, 220.711, 46.5956, 224, 256, 144, 256, 144, 224, -13.5, 222, -14, 64, -0.5, 64, -0.754518, 207.915, 160, 208, 160, 240, 208, 240, 208.012, 63.8586 )
 
 [node name="SceneSwitchArea" parent="." instance=ExtResource( 1 )]
+position = Vector2( 184, 232 )
+scale = Vector2( 3, 1 )
 locationName = "Woodville"
 direction = "Front"
 spawnPoint = 1

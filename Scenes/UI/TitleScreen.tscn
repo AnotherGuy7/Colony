@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/UI/TitleScreen.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/SettingsFont.tres" type="DynamicFont" id=2]
@@ -7,8 +7,45 @@
 [ext_resource path="res://Sprites/UI/TitleSavePanel.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/UI/SettingsJournal.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/UI/SettingsJournalCheckBoxDisabled.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_09.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_01.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_15.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_16.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_12.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_17.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_14.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_08.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_02.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_04.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_07.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_00.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_03.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_06.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_10.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_11.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_13.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/UI/Title Animation/TitleAnimation_05.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Environment/Misc/TitleBird/Bird_0.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Environment/Misc/TitleBird/Bird_1.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Environment/Misc/TitleBird/Bird_2.png" type="Texture" id=29]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 19 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 25 ), ExtResource( 21 ), ExtResource( 18 ), ExtResource( 15 ), ExtResource( 8 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 12 ), ExtResource( 24 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Main_Anim",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.847059, 0.643137, 0.247059, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -16,8 +53,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.615686, 0.560784, 0.145098, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "SavesTransition"
+[sub_resource type="Animation" id=6]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("SavesPanel:rect_position")
@@ -32,8 +68,7 @@ tracks/0/keys = {
 "values": [ Vector2( 8, -144 ), Vector2( 8, 8 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "SettingsTransition"
+[sub_resource type="Animation" id=7]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("SettingsPanel:rect_position")
@@ -48,6 +83,105 @@ tracks/0/keys = {
 "values": [ Vector2( 24, 152 ), Vector2( 24, 8 ) ]
 }
 
+[sub_resource type="Animation" id=8]
+length = 7.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/Overview:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/LumberjackTitleScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayButton:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 4.1, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 208, 36 ), Vector2( 208, 56 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PlayButton:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 4.1, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SettingsButton:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 4.3, 5.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 52 ), Vector2( 200, 72 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SettingsButton:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4.3, 5.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TitleCam:zoom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2, 2.8, 3, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.01, 0.01 ), Vector2( 0.01, 0.01 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CanvasLayer/Overview/Birds:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 40 ), Vector2( 64, 40 ) ]
+}
+
 [node name="TitleScreen" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
@@ -56,16 +190,33 @@ __meta__ = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
+follow_viewport_enable = true
 
 [node name="LumberjackTitleScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 32, 0 )
 scale = Vector2( 0.55, 0.55 )
 
+[node name="Overview" type="AnimatedSprite" parent="CanvasLayer"]
+frames = SubResource( 1 )
+animation = "Main_Anim"
+frame = 5
+playing = true
+centered = false
+
+[node name="Birds" type="AnimatedSprite" parent="CanvasLayer/Overview"]
+position = Vector2( 48, 40 )
+scale = Vector2( 0.7, 0.7 )
+frames = SubResource( 2 )
+frame = 2
+playing = true
+
 [node name="PlayButton" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 208.0
-margin_top = 56.0
+margin_top = 36.0
 margin_right = 279.0
-margin_bottom = 101.0
+margin_bottom = 81.0
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Play"
@@ -75,10 +226,11 @@ __meta__ = {
 }
 
 [node name="SettingsButton" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 200.0
-margin_top = 72.0
+margin_top = 60.8889
 margin_right = 332.0
-margin_bottom = 117.0
+margin_bottom = 105.889
 rect_scale = Vector2( 0.4, 0.4 )
 custom_fonts/font = ExtResource( 2 )
 text = "Settings"
@@ -150,6 +302,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FullScreenCheckBox" type="TextureRect" parent="SettingsPanel"]
+margin_left = 56.0
+margin_top = 54.0
+margin_right = 76.0
+margin_bottom = 74.0
+texture = ExtResource( 7 )
+
 [node name="FullscreenButton" type="Button" parent="SettingsPanel"]
 modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
 margin_left = 8.0
@@ -157,21 +316,16 @@ margin_top = 56.0
 margin_right = 226.0
 margin_bottom = 108.0
 rect_scale = Vector2( 0.3, 0.3 )
+focus_mode = 0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.996078, 1, 0.294118, 1 )
+enabled_focus_mode = 0
 text = "Fullscreen:"
 flat = true
 align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="FullScreenCheckBox" type="TextureRect" parent="SettingsPanel"]
-margin_left = 56.0
-margin_top = 54.0
-margin_right = 76.0
-margin_bottom = 74.0
-texture = ExtResource( 7 )
 
 [node name="LowerResolutionButton" type="Button" parent="SettingsPanel"]
 modulate = Color( 0.792157, 0.494118, 0.258824, 1 )
@@ -372,16 +526,22 @@ margin_top = 88.0
 margin_right = 178.0
 margin_bottom = 133.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
 custom_fonts/font = ExtResource( 2 )
 text = "Load Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TitleCam" type="Camera2D" parent="."]
+position = Vector2( 128, 75 )
+current = true
+
 [node name="TitleAnimPlayer" type="AnimationPlayer" parent="."]
-anims/SavesTransition = SubResource( 2 )
-anims/SettingsTransition = SubResource( 3 )
+autoplay = "StartingTransition"
+anims/SavesTransition = SubResource( 6 )
+anims/SettingsTransition = SubResource( 7 )
+anims/StartingTransition = SubResource( 8 )
 [connection signal="pressed" from="PlayButton" to="." method="OnPlayButtonPressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="SettingsPanel/FullscreenButton" to="." method="OnFullscreenPressed"]

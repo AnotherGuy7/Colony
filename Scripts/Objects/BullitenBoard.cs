@@ -15,7 +15,7 @@ public class BullitenBoard : Sprite
 	{
 		if (canRead && Input.IsActionJustPressed("Continue") && !GameData.isPlayerTalking)
 		{
-			DialogueManager.StartDialog(messages, names);
+			DialogueManager.StartDialog(messages, names, DialogueManager.Style_Wooden);
 			canRead = false;
 		}
 	}

@@ -8,7 +8,7 @@ public class TitleScreen : Control
 	private Panel savesPanel;
 	private Label resolutionNumber;
 
-	private Vector2[] resolutionsArray = new Vector2[4] { new Vector2(256f, 150f), new Vector2(512f, 300f), new Vector2(1280f, 720f), OS.MaxWindowSize };
+	private Vector2[] resolutionsArray = new Vector2[3] { new Vector2(256f, 150f), new Vector2(512f, 300f), new Vector2(1280f, 720f) };
 	private int resolutionsArrayIndex = 0;
 	private int saveSlotIndex = 1;
 	private bool saveExists = false;
@@ -108,7 +108,7 @@ public class TitleScreen : Control
 	{
 		if (!settingsPanelOut)
 		{
-			settingsPanelOut = false;
+			settingsPanelOut = true;
 			titleAnimPlayer.Play("SettingsTransition");
 		}
 	}

@@ -96,6 +96,7 @@ public class UI : Control
 			TextureRect currentSlot = inventorySlots[i];
 			TextureRect currentSlotItemRect = (TextureRect)inventorySlots[i].GetNode(inventorySlots[i].GetPath() + "/ItemTexture");
 			Label currentSlotStack = (Label)inventorySlots[i].GetNode(inventorySlots[i].GetPath() + "/ItemStack");
+			currentSlotItemRect.RectScale = new Vector2(40f, 40f) / item.sprite.GetSize();
 			currentSlotItemRect.Texture = item.sprite;
 
 			if (item.stack > 1)

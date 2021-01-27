@@ -8,6 +8,8 @@ public class DialogueManager : Control
 	private Label dialogueText;
 	private Label nameLabel;
 	private Panel dialogPanel;
+	private TextureRect namePanelTextureRect;
+	private TextureRect dialogueBoxTextureRect;
 	private AudioStreamPlayer talkSound;
 
 	public static List<string> speakerNames = new List<string>();
@@ -31,6 +33,18 @@ public class DialogueManager : Control
 	//Item stuff
 	private bool itemDialog = false;
 
+	//Style textures
+	public const int Style_Paper = 0;
+	public const int Style_Wooden = 1;
+
+	private Texture paperNamePanel;
+	private Texture paperDialogueBox;
+	private Texture woodenNamePanel;
+	private Texture woodenDialogueBox;
+
+	private Color paperTextColor = new Color(0.38f, 0.38f, 0.38f);
+	private Color woodenTextColor = new Color(0.93f, 0.82f, 0.40f);
+
 	private Random rand = new Random();
 
 	public override void _Ready()
@@ -39,7 +53,15 @@ public class DialogueManager : Control
 		dialogueText = GetNode<Label>("Layer2/DialogPanel/DialogueText");
 		nameLabel = GetNode<Label>("Layer2/DialogPanel/NameLabel");
 		dialogPanel = GetNode<Panel>("Layer2/DialogPanel");
+		namePanelTextureRect = GetNode<TextureRect>("Layer2/DialogPanel/NamePanel");
+		dialogueBoxTextureRect = GetNode<TextureRect>("Layer2/DialogPanel/DialogueBox");
 		talkSound = GetNode<AudioStreamPlayer>("TalkSound");
+
+		paperNamePanel = GD.Load<Texture>("res://Sprites/UI/DialogueBoxes/PaperNamePanel.png");
+		paperDialogueBox = GD.Load<Texture>("res://Sprites/UI/DialogueBoxes/PaperDialogueBox.png");
+		woodenNamePanel = GD.Load<Texture>("res://Sprites/UI/DialogueBoxes/WoodenNamePanel.png");
+		woodenDialogueBox = GD.Load<Texture>("res://Sprites/UI/DialogueBoxes/WoodenDialogueBox.png");
+
 		GameData.gameData.Connect(nameof(GameData.SavedGame), this, nameof(ForceCloseSaveDialogue));
 	}
 
@@ -75,7 +97,7 @@ public class DialogueManager : Control
 						return;
 					}
 					if (dialogIndex > activeDialog.Count - 2)		//For things that should happen before the last message
-                    {
+					{
 						if (itemToGive != null)
 						{
 							Player.PlayItemObtainedAnimation(itemToGive.type);
@@ -115,22 +137,22 @@ public class DialogueManager : Control
 		GameData.isPlayerTalking = false;
 	}
 
-	public static void StartDialog(string[] dialogArray, string[] nameArray)
+	public static void StartDialog(string[] dialogArray, string[] nameArray, int style = 0)
 	{
-		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray, style);
 		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 	}
 
-	public static void StartDialogForItem(string[] dialogArray, string[] nameArray)
+	public static void StartDialogForItem(string[] dialogArray, string[] nameArray, int style = 0)
 	{
-		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray, style);
 		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 		dialogManager.itemDialog = true;
 	}
 
 	public static void StartDialogWithQuest(string[] dialogArray, string[] nameArray, string questName, string questDesc, int questType, string targetNPCName, string providerName, string questsFullMessage, int questMaxProgress)
 	{
-		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray, Style_Paper);
 		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 
 		for (int q = 0; q < GameData.activeQuests.Length; q++)       //This is so that upon loading, the array has object values while will be modified on save, and it's above all else since it has to happen
@@ -158,9 +180,9 @@ public class DialogueManager : Control
 
 	}
 
-	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, string inventoryFullMessage, int moneyAmount = 0, int itemType = -1, int itemStack = 0)
+	public static void StartDialogWithReward(string[] dialogArray, string[] nameArray, string inventoryFullMessage, int dialogueBoxStyle = 0, int moneyAmount = 0, int itemType = -1, int itemStack = 0)
 	{
-		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray, dialogueBoxStyle);
 		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 
 		dialogManager.moneyAmount = moneyAmount;
@@ -182,14 +204,14 @@ public class DialogueManager : Control
 		}
 	}
 
-	public static void StartSaveDialog(string[] dialogArray, string[] nameArray)
+	public static void StartSaveDialog(string[] dialogArray, string[] nameArray, int style = 0)
 	{
-		dialogManager.InitializeDialogArrays(dialogArray, nameArray);
+		dialogManager.InitializeDialogArrays(dialogArray, nameArray, style);
 		dialogManager.ResetDialogUI(dialogArray[0], nameArray[0]);
 		dialogManager.saveDialog = true;
 	}
 
-	public void InitializeDialogArrays(string[] dialogArray, string[] nameArray)
+	public void InitializeDialogArrays(string[] dialogArray, string[] nameArray, int style)
 	{
 		GameData.isPlayerTalking = true;
 		for (int t = 0; t < dialogArray.Length; t++)
@@ -197,10 +219,32 @@ public class DialogueManager : Control
 			activeDialog.Add(dialogArray[t]);
 			speakerNames.Add(nameArray[t]);
 		}
+
+		switch (style)
+		{
+			case Style_Paper:
+				namePanelTextureRect.Texture = paperNamePanel;
+				dialogueBoxTextureRect.Texture = paperDialogueBox;
+				nameLabel.Modulate = paperTextColor;
+				dialogueText.Modulate = paperTextColor;
+				break;
+			case Style_Wooden:
+				namePanelTextureRect.Texture = woodenNamePanel;
+				dialogueBoxTextureRect.Texture = woodenDialogueBox;
+				nameLabel.Modulate = woodenTextColor;
+				dialogueText.Modulate = woodenTextColor;
+				break;
+			default:
+				namePanelTextureRect.Texture = paperNamePanel;
+				dialogueBoxTextureRect.Texture = paperDialogueBox;
+				nameLabel.Modulate = paperTextColor;
+				dialogueText.Modulate = paperTextColor;
+				break;
+		}
 	}
 
 	public void ResetDialogUI(string firstDialog, string firstName)
-    {
+	{
 		dialogManager.dialogIndex = 0;
 		dialogManager.dialogueText.Text = dialogManager.currentText = firstDialog;
 		dialogManager.nameLabel.Text = firstName;
